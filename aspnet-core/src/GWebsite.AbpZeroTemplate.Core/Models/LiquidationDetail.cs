@@ -7,17 +7,24 @@ using System.Threading.Tasks;
 namespace GWebsite.AbpZeroTemplate.Core.Models
 {
     /// <summary>
-    /// Chi tiết thanh lý
+    /// Entity Chi tiết thanh lý
     /// </summary>
+
     public class LiquidationDetail : FullAuditModel
-    {   
-        // mã thanh lý
+    {
+        //Mã thanh lý
         public string LiquidationID { get; set; }
-        // mã tài sản
+        //Mã tài sản
         public string AssetID { get; set; }
-        //giá tiền thanh lý
+        //Nguyên giá
+        public float OriginalPrice { get; set; }
+        //Giá trị còn lại
+        public float ResidualValue { get; set; }
+        //Tình trạng tài sản/ công cụ
+        public string AssetStatus { get; set; }
+        //Hình thức thanh lý
+        public int LiquidationForm { get; set; }
+        //Giá tiền thanh lý
         public string LiquidationPrice { get; set; }
-        //ghi chú
-        public string Note { get; set; }
     }
 }

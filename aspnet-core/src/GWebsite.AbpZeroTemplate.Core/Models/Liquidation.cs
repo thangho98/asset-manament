@@ -11,23 +11,25 @@ namespace GWebsite.AbpZeroTemplate.Core.Models
     /// </summary>
     public class Liquidation : FullAuditModel
     {
-        //Mã thanh lý
-        public string LiquidationId { get; set; }
+        //Mã tài sản
+        public string AssetID { get; set; }
         //Ngày thanh lý
         public string LiquidationDate { get; set; }
-        //Trạng thái duyệt
-        public string StatusApproved { get; set; }
         //Đơn vị mua
         public string PurchaseUnit { get; set; }
-        //Loại thanh lý
-        public int LiquidationType { get; set; }
-        //Số tiền thanh lý
-        public float AmountOfLiquidation { get; set; }
-        // tổng tài sản thanh lý
-        public string TotalAsset { get; set; }
-        //Trạng thái thanh lý
-        public int LiquidationStatus { get; set; }
+        //Nguyên giá
+        public float OriginalPrice { get; set; }
+        //Giá trị còn lại
+        public float ResidualValue { get; set; }
+        //Tình trạng tài sản/ công cụ
+        public string AssetStatus { get; set; }
+        //Hình thức thanh lý
+        public int LiquidationForm { get; set; }
+        //Giá tiền thanh lý
+        public string LiquidationPrice { get; set; }
         //Ghi chú
         public string Note { get; set; }
+        //Trạng thái duyệt
+        public string StatusApproved { get; set; }
     }
 }

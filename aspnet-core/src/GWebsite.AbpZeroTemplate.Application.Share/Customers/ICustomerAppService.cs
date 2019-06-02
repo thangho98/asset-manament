@@ -8,7 +8,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Customers
         void CreateOrEditCustomer(CustomerInput customerInput);
         CustomerInput GetCustomerForEdit(int id);
         void DeleteCustomer(int id);
-        PagedResultDto<CustomerDto> GetCustomers(CustomerFilter input);
+        PagedResultDto<RepairDto> GetCustomers(RepairFilter input);
         CustomerForViewDto GetCustomerForView(int id);
     }
 }

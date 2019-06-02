@@ -67,7 +67,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Customers
             return ObjectMapper.Map<CustomerForViewDto>(customerEntity);
         }
 
-        public PagedResultDto<CustomerDto> GetCustomers(CustomerFilter input)
+        public PagedResultDto<RepairDto> GetCustomers(RepairFilter input)
         {
             var query = customerRepository.GetAll().Where(x => !x.IsDelete);
 
@@ -89,9 +89,9 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Customers
             var items = query.PageBy(input).ToList();
 
             // result
-            return new PagedResultDto<CustomerDto>(
+            return new PagedResultDto<RepairDto>(
                 totalCount,
-                items.Select(item => ObjectMapper.Map<CustomerDto>(item)).ToList());
+                items.Select(item => ObjectMapper.Map<RepairDto>(item)).ToList());
         }
 
         #endregion

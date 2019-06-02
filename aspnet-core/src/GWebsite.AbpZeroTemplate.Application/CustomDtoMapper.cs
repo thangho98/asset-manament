@@ -22,7 +22,7 @@ namespace GWebsite.AbpZeroTemplate.Applications
             configuration.CreateMap<DemoModel, DemoModelForViewDto>();
 
             // Customer
-            configuration.CreateMap<Customer, CustomerDto>();
+            configuration.CreateMap<Customer, RepairDto>();
             configuration.CreateMap<CustomerInput, Customer>();
             configuration.CreateMap<Customer, CustomerInput>();
             configuration.CreateMap<Customer, CustomerForViewDto>();

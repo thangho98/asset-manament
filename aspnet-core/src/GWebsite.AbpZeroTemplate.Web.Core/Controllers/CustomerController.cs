@@ -16,7 +16,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         }
 
         [HttpGet]
-        public PagedResultDto<CustomerDto> GetCustomersByFilter(CustomerFilter customerFilter)
+        public PagedResultDto<RepairDto> GetCustomersByFilter(RepairFilter customerFilter)
         {
             return customerAppService.GetCustomers(customerFilter);
         }

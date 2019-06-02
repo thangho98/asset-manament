@@ -14,7 +14,7 @@ namespace GWebsite.AbpZeroTemplate.Core.Models
         //Mã tài sản
         public string AssetId { get; set; }
         //Ngày xuất
-        public int ExportDate { get; set; }
+        public string ExportDate { get; set; }
         //Ngày dự kiến sửa xong
         public string ExpectedDateRepaired { get; set; }
         //Đơn vị dự kiến sửa chữa - select để chọn

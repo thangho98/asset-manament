@@ -1,0 +1,100 @@
+<div bsModal #viewModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="viewModal"
+    aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span *ngIf="revoke.id">{{l("Xem thông tin chi tiết thu hồi")}}: {{revoke.name}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Ngày thu hồi</label>
+                    <p>{{revoke.revokeDate}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Mã tài sản</label>
+                    <p>{{revoke.assetId}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Tên tài sản</label>
+                    <p>{{}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Loại tài sản</label>
+                    <p>{{}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Nhóm tài sản</label>
+                    <p>{{}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Thông tin mô tả</label>
+                    <p>{{}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Tình trạng tài sản</label>
+                    <p>{{}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Ngày bắt đầu khấu hao</label>
+                    <p>{{}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Ngày kết thúc khấu hao</label>
+                    <p>{{}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Số tháng khấu hao</label>
+                    <p>{{}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Giá trị khấu hao</label>
+                    <p>{{}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Nguyên giá tài sản</label>
+                    <p>{{}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Giá trị khấu hao còn lại</label>
+                    <p>{{}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Tình trạng khấu hao</label>
+                    <p>{{}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Đơn vị sửa dụng</label>
+                    <p>{{}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Người sử dụng</label>
+                    <p>{{}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Lý do</label>
+                    <p>{{revoke.reason}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Vị trí tài sản</label>
+                    <p>{{revoke.currentLocationOfAssets}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Nội dung thu hồi</label>
+                    <p>{{revoke.revokeContent}}</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-default"
+                    (click)="close()">{{l("Cancel")}}</button>
+                <button type="submit" class="btn btn-primary" [buttonBusy]="saving"
+                    [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i>
+                    <span>{{l("Save")}}</span></button>
+            </div>
+        </div>
+    </div>
+</div>

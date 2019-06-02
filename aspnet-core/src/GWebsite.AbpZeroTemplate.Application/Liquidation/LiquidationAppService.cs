@@ -12,7 +12,7 @@ using System.Linq.Dynamic.Core;
 
 namespace GWebsite.AbpZeroTemplate.Web.Core.Liquidations
 {
-    [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient)]
+    [AbpAuthorize(GWebsitePermissions.Pages_Administration_Liquidation)]
     public class LiquidationAppService : GWebsiteAppServiceBase, ILiquidationAppService
     {
         private readonly IRepository<Liquidation> liquidationRepository;
@@ -36,6 +36,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Liquidations
             }
         }
 
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Liquidation_Delete)]
         public void DeleteLiquidation(int id)
         {
             var liquidationEntity = liquidationRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
@@ -104,11 +105,23 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Liquidations
             return ObjectMapper.Map<LiquidationForViewDto>(liquidationEntity);
         }
 
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Liquidation_Approve)]
+        public void ApproveLiquidation(int id)
+        {
+            var liquidationEntity = liquidationRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
+            if (liquidationEntity != null)
+            {
+                liquidationEntity.StatusApproved = true;
+                liquidationRepository.Update(liquidationEntity);
+                CurrentUnitOfWork.SaveChanges();
+            }
+        }
+
         #endregion
 
         #region Private Method
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Create)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Liquidation_Create)]
         private void Create(LiquidationInput liquidationInput)
         {
             var liquidationEntity = ObjectMapper.Map<Liquidation>(liquidationInput);
@@ -117,7 +130,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Liquidations
             CurrentUnitOfWork.SaveChanges();
         }
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Edit)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Liquidation_Edit)]
         private void Update(LiquidationInput liquidationInput)
         {
             var liquidationEntity = liquidationRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == liquidationInput.Id);

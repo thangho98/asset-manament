@@ -44,5 +44,11 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         {
             return revokeAppService.GetRevokeForView(id);
         }
+
+        [HttpGet]
+        public void ApproveRevoke(int id)
+        {
+            revokeAppService.ApproveRevoke(id);
+        }
     }
 }

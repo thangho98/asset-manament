@@ -1587,7 +1587,7 @@ namespace GSoft.AbpZeroTemplate.Migrations
 
                     b.Property<int>("Quantity");
 
-                    b.Property<string>("StatusApproved");
+                    b.Property<bool>("StatusApproved");
 
                     b.Property<string>("UpdatedBy");
 
@@ -1623,8 +1623,6 @@ namespace GSoft.AbpZeroTemplate.Migrations
                     b.Property<bool>("IsDelete");
 
                     b.Property<int>("MonthOfDepreciation");
-
-                    b.Property<string>("StatusApproved");
 
                     b.Property<string>("UpdatedBy");
 
@@ -1752,7 +1750,7 @@ namespace GSoft.AbpZeroTemplate.Migrations
 
                     b.Property<float>("ResidualValue");
 
-                    b.Property<string>("StatusApproved");
+                    b.Property<bool>("StatusApproved");
 
                     b.Property<string>("UpdatedBy");
 
@@ -1859,7 +1857,7 @@ namespace GSoft.AbpZeroTemplate.Migrations
 
                     b.Property<string>("Content");
 
-                    b.Property<float>("Cost");
+                    b.Property<float?>("Cost");
 
                     b.Property<string>("CreatedBy");
 
@@ -1877,7 +1875,7 @@ namespace GSoft.AbpZeroTemplate.Migrations
 
                     b.Property<string>("ExpectedRepairUnit");
 
-                    b.Property<int>("ExportDate");
+                    b.Property<string>("ExportDate");
 
                     b.Property<bool>("IsChangeFunction");
 
@@ -1887,11 +1885,13 @@ namespace GSoft.AbpZeroTemplate.Migrations
 
                     b.Property<string>("Proposer");
 
-                    b.Property<int>("RepairUnit");
+                    b.Property<int?>("RepairUnit");
 
                     b.Property<string>("StaffInCharge");
 
                     b.Property<bool>("Status");
+
+                    b.Property<bool>("StatusApproved");
 
                     b.Property<string>("UpdatedBy");
 
@@ -1926,6 +1926,8 @@ namespace GSoft.AbpZeroTemplate.Migrations
 
                     b.Property<string>("RevokeDate");
 
+                    b.Property<bool>("StatusApproved");
+
                     b.Property<string>("UpdatedBy");
 
                     b.Property<DateTime?>("UpdatedDate");
@@ -1955,7 +1957,7 @@ namespace GSoft.AbpZeroTemplate.Migrations
 
                     b.Property<string>("ReceivingUnit");
 
-                    b.Property<string>("StatusApproved");
+                    b.Property<bool>("StatusApproved");
 
                     b.Property<string>("TransferDate");
 
@@ -1980,17 +1982,17 @@ namespace GSoft.AbpZeroTemplate.Migrations
 
                     b.Property<DateTime?>("CreatedDate");
 
+                    b.Property<string>("DateExport");
+
                     b.Property<float>("DepreciationValueForTheFirstMonth");
 
                     b.Property<string>("EndDateOfDepreciation");
 
                     b.Property<bool>("IsDelete");
 
-                    b.Property<string>("OfficialUseDate");
-
                     b.Property<string>("StartDateOfDepreciation");
 
-                    b.Property<string>("StatusApproved");
+                    b.Property<bool>("StatusApproved");
 
                     b.Property<string>("UnitsUsedId");
 

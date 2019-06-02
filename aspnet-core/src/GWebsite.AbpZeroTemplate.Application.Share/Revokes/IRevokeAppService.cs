@@ -10,5 +10,6 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Revokes
         void DeleteRevoke(int id);
         PagedResultDto<RevokeDto> GetRevokes(RevokeFilter input);
         RevokeForViewDto GetRevokeForView(int id);
+        void ApproveRevoke(int id);
     }
 }

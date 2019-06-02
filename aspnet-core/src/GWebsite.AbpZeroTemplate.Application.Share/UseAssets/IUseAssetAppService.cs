@@ -10,5 +10,6 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.UseAssets
         void DeleteUseAsset(int id);
         PagedResultDto<UseAssetDto> GetUseAssets(UseAssetFilter input);
         UseAssetForViewDto GetUseAssetForView(int id);
+        void ApproveUseAsset(int id);
     }
 }

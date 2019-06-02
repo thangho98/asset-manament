@@ -44,5 +44,11 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         {
             return useAssetAppService.GetUseAssetForView(id);
         }
+
+        [HttpGet]
+        public void ApproveUseAsset(int id)
+        {
+            useAssetAppService.ApproveUseAsset(id);
+        }
     }
 }

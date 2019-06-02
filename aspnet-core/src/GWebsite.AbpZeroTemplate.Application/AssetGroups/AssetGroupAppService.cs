@@ -14,7 +14,7 @@ using System.Linq.Dynamic.Core;
 
 namespace GWebsite.AbpZeroTemplate.Web.Core.AssetGroups
 {
-    [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient)]
+    [AbpAuthorize(GWebsitePermissions.Pages_Administration_AssetGroup)]
     public class AssetGroupAppService : GWebsiteAppServiceBase, IAssetGroupAppService
     {
         private readonly IRepository<AssetGroup> assetGroupRepository;
@@ -37,7 +37,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.AssetGroups
                 Update(assetGroupInput);
             }
         }
-
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_AssetGroup_Delete)]
         public void DeleteAssetGroup(int id)
         {
             var assetGroupEntity = assetGroupRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
@@ -124,7 +124,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.AssetGroups
 
         #region Private Method
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Create)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_AssetGroup_Create)]
         private void Create(AssetGroupInput assetGroupInput)
         {
             var assetGroupEntity = ObjectMapper.Map<AssetGroup>(assetGroupInput);
@@ -133,7 +133,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.AssetGroups
             CurrentUnitOfWork.SaveChanges();
         }
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Edit)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_AssetGroup_Edit)]
         private void Update(AssetGroupInput assetGroupInput)
         {
             var assetGroupEntity = assetGroupRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == assetGroupInput.Id);

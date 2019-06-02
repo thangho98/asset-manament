@@ -12,7 +12,7 @@ using System.Linq.Dynamic.Core;
 
 namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
 {
-    [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient)]
+    [AbpAuthorize(GWebsitePermissions.Pages_Administration_Asset)]
     public class AssetAppService : GWebsiteAppServiceBase, IAssetAppService
     {
         private readonly IRepository<Asset> assetRepository;
@@ -36,6 +36,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
             }
         }
 
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Asset)]
         public void DeleteAsset(int id)
         {
             var assetEntity = assetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
@@ -104,11 +105,23 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
             return ObjectMapper.Map<AssetDto>(assetEntity).AssetName;
         }
 
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Asset_Approve)]
+        public void ApproveAsset(int id)
+        {
+            var assetEntity = assetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
+            if (assetEntity != null)
+            {
+                assetEntity.StatusApproved = true;
+                assetRepository.Update(assetEntity);
+                CurrentUnitOfWork.SaveChanges();
+            }
+        }
+
         #endregion
 
         #region Private Method
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Create)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Asset_Create)]
         private void Create(AssetInput assetInput)
         {
             var assetEntity = ObjectMapper.Map<Asset>(assetInput);
@@ -117,7 +130,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
             CurrentUnitOfWork.SaveChanges();
         }
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Edit)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Asset_Edit)]
         private void Update(AssetInput assetInput)
         {
             var assetEntity = assetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == assetInput.Id);

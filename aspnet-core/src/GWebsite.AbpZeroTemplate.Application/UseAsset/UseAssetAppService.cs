@@ -12,7 +12,7 @@ using System.Linq.Dynamic.Core;
 
 namespace GWebsite.AbpZeroTemplate.Web.Core.UseAssets
 {
-    [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient)]
+    [AbpAuthorize(GWebsitePermissions.Pages_Administration_UseAsset)]
     public class UseAssetAppService : GWebsiteAppServiceBase, IUseAssetAppService
     {
         private readonly IRepository<UseAsset> useAssetRepository;
@@ -36,6 +36,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.UseAssets
             }
         }
 
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_UseAsset_Delete)]
         public void DeleteUseAsset(int id)
         {
             var useAssetEntity = useAssetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
@@ -94,11 +95,23 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.UseAssets
                 items.Select(item => ObjectMapper.Map<UseAssetDto>(item)).ToList());
         }
 
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_UseAsset_Approve)]
+        public void ApproveUseAsset(int id)
+        {
+            var useAssetEntity = useAssetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
+            if (useAssetEntity != null)
+            {
+                useAssetEntity.StatusApproved = true;
+                useAssetRepository.Update(useAssetEntity);
+                CurrentUnitOfWork.SaveChanges();
+            }
+        }
+
         #endregion
 
         #region Private Method
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Create)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_UseAsset_Create)]
         private void Create(UseAssetInput useAssetInput)
         {
             var useAssetEntity = ObjectMapper.Map<UseAsset>(useAssetInput);
@@ -107,7 +120,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.UseAssets
             CurrentUnitOfWork.SaveChanges();
         }
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Edit)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_UseAsset_Edit)]
         private void Update(UseAssetInput useAssetInput)
         {
             var useAssetEntity = useAssetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == useAssetInput.Id);

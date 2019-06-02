@@ -10,5 +10,6 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Transfers
         void DeleteTransfer(int id);
         PagedResultDto<TransferDto> GetTransfers(TransferFilter input);
         TransferForViewDto GetTransferForView(int id);
+        void ApproveTransfer(int id);
     }
 }

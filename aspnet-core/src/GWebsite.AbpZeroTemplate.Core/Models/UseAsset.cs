@@ -17,8 +17,8 @@ namespace GWebsite.AbpZeroTemplate.Core.Models
         public string UnitsUsedId { get; set; }
         //Mã người sử dụng
         public string UserId { get; set; }
-        //Ngày sử dụng chính thức
-        public string OfficialUseDate { get; set; }
+        //Ngày xuất
+        public string DateExport { get; set; }
         //Ngày bắt đầu khấu hao
         public string StartDateOfDepreciation { get; set; }
         //Ngày kết thúc khấu hao
@@ -26,6 +26,6 @@ namespace GWebsite.AbpZeroTemplate.Core.Models
         //Giá trị khấu hao tháng đầu tiên
         public float DepreciationValueForTheFirstMonth { get; set; }
         //Trạng thái duyệt
-        public string StatusApproved { get; set; }
+        public bool StatusApproved { get; set; }
     }
 }

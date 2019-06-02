@@ -23,5 +23,7 @@ namespace GWebsite.AbpZeroTemplate.Core.Models
         public string AssetStatus { get; set; }
         //Vị trí: vị trí hiện tại của tài sản
         public string CurrentLocationOfAssets { get; set; }
+        //Trạng thái duyệt
+        public bool StatusApproved { get; set; }
     }
 }

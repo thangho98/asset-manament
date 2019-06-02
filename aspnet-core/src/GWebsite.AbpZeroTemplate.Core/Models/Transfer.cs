@@ -22,6 +22,6 @@ namespace GWebsite.AbpZeroTemplate.Core.Models
         //Ghi chú
         public string Note { get; set; }
         //Trạng thái duyệt
-        public string StatusApproved { get; set; }
+        public bool StatusApproved { get; set; }
     }
 }

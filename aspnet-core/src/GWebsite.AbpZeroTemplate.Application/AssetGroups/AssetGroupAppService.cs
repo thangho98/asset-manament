@@ -103,6 +103,23 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.AssetGroups
             return assetGroupDtoQuery.ToList();
         }
 
+        public string GetAssetGroupNameByID(int id)
+        {
+            var assetGroupEntity = assetGroupRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
+            if (assetGroupEntity == null)
+            {
+                return null;
+            }
+            return ObjectMapper.Map<AssetGroupDto>(assetGroupEntity).AssetGroupName;
+        }
+
+        public List<AssetGroupDto> GetListAssetGroupsByAssetType(int assetType)
+        {
+            IQueryable<AssetGroup> query = assetGroupRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.AssetType == assetType);
+            IQueryable<AssetGroupDto> assetGroupDtoQuery = query.ProjectTo<AssetGroupDto>(query);
+            return assetGroupDtoQuery.ToList();
+        }
+
         #endregion
 
         #region Private Method

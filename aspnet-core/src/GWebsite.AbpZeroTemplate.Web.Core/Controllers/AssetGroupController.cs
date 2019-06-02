@@ -51,5 +51,17 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         {
             return assetGroupAppService.GetListAssetGroups();
         }
+
+        [HttpGet]
+        public string GetAssetGroupNameByID(int id)
+        {
+            return assetGroupAppService.GetAssetGroupNameByID(id);
+        }
+
+        [HttpGet]
+        public List<AssetGroupDto> GetListAssetGroupsByAssetType(int assetType)
+        {
+            return assetGroupAppService.GetListAssetGroupsByAssetType(assetType);
+        }
     }
 }

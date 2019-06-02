@@ -2,6 +2,7 @@
 using GWebsite.AbpZeroTemplate.Application.Share.Repairs;
 using GWebsite.AbpZeroTemplate.Application.Share.Repairs.Dto;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace GWebsite.AbpZeroTemplate.Application.Controllers
 {
@@ -43,6 +44,12 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         public RepairForViewDto GetRepairForView(int id)
         {
             return repairAppService.GetRepairForView(id);
+        }
+
+        [HttpGet]
+        public List<RepairForViewDto> GetListRepairByAssetId(string assetId)
+        {
+            return repairAppService.GetListRepairByAssetId(assetId);
         }
     }
 }

@@ -12,6 +12,8 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.AssetGroups
         PagedResultDto<AssetGroupDto> GetAssetGroups(AssetGroupFilter input);
         AssetGroupForViewDto GetAssetGroupForView(int id);
         List<AssetGroupDto> GetListAssetGroups();
+        string GetAssetGroupNameByID(int id);
+        List<AssetGroupDto> GetListAssetGroupsByAssetType(int assetType);
     }
 }
 

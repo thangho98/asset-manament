@@ -7,11 +7,25 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Liquidations.Dto
     /// </summary>
     public class LiquidationForViewDto
     {
-        //Ngày thanh lý
-        public string LiquidationDate { get; set; }
         //Mã tài sản
         public string AssetID { get; set; }
+        //Ngày thanh lý
+        public string LiquidationDate { get; set; }
+        //Đơn vị mua
+        public string PurchaseUnit { get; set; }
+        //Nguyên giá
+        public float OriginalPrice { get; set; }
+        //Giá trị còn lại
+        public float ResidualValue { get; set; }
+        //Tình trạng tài sản/ công cụ
+        public string AssetStatus { get; set; }
+        //Hình thức thanh lý
+        public int LiquidationForm { get; set; }
+        //Giá tiền thanh lý
+        public string LiquidationPrice { get; set; }
+        //Ghi chú
+        public string Note { get; set; }
         //Trạng thái duyệt
-        public string StatusApproved { get; set; }
+        public bool StatusApproved { get; set; }
     }
 }

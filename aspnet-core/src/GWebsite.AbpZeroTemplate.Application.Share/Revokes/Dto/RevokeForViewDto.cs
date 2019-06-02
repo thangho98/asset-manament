@@ -13,7 +13,13 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Revokes.Dto
         public string AssetId { get; set; }
         //Lý do
         public string Reason { get; set; }
+        //Nội dung thu hồi
+        public string RevokeContent { get; set; }
+        //Tình trạng tài sản/ công cụ
+        public string AssetStatus { get; set; }
+        //Vị trí: vị trí hiện tại của tài sản
+        public string CurrentLocationOfAssets { get; set; }
         //Trạng thái duyệt
-        public string StatusApproved { get; set; }
+        public bool StatusApproved { get; set; }
     }
 }

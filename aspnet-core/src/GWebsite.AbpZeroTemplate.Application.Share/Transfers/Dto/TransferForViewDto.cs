@@ -14,8 +14,10 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Transfers.Dto
         //Đơn vị nhận
         public string ReceivingUnit { get; set; }
         //Người nhận
-        public string Receiver { get; set; }      
+        public string Receiver { get; set; }
+        //Ghi chú
+        public string Note { get; set; }
         //Trạng thái duyệt
-        public string StatusApproved { get; set; }
+        public bool StatusApproved { get; set; }
     }
 }

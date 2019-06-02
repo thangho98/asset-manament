@@ -15,5 +15,11 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.AssetGroups.Dto
         public int AssetType { get; set; }
         //Nhóm tài sản cha
         public string AssetGroupParentId { get; set; }
+        //Số tháng khấu hao
+        public int MonthOfDepreciation { get; set; }
+        //Tỷ lệ khấu hao
+        public float DepreciationRates { get; set; }
+        //Trạng thái duyệt
+        public bool StatusApproved { get; set; }
     }
 }

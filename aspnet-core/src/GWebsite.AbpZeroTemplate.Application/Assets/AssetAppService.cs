@@ -36,7 +36,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
             }
         }
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Asset)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Asset_Delete)]
         public void DeleteAsset(int id)
         {
             var assetEntity = assetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
@@ -117,6 +117,16 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
             }
         }
 
+        public int GetTotalAsset()
+        {
+            var query = assetRepository.GetAll();
+            if (query == null)
+            {
+                return 0;
+            }
+            return query.ToList().Count();
+        }
+
         #endregion
 
         #region Private Method
@@ -124,6 +134,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
         [AbpAuthorize(GWebsitePermissions.Pages_Administration_Asset_Create)]
         private void Create(AssetInput assetInput)
         {
+            assetInput.StatusApproved = false;
             var assetEntity = ObjectMapper.Map<Asset>(assetInput);
             SetAuditInsert(assetEntity);
             assetRepository.Insert(assetEntity);

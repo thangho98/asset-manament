@@ -1,0 +1,113 @@
+<div bsModal #viewModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-bledby="viewModal"
+    aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span *ngIf="asset.id">{{l("EditAsset")}}: {{asset.name}}</span>
+                    <span *ngIf="!asset.id">{{l("CreateNewAsset")}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" [attr.aria-b]="l('Close')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <b>Mã tài sản: </b>
+                    <span>{{asset.assetId}}</span>
+                </div>
+                <div class="form-group">
+                    <b>Tên tài sản: </b>
+                    <span>{{asset.assetName}}</span>
+                </div>
+                <div class="form-group">
+                    <b>Loại tài sản: </b>
+                    <span>{{asset.assetType}}</span>
+                </div>
+                <div class="form-group">
+                    <b>Nhóm tài sản: </b>
+                    <span>{{asset.assetGrouptId}}</span>
+                </div>
+                <div class="form-group">
+                    <b>Ngày nhập: </b>
+                    <span>{{asset.dateAdded}}</span>
+                </div>
+                <div class="form-group">
+                    <b>Tình trạng tài sản: </b>
+                    <span></span>
+                </div>
+                <div class="form-group">
+                    <b>Thông tin mô tả: </b>
+                    <span>{{asset.describe}}</span>
+                </div>
+                <div class="form-group">
+                    <b>Nhà cung cấp: </b>
+                    <span>{{asset.providerId}}</span>
+                </div>
+                <div class="form-group">
+                    <b>Nguyên giá tài sản: </b>
+                    <span>{{asset.originalPrice}}</span>
+                </div>
+                <div class="form-group">
+                    <b>Số tháng khấu hao: </b>
+                    <span>{{asset.monthOfDepreciation}}</span>
+                </div>
+                <div class="form-group">
+                    <b>Tỉ lệ khấu hao: </b>
+                    <span></span>
+                </div>
+                <div class="form-group">
+                    <b>Số tháng khấu hao còn lại: </b>
+                    <span></span>
+                </div>
+                <div class="form-group">
+                    <b>Tình trạng khấu hao: </b>
+                    <span></span>
+                </div>
+                <div class="form-group">
+                    <b>Giá trị khấu hao: </b>
+                    <span>{{asset.depreciationValue}}</span>
+                </div>
+                <div class="form-group">
+                    <b>Giá trị khấu hao còn lại: </b>
+                    <span></span>
+                </div>
+                <div class="form-group">
+                    <b>Ghi chú</b>
+                    <span>{{asset.note}}</span>
+                </div>
+                <div class="form-group">
+                    <b>Thời gian bảo hành</b>
+                    <span></span>
+                </div>
+                <div class="form-group">
+                    <b>Ngày thanh lý</b>
+                    <span></span>
+                </div>
+                <div class="form-group">
+                    <b>Giá trị khấu hao còn lại sau khi thanh lý</b>
+                    <span></span>
+                </div>
+                <div class="form-group">
+                    <b>Số tiền thanh lý</b>
+                    <span></span>
+                </div>
+                <div class="form-group">
+                    <b>Hình thức thanh lý</b>
+                    <span></span>
+                </div>
+                <div class="form-group">
+                    <b>Ghi chú</b>
+                    <span></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-default"
+                    (click)="close()">{{l("Cancel")}}</button>
+                <button type="submit" class="btn btn-primary" [buttonBusy]="saving"
+                    [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i>
+                    <span>{{l("Save")}}</span></button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -913,6 +913,109 @@ export class AssetServiceProxy {
         }
         return _observableOf<string>(<any>null);
     }
+
+    /**
+     * @return Success
+     */
+    approveAsset(id: number): Observable<void> {
+        let url_ = this.baseUrl + "/api/Asset/ApproveAsset/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApproveAsset(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApproveAsset(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApproveAsset(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    getTotalAsset(): Observable<number> {
+        let url_ = this.baseUrl + "/api/Asset/GetTotalAsset";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetTotalAsset(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetTotalAsset(<any>response_);
+                } catch (e) {
+                    return <Observable<number>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<number>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetTotalAsset(response: HttpResponseBase): Observable<number> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 !== undefined ? resultData200 : <any>null;
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<number>(<any>null);
+    }
 }
 
 @Injectable()
@@ -1204,10 +1307,13 @@ export class AssetGroupServiceProxy {
     }
 
     /**
+     * @assetGrouptId (optional) 
      * @return Success
      */
-    getListAssetGroups(): Observable<AssetGroupDto[]> {
-        let url_ = this.baseUrl + "/api/AssetGroup/GetListAssetGroups";
+    getListAssetGroups(assetGrouptId: string | null | undefined): Observable<AssetGroupDto[]> {
+        let url_ = this.baseUrl + "/api/AssetGroup/GetListAssetGroups?";
+        if (assetGrouptId !== undefined)
+            url_ += "assetGrouptId=" + encodeURIComponent("" + assetGrouptId) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1260,13 +1366,13 @@ export class AssetGroupServiceProxy {
     }
 
     /**
-     * @id (optional) 
+     * @assetGrouptId (optional) 
      * @return Success
      */
-    getAssetGroupNameByID(id: number | null | undefined): Observable<string> {
-        let url_ = this.baseUrl + "/api/AssetGroup/GetAssetGroupNameByID?";
-        if (id !== undefined)
-            url_ += "id=" + encodeURIComponent("" + id) + "&"; 
+    getAssetGroupNameByAssetID(assetGrouptId: string | null | undefined): Observable<string> {
+        let url_ = this.baseUrl + "/api/AssetGroup/GetAssetGroupNameByAssetID?";
+        if (assetGrouptId !== undefined)
+            url_ += "assetGrouptId=" + encodeURIComponent("" + assetGrouptId) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1279,11 +1385,11 @@ export class AssetGroupServiceProxy {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetAssetGroupNameByID(response_);
+            return this.processGetAssetGroupNameByAssetID(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processGetAssetGroupNameByID(<any>response_);
+                    return this.processGetAssetGroupNameByAssetID(<any>response_);
                 } catch (e) {
                     return <Observable<string>><any>_observableThrow(e);
                 }
@@ -1292,7 +1398,7 @@ export class AssetGroupServiceProxy {
         }));
     }
 
-    protected processGetAssetGroupNameByID(response: HttpResponseBase): Observable<string> {
+    protected processGetAssetGroupNameByAssetID(response: HttpResponseBase): Observable<string> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -1371,6 +1477,61 @@ export class AssetGroupServiceProxy {
             }));
         }
         return _observableOf<AssetGroupDto[]>(<any>null);
+    }
+
+    /**
+     * @assetGrouptId (optional) 
+     * @return Success
+     */
+    getAssetGroupByAssetID(assetGrouptId: string | null | undefined): Observable<AssetGroupForViewDto> {
+        let url_ = this.baseUrl + "/api/AssetGroup/GetAssetGroupByAssetID?";
+        if (assetGrouptId !== undefined)
+            url_ += "assetGrouptId=" + encodeURIComponent("" + assetGrouptId) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAssetGroupByAssetID(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAssetGroupByAssetID(<any>response_);
+                } catch (e) {
+                    return <Observable<AssetGroupForViewDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<AssetGroupForViewDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAssetGroupByAssetID(response: HttpResponseBase): Observable<AssetGroupForViewDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? AssetGroupForViewDto.fromJS(resultData200) : new AssetGroupForViewDto();
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<AssetGroupForViewDto>(<any>null);
     }
 }
 
@@ -5238,6 +5399,57 @@ export class LiquidationServiceProxy {
         }
         return _observableOf<LiquidationForViewDto>(<any>null);
     }
+
+    /**
+     * @id (optional) 
+     * @return Success
+     */
+    approveLiquidation(id: number | null | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/Liquidation/ApproveLiquidation?";
+        if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApproveLiquidation(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApproveLiquidation(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApproveLiquidation(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
 }
 
 @Injectable()
@@ -7782,6 +7994,57 @@ export class RepairServiceProxy {
         }
         return _observableOf<RepairForViewDto[]>(<any>null);
     }
+
+    /**
+     * @id (optional) 
+     * @return Success
+     */
+    approveRepair(id: number | null | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/Repair/ApproveRepair?";
+        if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApproveRepair(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApproveRepair(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApproveRepair(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
 }
 
 @Injectable()
@@ -8070,6 +8333,57 @@ export class RevokeServiceProxy {
             }));
         }
         return _observableOf<RevokeForViewDto>(<any>null);
+    }
+
+    /**
+     * @id (optional) 
+     * @return Success
+     */
+    approveRevoke(id: number | null | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/Revoke/ApproveRevoke?";
+        if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApproveRevoke(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApproveRevoke(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApproveRevoke(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
     }
 }
 
@@ -10524,6 +10838,57 @@ export class TransferServiceProxy {
         }
         return _observableOf<TransferForViewDto>(<any>null);
     }
+
+    /**
+     * @id (optional) 
+     * @return Success
+     */
+    approveTransfer(id: number | null | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/Transfer/ApproveTransfer?";
+        if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApproveTransfer(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApproveTransfer(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApproveTransfer(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
 }
 
 @Injectable()
@@ -11028,6 +11393,57 @@ export class UseAssetServiceProxy {
             }));
         }
         return _observableOf<UseAssetForViewDto>(<any>null);
+    }
+
+    /**
+     * @id (optional) 
+     * @return Success
+     */
+    approveUseAsset(id: number | null | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/UseAsset/ApproveUseAsset?";
+        if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processApproveUseAsset(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processApproveUseAsset(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processApproveUseAsset(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
     }
 }
 
@@ -12634,6 +13050,7 @@ export class AssetDto implements IAssetDto {
     assetGrouptId!: string | undefined;
     dateAdded!: string | undefined;
     providerId!: string | undefined;
+    statusApproved!: boolean | undefined;
     id!: number | undefined;
 
     constructor(data?: IAssetDto) {
@@ -12653,6 +13070,7 @@ export class AssetDto implements IAssetDto {
             this.assetGrouptId = data["assetGrouptId"];
             this.dateAdded = data["dateAdded"];
             this.providerId = data["providerId"];
+            this.statusApproved = data["statusApproved"];
             this.id = data["id"];
         }
     }
@@ -12672,6 +13090,7 @@ export class AssetDto implements IAssetDto {
         data["assetGrouptId"] = this.assetGrouptId;
         data["dateAdded"] = this.dateAdded;
         data["providerId"] = this.providerId;
+        data["statusApproved"] = this.statusApproved;
         data["id"] = this.id;
         return data; 
     }
@@ -12684,6 +13103,7 @@ export interface IAssetDto {
     assetGrouptId: string | undefined;
     dateAdded: string | undefined;
     providerId: string | undefined;
+    statusApproved: boolean | undefined;
     id: number | undefined;
 }
 
@@ -12699,8 +13119,8 @@ export class AssetInput implements IAssetInput {
     depreciationValue!: number | undefined;
     warrantyExpiryDate!: string | undefined;
     providerId!: string | undefined;
-    quantity!: number | undefined;
     note!: string | undefined;
+    status!: number | undefined;
     statusApproved!: boolean | undefined;
     id!: number | undefined;
 
@@ -12726,8 +13146,8 @@ export class AssetInput implements IAssetInput {
             this.depreciationValue = data["depreciationValue"];
             this.warrantyExpiryDate = data["warrantyExpiryDate"];
             this.providerId = data["providerId"];
-            this.quantity = data["quantity"];
             this.note = data["note"];
+            this.status = data["status"];
             this.statusApproved = data["statusApproved"];
             this.id = data["id"];
         }
@@ -12753,8 +13173,8 @@ export class AssetInput implements IAssetInput {
         data["depreciationValue"] = this.depreciationValue;
         data["warrantyExpiryDate"] = this.warrantyExpiryDate;
         data["providerId"] = this.providerId;
-        data["quantity"] = this.quantity;
         data["note"] = this.note;
+        data["status"] = this.status;
         data["statusApproved"] = this.statusApproved;
         data["id"] = this.id;
         return data; 
@@ -12773,8 +13193,8 @@ export interface IAssetInput {
     depreciationValue: number | undefined;
     warrantyExpiryDate: string | undefined;
     providerId: string | undefined;
-    quantity: number | undefined;
     note: string | undefined;
+    status: number | undefined;
     statusApproved: boolean | undefined;
     id: number | undefined;
 }
@@ -12791,8 +13211,8 @@ export class AssetForViewDto implements IAssetForViewDto {
     depreciationValue!: number | undefined;
     warrantyExpiryDate!: string | undefined;
     providerId!: string | undefined;
-    quantity!: number | undefined;
     note!: string | undefined;
+    status!: number | undefined;
     statusApproved!: boolean | undefined;
 
     constructor(data?: IAssetForViewDto) {
@@ -12817,8 +13237,8 @@ export class AssetForViewDto implements IAssetForViewDto {
             this.depreciationValue = data["depreciationValue"];
             this.warrantyExpiryDate = data["warrantyExpiryDate"];
             this.providerId = data["providerId"];
-            this.quantity = data["quantity"];
             this.note = data["note"];
+            this.status = data["status"];
             this.statusApproved = data["statusApproved"];
         }
     }
@@ -12843,8 +13263,8 @@ export class AssetForViewDto implements IAssetForViewDto {
         data["depreciationValue"] = this.depreciationValue;
         data["warrantyExpiryDate"] = this.warrantyExpiryDate;
         data["providerId"] = this.providerId;
-        data["quantity"] = this.quantity;
         data["note"] = this.note;
+        data["status"] = this.status;
         data["statusApproved"] = this.statusApproved;
         return data; 
     }
@@ -12862,8 +13282,8 @@ export interface IAssetForViewDto {
     depreciationValue: number | undefined;
     warrantyExpiryDate: string | undefined;
     providerId: string | undefined;
-    quantity: number | undefined;
     note: string | undefined;
+    status: number | undefined;
     statusApproved: boolean | undefined;
 }
 
@@ -12974,7 +13394,6 @@ export class AssetGroupInput implements IAssetGroupInput {
     assetGroupParentId!: string | undefined;
     monthOfDepreciation!: number | undefined;
     depreciationRates!: number | undefined;
-    statusApproved!: boolean | undefined;
     id!: number | undefined;
 
     constructor(data?: IAssetGroupInput) {
@@ -12994,7 +13413,6 @@ export class AssetGroupInput implements IAssetGroupInput {
             this.assetGroupParentId = data["assetGroupParentId"];
             this.monthOfDepreciation = data["monthOfDepreciation"];
             this.depreciationRates = data["depreciationRates"];
-            this.statusApproved = data["statusApproved"];
             this.id = data["id"];
         }
     }
@@ -13014,7 +13432,6 @@ export class AssetGroupInput implements IAssetGroupInput {
         data["assetGroupParentId"] = this.assetGroupParentId;
         data["monthOfDepreciation"] = this.monthOfDepreciation;
         data["depreciationRates"] = this.depreciationRates;
-        data["statusApproved"] = this.statusApproved;
         data["id"] = this.id;
         return data; 
     }
@@ -13027,7 +13444,6 @@ export interface IAssetGroupInput {
     assetGroupParentId: string | undefined;
     monthOfDepreciation: number | undefined;
     depreciationRates: number | undefined;
-    statusApproved: boolean | undefined;
     id: number | undefined;
 }
 
@@ -13038,7 +13454,6 @@ export class AssetGroupForViewDto implements IAssetGroupForViewDto {
     assetGroupParentId!: string | undefined;
     monthOfDepreciation!: number | undefined;
     depreciationRates!: number | undefined;
-    statusApproved!: boolean | undefined;
 
     constructor(data?: IAssetGroupForViewDto) {
         if (data) {
@@ -13057,7 +13472,6 @@ export class AssetGroupForViewDto implements IAssetGroupForViewDto {
             this.assetGroupParentId = data["assetGroupParentId"];
             this.monthOfDepreciation = data["monthOfDepreciation"];
             this.depreciationRates = data["depreciationRates"];
-            this.statusApproved = data["statusApproved"];
         }
     }
 
@@ -13076,7 +13490,6 @@ export class AssetGroupForViewDto implements IAssetGroupForViewDto {
         data["assetGroupParentId"] = this.assetGroupParentId;
         data["monthOfDepreciation"] = this.monthOfDepreciation;
         data["depreciationRates"] = this.depreciationRates;
-        data["statusApproved"] = this.statusApproved;
         return data; 
     }
 }
@@ -13088,7 +13501,6 @@ export interface IAssetGroupForViewDto {
     assetGroupParentId: string | undefined;
     monthOfDepreciation: number | undefined;
     depreciationRates: number | undefined;
-    statusApproved: boolean | undefined;
 }
 
 export class PagedResultDtoOfAuditLogListDto implements IPagedResultDtoOfAuditLogListDto {

@@ -96,16 +96,16 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.AssetGroups
                 items.Select(item => ObjectMapper.Map<AssetGroupDto>(item)).ToList());
         }
 
-        public List<AssetGroupDto> GetListAssetGroups()
+        public List<AssetGroupDto> GetListAssetGroups(string assetGrouptId)
         {
-            IQueryable<AssetGroup> query = assetGroupRepository.GetAll().Where(x => !x.IsDelete);
+            IQueryable<AssetGroup> query = assetGroupRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.AssetGrouptId != assetGrouptId);
             IQueryable<AssetGroupDto> assetGroupDtoQuery = query.ProjectTo<AssetGroupDto>(query);
             return assetGroupDtoQuery.ToList();
         }
 
-        public string GetAssetGroupNameByID(int id)
+        public string GetAssetGroupNameByAssetID(string assetGrouptId)
         {
-            var assetGroupEntity = assetGroupRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
+            var assetGroupEntity = assetGroupRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.AssetGrouptId == assetGrouptId);
             if (assetGroupEntity == null)
             {
                 return null;
@@ -118,6 +118,16 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.AssetGroups
             IQueryable<AssetGroup> query = assetGroupRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.AssetType == assetType);
             IQueryable<AssetGroupDto> assetGroupDtoQuery = query.ProjectTo<AssetGroupDto>(query);
             return assetGroupDtoQuery.ToList();
+        }
+
+        public AssetGroupForViewDto GetAssetGroupByAssetID(string assetGrouptId)
+        {
+            var assetGroupEntity = assetGroupRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.AssetGrouptId == assetGrouptId);
+            if (assetGroupEntity == null)
+            {
+                return null;
+            }
+            return ObjectMapper.Map<AssetGroupForViewDto>(assetGroupEntity);
         }
 
         #endregion

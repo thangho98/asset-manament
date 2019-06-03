@@ -12,5 +12,6 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Assets
         AssetForViewDto GetAssetForView(int id);
         string GetAssetNameByID(int id);
         void ApproveAsset(int id);
+        int GetTotalAsset();
     }
 }

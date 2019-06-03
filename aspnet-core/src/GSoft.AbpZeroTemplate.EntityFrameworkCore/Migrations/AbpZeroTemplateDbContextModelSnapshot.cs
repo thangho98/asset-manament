@@ -1585,7 +1585,7 @@ namespace GSoft.AbpZeroTemplate.Migrations
 
                     b.Property<string>("ProviderId");
 
-                    b.Property<int>("Quantity");
+                    b.Property<int>("Status");
 
                     b.Property<bool>("StatusApproved");
 

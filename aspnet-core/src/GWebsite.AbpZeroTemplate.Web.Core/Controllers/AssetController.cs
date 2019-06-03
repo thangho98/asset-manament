@@ -51,10 +51,16 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
             return assetAppService.GetAssetNameByID(id);
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public void ApproveAsset(int id)
         {
             assetAppService.ApproveAsset(id);
+        }
+
+        [HttpGet]
+        public int GetTotalAsset()
+        {
+            return assetAppService.GetTotalAsset();
         }
     }
 }

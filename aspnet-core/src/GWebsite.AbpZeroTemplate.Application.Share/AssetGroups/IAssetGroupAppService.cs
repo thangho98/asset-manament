@@ -11,9 +11,11 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.AssetGroups
         void DeleteAssetGroup(int id);
         PagedResultDto<AssetGroupDto> GetAssetGroups(AssetGroupFilter input);
         AssetGroupForViewDto GetAssetGroupForView(int id);
-        List<AssetGroupDto> GetListAssetGroups();
-        string GetAssetGroupNameByID(int id);
+        List<AssetGroupDto> GetListAssetGroups(string assetGrouptId);
+        string GetAssetGroupNameByAssetID(string assetGrouptId);
         List<AssetGroupDto> GetListAssetGroupsByAssetType(int assetType);
+        AssetGroupForViewDto GetAssetGroupByAssetID(string assetGrouptId);
+
     }
 }
 

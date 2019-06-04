@@ -12,7 +12,7 @@ using System.Linq.Dynamic.Core;
 
 namespace GWebsite.AbpZeroTemplate.Web.Core.Transfers
 {
-    [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient)]
+    [AbpAuthorize(GWebsitePermissions.Pages_Administration_Transfer)]
     public class TransferAppService : GWebsiteAppServiceBase, ITransferAppService
     {
         private readonly IRepository<Transfer> transferRepository;
@@ -36,6 +36,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Transfers
             }
         }
 
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Transfer_Delete)]
         public void DeleteTransfer(int id)
         {
             var transferEntity = transferRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
@@ -94,11 +95,23 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Transfers
                 items.Select(item => ObjectMapper.Map<TransferDto>(item)).ToList());
         }
 
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Transfer_Approve)]
+        public void ApproveTransfer(int id)
+        {
+            var transferEntity = transferRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
+            if (transferEntity != null)
+            {
+                transferEntity.StatusApproved = true;
+                transferRepository.Update(transferEntity);
+                CurrentUnitOfWork.SaveChanges();
+            }
+        }
+
         #endregion
 
         #region Private Method
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Create)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Transfer_Create)]
         private void Create(TransferInput transferInput)
         {
             var transferEntity = ObjectMapper.Map<Transfer>(transferInput);
@@ -107,7 +120,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Transfers
             CurrentUnitOfWork.SaveChanges();
         }
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Edit)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Transfer_Edit)]
         private void Update(TransferInput transferInput)
         {
             var transferEntity = transferRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == transferInput.Id);

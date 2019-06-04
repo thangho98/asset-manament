@@ -44,5 +44,11 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         {
             return transferAppService.GetTransferForView(id);
         }
+
+        [HttpGet("{id}")]
+        public void ApproveTransfer(int id)
+        {
+            transferAppService.ApproveTransfer(id);
+        }
     }
 }

@@ -41,6 +41,8 @@ namespace GWebsite.AbpZeroTemplate.Core.Models
         public string Content { get; set; }
         //Ghi chú
         public string Note { get; set; }
+        //Trạng thái sửa chữa
+        public bool Status { get; set; }
         //Trạng thái duyệt
         public bool StatusApproved { get; set; }
     }

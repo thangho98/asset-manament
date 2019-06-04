@@ -2,6 +2,7 @@
 using GWebsite.AbpZeroTemplate.Application.Share.Assets;
 using GWebsite.AbpZeroTemplate.Application.Share.Assets.Dto;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace GWebsite.AbpZeroTemplate.Application.Controllers
 {
@@ -49,6 +50,48 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         public string GetAssetNameByID(int id)
         {
             return assetAppService.GetAssetNameByID(id);
+        }
+
+        [HttpGet("{id}")]
+        public void ApproveAsset(int id)
+        {
+            assetAppService.ApproveAsset(id);
+        }
+
+        [HttpGet]
+        public int GetTotalAsset()
+        {
+            return assetAppService.GetTotalAsset();
+        }
+
+        [HttpGet]
+        public List<AssetDto> getListAssetsInStock()
+        {
+            return assetAppService.getListAssetsInStock();
+        }
+
+        [HttpGet]
+        public void updateAssetStatusInStock(string assetID)
+        {
+            assetAppService.updateAssetStatusInStock(assetID);
+        }
+
+        [HttpGet]
+        public void updateAssetStatusUsing(string assetID)
+        {
+            assetAppService.updateAssetStatusUsing(assetID);
+        }
+
+        [HttpGet]
+        public void updateAssetStatusReparing(string assetID)
+        {
+            assetAppService.updateAssetStatusReparing(assetID);
+        }
+
+        [HttpGet]
+        public void updateAssetStatusLiquidated(string assetID)
+        {
+            assetAppService.updateAssetStatusLiquidated(assetID);
         }
     }
 }

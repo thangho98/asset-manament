@@ -14,7 +14,7 @@ using System.Linq.Dynamic.Core;
 
 namespace GWebsite.AbpZeroTemplate.Web.Core.Repairs
 {
-    [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient)]
+    [AbpAuthorize(GWebsitePermissions.Pages_Administration_Repair)]
     public class RepairAppService : GWebsiteAppServiceBase, IRepairAppService
     {
         private readonly IRepository<Repair> repairRepository;
@@ -38,6 +38,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Repairs
             }
         }
 
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Repair_Delete)]
         public void DeleteRepair(int id)
         {
             var repairEntity = repairRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
@@ -103,13 +104,23 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Repairs
                 items.Select(item => ObjectMapper.Map<RepairDto>(item)).ToList());
         }
 
-
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Repair_Approve)]
+        public void ApproveRepair(int id)
+        {
+            var repairEntity = repairRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
+            if (repairEntity != null)
+            {
+                repairEntity.StatusApproved = true;
+                repairRepository.Update(repairEntity);
+                CurrentUnitOfWork.SaveChanges();
+            }
+        }
 
         #endregion
 
         #region Private Method
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Create)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Repair_Create)]
         private void Create(RepairInput repairInput)
         {
             var repairEntity = ObjectMapper.Map<Repair>(repairInput);
@@ -118,7 +129,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Repairs
             CurrentUnitOfWork.SaveChanges();
         }
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Edit)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Repair_Edit)]
         private void Update(RepairInput repairInput)
         {
             var repairEntity = repairRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == repairInput.Id);

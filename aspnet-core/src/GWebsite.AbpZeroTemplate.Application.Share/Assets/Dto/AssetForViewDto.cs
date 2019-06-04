@@ -29,10 +29,10 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Assets.Dto
         public string WarrantyExpiryDate { get; set; }
         //Nhà cung cấp
         public string ProviderId { get; set; }
-        //Số lượng
-        public int Quantity { get; set; }
         //Ghi chú
         public string Note { get; set; }
+        //trạng thái của sản phẩm
+        public int Status { get; set; }
         //Trạng thái duyệt
         public bool StatusApproved { get; set; }
     }

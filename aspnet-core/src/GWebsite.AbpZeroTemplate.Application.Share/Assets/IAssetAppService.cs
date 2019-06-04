@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using GWebsite.AbpZeroTemplate.Application.Share.Assets.Dto;
+using System.Collections.Generic;
 
 namespace GWebsite.AbpZeroTemplate.Application.Share.Assets
 {
@@ -11,5 +12,12 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Assets
         PagedResultDto<AssetDto> GetAssets(AssetFilter input);
         AssetForViewDto GetAssetForView(int id);
         string GetAssetNameByID(int id);
+        void ApproveAsset(int id);
+        int GetTotalAsset();
+        List<AssetDto> getListAssetsInStock();
+        void updateAssetStatusInStock(string assetID);
+        void updateAssetStatusUsing(string assetID);
+        void updateAssetStatusReparing(string assetID);
+        void updateAssetStatusLiquidated(string assetID);
     }
 }

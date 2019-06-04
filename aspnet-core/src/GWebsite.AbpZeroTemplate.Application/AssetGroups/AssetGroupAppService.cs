@@ -14,7 +14,7 @@ using System.Linq.Dynamic.Core;
 
 namespace GWebsite.AbpZeroTemplate.Web.Core.AssetGroups
 {
-    [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient)]
+    [AbpAuthorize(GWebsitePermissions.Pages_Administration_AssetGroup)]
     public class AssetGroupAppService : GWebsiteAppServiceBase, IAssetGroupAppService
     {
         private readonly IRepository<AssetGroup> assetGroupRepository;
@@ -37,7 +37,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.AssetGroups
                 Update(assetGroupInput);
             }
         }
-
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_AssetGroup_Delete)]
         public void DeleteAssetGroup(int id)
         {
             var assetGroupEntity = assetGroupRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
@@ -96,16 +96,16 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.AssetGroups
                 items.Select(item => ObjectMapper.Map<AssetGroupDto>(item)).ToList());
         }
 
-        public List<AssetGroupDto> GetListAssetGroups()
+        public List<AssetGroupDto> GetListAssetGroups(string assetGrouptId)
         {
-            IQueryable<AssetGroup> query = assetGroupRepository.GetAll().Where(x => !x.IsDelete);
+            IQueryable<AssetGroup> query = assetGroupRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.AssetGrouptId != assetGrouptId);
             IQueryable<AssetGroupDto> assetGroupDtoQuery = query.ProjectTo<AssetGroupDto>(query);
             return assetGroupDtoQuery.ToList();
         }
 
-        public string GetAssetGroupNameByID(int id)
+        public string GetAssetGroupNameByAssetID(string assetGrouptId)
         {
-            var assetGroupEntity = assetGroupRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
+            var assetGroupEntity = assetGroupRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.AssetGrouptId.ToLower().Equals(assetGrouptId.ToLower()));
             if (assetGroupEntity == null)
             {
                 return null;
@@ -120,11 +120,21 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.AssetGroups
             return assetGroupDtoQuery.ToList();
         }
 
+        public AssetGroupForViewDto GetAssetGroupByAssetID(string assetGrouptId)
+        {
+            var assetGroupEntity = assetGroupRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.AssetGrouptId == assetGrouptId);
+            if (assetGroupEntity == null)
+            {
+                return null;
+            }
+            return ObjectMapper.Map<AssetGroupForViewDto>(assetGroupEntity);
+        }
+
         #endregion
 
         #region Private Method
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Create)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_AssetGroup_Create)]
         private void Create(AssetGroupInput assetGroupInput)
         {
             var assetGroupEntity = ObjectMapper.Map<AssetGroup>(assetGroupInput);
@@ -133,7 +143,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.AssetGroups
             CurrentUnitOfWork.SaveChanges();
         }
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Edit)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_AssetGroup_Edit)]
         private void Update(AssetGroupInput assetGroupInput)
         {
             var assetGroupEntity = assetGroupRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == assetGroupInput.Id);

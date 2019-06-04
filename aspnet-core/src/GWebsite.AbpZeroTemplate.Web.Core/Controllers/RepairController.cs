@@ -51,5 +51,11 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         {
             return repairAppService.GetListRepairByAssetId(assetId);
         }
+
+        [HttpGet("{id}")]
+        public void ApproveRepair(int id)
+        {
+            repairAppService.ApproveRepair(id);
+        }
     }
 }

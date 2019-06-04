@@ -23,7 +23,5 @@ namespace GWebsite.AbpZeroTemplate.Core.Models
         public int MonthOfDepreciation { get; set; }
         //Tỷ lệ khấu hao
         public float DepreciationRates { get; set; }
-        //Trạng thái duyệt
-        public bool StatusApproved { get; set; }
     }
 }

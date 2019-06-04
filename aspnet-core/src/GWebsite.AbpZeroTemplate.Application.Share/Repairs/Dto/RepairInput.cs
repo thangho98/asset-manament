@@ -29,17 +29,18 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Repairs.Dto
         //Ngày sửa xong
         public string DateRepaired { get; set; }
         //Đơn vị sửa chữa thực tế - select để chọn
-        public int RepairUnit { get; set; }
+        public int? RepairUnit { get; set; }
         //Chi phí thực tế
-        public float Cost { get; set; }
+        public float? Cost { get; set; }
         //Thay đổi công năng - checked true false
         public bool IsChangeFunction { get; set; }
         //Nội dung
         public string Content { get; set; }
         //Ghi chú
         public string Note { get; set; }
-        //Trạng thái
+        //Trạng thái sửa chữa
         public bool Status { get; set; }
-
+        //Trạng thái duyệt
+        public bool StatusApproved { get; set; }
     }
 }

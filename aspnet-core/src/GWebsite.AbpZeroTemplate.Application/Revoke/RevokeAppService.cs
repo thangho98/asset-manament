@@ -12,7 +12,7 @@ using System.Linq.Dynamic.Core;
 
 namespace GWebsite.AbpZeroTemplate.Web.Core.Revokes
 {
-    [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient)]
+    [AbpAuthorize(GWebsitePermissions.Pages_Administration_Revoke)]
     public class RevokeAppService : GWebsiteAppServiceBase, IRevokeAppService
     {
         private readonly IRepository<Revoke> revokeRepository;
@@ -36,6 +36,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Revokes
             }
         }
 
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Revoke_Delete)]
         public void DeleteRevoke(int id)
         {
             var revokeEntity = revokeRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
@@ -94,11 +95,23 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Revokes
                 items.Select(item => ObjectMapper.Map<RevokeDto>(item)).ToList());
         }
 
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Revoke_Approve)]
+        public void ApproveRevoke(int id)
+        {
+            var revokeEntity = revokeRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
+            if (revokeEntity != null)
+            {
+                revokeEntity.StatusApproved = true;
+                revokeRepository.Update(revokeEntity);
+                CurrentUnitOfWork.SaveChanges();
+            }
+        }
+
         #endregion
 
         #region Private Method
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Create)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Revoke_Create)]
         private void Create(RevokeInput revokeInput)
         {
             var revokeEntity = ObjectMapper.Map<Revoke>(revokeInput);
@@ -107,7 +120,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Revokes
             CurrentUnitOfWork.SaveChanges();
         }
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Edit)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Revoke_Edit)]
         private void Update(RevokeInput revokeInput)
         {
             var revokeEntity = revokeRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == revokeInput.Id);

@@ -2,17 +2,19 @@
 using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
+using AutoMapper.QueryableExtensions;
 using GWebsite.AbpZeroTemplate.Application;
 using GWebsite.AbpZeroTemplate.Application.Share.Assets;
 using GWebsite.AbpZeroTemplate.Application.Share.Assets.Dto;
 using GWebsite.AbpZeroTemplate.Core.Authorization;
 using GWebsite.AbpZeroTemplate.Core.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 
 namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
 {
-    [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient)]
+    [AbpAuthorize(GWebsitePermissions.Pages_Administration_Asset)]
     public class AssetAppService : GWebsiteAppServiceBase, IAssetAppService
     {
         private readonly IRepository<Asset> assetRepository;
@@ -36,6 +38,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
             }
         }
 
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Asset_Delete)]
         public void DeleteAsset(int id)
         {
             var assetEntity = assetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
@@ -104,20 +107,95 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
             return ObjectMapper.Map<AssetDto>(assetEntity).AssetName;
         }
 
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Asset_Approve)]
+        public void ApproveAsset(int id)
+        {
+            var assetEntity = assetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
+            if (assetEntity != null)
+            {
+                assetEntity.StatusApproved = true;
+                assetRepository.Update(assetEntity);
+                CurrentUnitOfWork.SaveChanges();
+            }
+        }
+
+        public int GetTotalAsset()
+        {
+            var query = assetRepository.GetAll();
+            if (query == null)
+            {
+                return 0;
+            }
+            return query.ToList().Count();
+        }
+
+        public List<AssetDto> getListAssetsInStock()
+        {
+            IQueryable<Asset> query = assetRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.Status == (int)Const.Const.AssetStatus.IN_STOCK);
+            IQueryable<AssetDto> assetDtoQuery = query.ProjectTo<AssetDto>(query);
+            return assetDtoQuery.ToList();
+        }
+
+        public void updateAssetStatusInStock(string assetID)
+        {
+            var assetEntity = assetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.AssetId.ToLower().Equals(assetID.ToLower()));
+            if (assetEntity != null)
+            {
+                assetEntity.Status = (int)Const.Const.AssetStatus.IN_STOCK;
+                assetRepository.Update(assetEntity);
+                CurrentUnitOfWork.SaveChanges();
+            }
+        }
+
+        public void updateAssetStatusUsing(string assetID)
+        {
+            var assetEntity = assetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.AssetId.ToLower().Equals(assetID.ToLower()));
+            if (assetEntity != null)
+            {
+                assetEntity.Status = (int)Const.Const.AssetStatus.USING;
+                assetRepository.Update(assetEntity);
+                CurrentUnitOfWork.SaveChanges();
+            }
+        }
+
+        public void updateAssetStatusReparing(string assetID)
+        {
+            var assetEntity = assetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.AssetId.ToLower().Equals(assetID.ToLower()));
+            if (assetEntity != null)
+            {
+                assetEntity.Status = (int)Const.Const.AssetStatus.REPARING;
+                assetRepository.Update(assetEntity);
+                CurrentUnitOfWork.SaveChanges();
+            }
+        }
+
+        public void updateAssetStatusLiquidated(string assetID)
+        {
+            var assetEntity = assetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.AssetId.ToLower().Equals(assetID.ToLower()));
+            if (assetEntity != null)
+            {
+                assetEntity.Status = (int)Const.Const.AssetStatus.LIQUIDATED;
+                assetRepository.Update(assetEntity);
+                CurrentUnitOfWork.SaveChanges();
+            }
+        }
+
         #endregion
 
         #region Private Method
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Create)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Asset_Create)]
         private void Create(AssetInput assetInput)
         {
+            assetInput.StatusApproved = false;
+            assetInput.Status = (int)Const.Const.AssetStatus.IN_STOCK;
             var assetEntity = ObjectMapper.Map<Asset>(assetInput);
             SetAuditInsert(assetEntity);
             assetRepository.Insert(assetEntity);
             CurrentUnitOfWork.SaveChanges();
         }
 
-        [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Edit)]
+        [AbpAuthorize(GWebsitePermissions.Pages_Administration_Asset_Edit)]
         private void Update(AssetInput assetInput)
         {
             var assetEntity = assetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == assetInput.Id);

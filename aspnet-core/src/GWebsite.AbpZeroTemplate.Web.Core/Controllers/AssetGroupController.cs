@@ -47,21 +47,27 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         }
 
         [HttpGet]
-        public List<AssetGroupDto> GetListAssetGroups()
+        public List<AssetGroupDto> GetListAssetGroups(string assetGrouptId)
         {
-            return assetGroupAppService.GetListAssetGroups();
+            return assetGroupAppService.GetListAssetGroups(assetGrouptId);
         }
 
         [HttpGet]
-        public string GetAssetGroupNameByID(int id)
+        public string GetAssetGroupNameByAssetID(string assetGrouptId)
         {
-            return assetGroupAppService.GetAssetGroupNameByID(id);
+            return assetGroupAppService.GetAssetGroupNameByAssetID(assetGrouptId);
         }
 
         [HttpGet]
         public List<AssetGroupDto> GetListAssetGroupsByAssetType(int assetType)
         {
             return assetGroupAppService.GetListAssetGroupsByAssetType(assetType);
+        }
+
+        [HttpGet]
+        public AssetGroupForViewDto GetAssetGroupByAssetID(string assetGrouptId)
+        {
+            return assetGroupAppService.GetAssetGroupByAssetID(assetGrouptId);
         }
     }
 }

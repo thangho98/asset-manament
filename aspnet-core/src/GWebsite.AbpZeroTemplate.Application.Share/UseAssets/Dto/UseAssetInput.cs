@@ -16,7 +16,13 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.UseAssets.Dto
         public string UserId { get; set; }
         //Ngày xuất
         public string DateExport { get; set; }
+        //Ngày bắt đầu khấu hao
+        public string StartDateOfDepreciation { get; set; }
+        //Ngày kết thúc khấu hao
+        public string EndDateOfDepreciation { get; set; }
+        //Giá trị khấu hao tháng đầu tiên
+        public float DepreciationValueForTheFirstMonth { get; set; }
         //Trạng thái duyệt
-        public string StatusApproved { get; set; }
+        public bool StatusApproved { get; set; }
     }
 }

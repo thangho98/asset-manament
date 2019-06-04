@@ -2,6 +2,7 @@
 using GWebsite.AbpZeroTemplate.Application.Share.UseAssets;
 using GWebsite.AbpZeroTemplate.Application.Share.UseAssets.Dto;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace GWebsite.AbpZeroTemplate.Application.Controllers
 {
@@ -43,6 +44,12 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         public UseAssetForViewDto GetUseAssetForView(int id)
         {
             return useAssetAppService.GetUseAssetForView(id);
+        }
+
+        [HttpGet]
+        public List<UseAssetForViewDto> GetListUseAssetByAssetId(string assetId)
+        {
+            return useAssetAppService.GetListUseAssetByAssetId(assetId);
         }
     }
 }

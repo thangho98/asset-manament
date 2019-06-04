@@ -2,11 +2,13 @@
 using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
+using AutoMapper.QueryableExtensions;
 using GWebsite.AbpZeroTemplate.Application;
 using GWebsite.AbpZeroTemplate.Application.Share.UseAssets;
 using GWebsite.AbpZeroTemplate.Application.Share.UseAssets.Dto;
 using GWebsite.AbpZeroTemplate.Core.Authorization;
 using GWebsite.AbpZeroTemplate.Core.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 
@@ -92,6 +94,13 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.UseAssets
             return new PagedResultDto<UseAssetDto>(
                 totalCount,
                 items.Select(item => ObjectMapper.Map<UseAssetDto>(item)).ToList());
+        }
+
+        public List<UseAssetForViewDto> GetListUseAssetByAssetId(string assetId)
+        {
+            IQueryable<UseAsset> query = useAssetRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.AssetId == assetId);
+            IQueryable<UseAssetForViewDto> useAssetDtoQuery = query.ProjectTo<UseAssetForViewDto>(query);
+            return useAssetDtoQuery.ToList();
         }
 
         #endregion

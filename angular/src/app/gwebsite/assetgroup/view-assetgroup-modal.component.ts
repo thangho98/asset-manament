@@ -11,6 +11,7 @@ import { ModalDirective } from 'ngx-bootstrap';
 
 export class ViewAssetGroupModalComponent extends AppComponentBase {
 
+    assetGroupName: string = '';
     assetgroup: AssetGroupForViewDto = new AssetGroupForViewDto();
     @ViewChild('viewModal') modal: ModalDirective;
 
@@ -25,6 +26,7 @@ export class ViewAssetGroupModalComponent extends AppComponentBase {
         this._assetgroupService.getAssetGroupForView(assetgroupId).subscribe(result => {
             this.assetgroup = result;
             this.modal.show();
+            this.getNameAssetGroupParent();
         })
     }
 
@@ -32,11 +34,10 @@ export class ViewAssetGroupModalComponent extends AppComponentBase {
         this.modal.hide();
     }
 
-    getNameAssetGroupParent(assetGroupId): string {
-        let name: string;
-        this._assetgroupService.getAssetGroupNameByAssetID(assetGroupId).subscribe(result => {
-            name = result;
+    getNameAssetGroupParent(): void {
+        this._assetgroupService.getAssetGroupNameByAssetID(this.assetgroup.assetGroupParentId).subscribe(result => {
+            if(result != null)
+            this.assetGroupName = result;
         });
-        return name;
     }
 }

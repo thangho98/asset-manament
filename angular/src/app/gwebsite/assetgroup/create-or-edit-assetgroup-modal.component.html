@@ -29,7 +29,7 @@
                         <label>Loại tài sản *</label>
                         <select #noteInput="ngModel" required [(ngModel)]='assetgroup.assetType' class='form-control'
                             name="AssetType">
-                            <option value='0'>Công Cục lao động</option>
+                            <option value='0'>Công cụ lao động</option>
                             <option value='1'>Tài sản cố định</option>
                         </select>
                     </div>
@@ -37,6 +37,7 @@
                         <label>Nhóm tài sản cha *</label>
                         <select #noteInput="ngModel" required [(ngModel)]='assetgroup.assetGroupParentId'
                             class='form-control' name="AssetGroupParentId">
+                            <option value="">Không có nhóm cha</option>
                             <option *ngFor="let item of assetGroupParents" [value]="item.assetGrouptId">
                                 {{item.assetGrouptId}} - {{item.assetGroupName}}
                             </option>

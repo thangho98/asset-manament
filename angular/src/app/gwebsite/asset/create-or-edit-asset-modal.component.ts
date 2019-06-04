@@ -76,7 +76,13 @@ export class CreateOrEditAssetModalComponent extends AppComponentBase {
 
     getListAssetGroupsByAssetType(assetType: number): void {
         this._assetGroupService.getListAssetGroupsByAssetType(assetType).subscribe(result => {
+            console.log(this.assetGroup);
             this.assetGroups = result;
+            console.log(this.assetGroups);
+            if (this.assetGroup.assetGrouptId != null) {
+                this.getAssetGroupByID(this.assetGroups[0].assetGrouptId);
+            }
+            console.log(this.assetGroup);
         });
     }
 
@@ -92,6 +98,7 @@ export class CreateOrEditAssetModalComponent extends AppComponentBase {
     }
 
     getAssetGroupByID(assetGroupId: string): void {
+        console.log("Click");
         this._assetGroupService.getAssetGroupByAssetID(assetGroupId).subscribe(result => {
             this.assetGroup = result;
             console.log(this.assetGroup);
@@ -104,8 +111,6 @@ export class CreateOrEditAssetModalComponent extends AppComponentBase {
             }
             this.asset.assetId = this.assetId.toUpperCase();
         });
-
-        // console.log(this.assetGroup);
     }
 
     formatAssetID(total: number): string {

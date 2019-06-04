@@ -135,6 +135,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
         private void Create(AssetInput assetInput)
         {
             assetInput.StatusApproved = false;
+            assetInput.Status = (int)Const.Const.AssetStatus.IN_STOCK;
             var assetEntity = ObjectMapper.Map<Asset>(assetInput);
             SetAuditInsert(assetEntity);
             assetRepository.Insert(assetEntity);

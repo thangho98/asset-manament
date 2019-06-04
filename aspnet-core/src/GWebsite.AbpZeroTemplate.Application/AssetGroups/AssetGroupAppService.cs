@@ -105,7 +105,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.AssetGroups
 
         public string GetAssetGroupNameByAssetID(string assetGrouptId)
         {
-            var assetGroupEntity = assetGroupRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.AssetGrouptId == assetGrouptId);
+            var assetGroupEntity = assetGroupRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.AssetGrouptId.ToLower().Equals(assetGrouptId.ToLower()));
             if (assetGroupEntity == null)
             {
                 return null;

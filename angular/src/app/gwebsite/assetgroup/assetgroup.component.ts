@@ -123,12 +123,4 @@ export class AssetGroupComponent extends AppComponentBase implements AfterViewIn
     truncateString(text): string {
         return abp.utils.truncateStringWithPostfix(text, 32, '...');
     }
-
-    getNameAssetGroupParent(assetGroupId): string {
-        let name: string;
-        this._assetgroupService.getAssetGroupNameByAssetID(assetGroupId).subscribe(result => {
-            name = result;
-        });
-        return name;
-    }
 }

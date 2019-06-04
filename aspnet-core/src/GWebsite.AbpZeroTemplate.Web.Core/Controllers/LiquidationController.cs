@@ -51,7 +51,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
             return this.liquidationAppService.GetLiquidationByAssetID(assetId);
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public void ApproveLiquidation(int id)
         {
             liquidationAppService.ApproveLiquidation(id);

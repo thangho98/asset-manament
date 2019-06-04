@@ -15,6 +15,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.AssetGroups
         string GetAssetGroupNameByAssetID(string assetGrouptId);
         List<AssetGroupDto> GetListAssetGroupsByAssetType(int assetType);
         AssetGroupForViewDto GetAssetGroupByAssetID(string assetGrouptId);
+
     }
 }
 

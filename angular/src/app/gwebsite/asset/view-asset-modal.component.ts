@@ -1,4 +1,4 @@
-import { AssetForViewDto } from './../../../shared/service-proxies/service-proxies';
+import { AssetForViewDto, AssetGroupServiceProxy } from './../../../shared/service-proxies/service-proxies';
 import { AppComponentBase } from "@shared/common/app-component-base";
 import { AfterViewInit, Injector, Component, ViewChild } from "@angular/core";
 import { AssetServiceProxy } from "@shared/service-proxies/service-proxies";
@@ -11,12 +11,14 @@ import { ModalDirective } from 'ngx-bootstrap';
 
 export class ViewAssetModalComponent extends AppComponentBase {
 
-    asset : AssetForViewDto = new AssetForViewDto();
+    assetGroupName: string = "";
+    asset: AssetForViewDto = new AssetForViewDto();
     @ViewChild('viewModal') modal: ModalDirective;
 
     constructor(
         injector: Injector,
-        private _assetService: AssetServiceProxy
+        private _assetService: AssetServiceProxy,
+        private _assetgroupService: AssetGroupServiceProxy,
     ) {
         super(injector);
     }
@@ -28,7 +30,14 @@ export class ViewAssetModalComponent extends AppComponentBase {
         })
     }
 
-    close() : void{
+    close(): void {
         this.modal.hide();
+    }
+
+    getNameAssetGroupParent(): void {
+        this._assetgroupService.getAssetGroupNameByAssetID(this.asset.assetGrouptId).subscribe(result => {
+            if (result != null)
+                this.assetGroupName = result;
+        });
     }
 }

@@ -35,7 +35,7 @@ namespace GWebsite.AbpZeroTemplate.Core.Models
         public string ProviderId { get; set; }
         //Ghi chú
         public string Note { get; set; }
-        //trạng thái của sản phẩm
+        //trạng thái của tài sản
         public int Status { get; set; }
         //Trạng thái duyệt
         public bool StatusApproved { get; set; }

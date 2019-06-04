@@ -6,7 +6,6 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.UseAssets
 {
     public interface IUseAssetAppService
     {
-    {
         void CreateOrEditUseAsset(UseAssetInput useassetInput);
         UseAssetInput GetUseAssetForEdit(int id);
         void DeleteUseAsset(int id);

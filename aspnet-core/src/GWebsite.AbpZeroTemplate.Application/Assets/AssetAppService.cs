@@ -147,6 +147,14 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
             return assetDtoQuery.ToList();
         }
 
+        public List<AssetForViewDto> GetListAssetsInUse()
+        {
+            IQueryable<Asset> query = assetRepository.GetAll().Where(x => !x.IsDelete)
+                .Where(x => x.Status == (int)Const.Const.AssetStatus.USING).Where(x => x.StatusApproved == true);
+            IQueryable<AssetForViewDto> assetDtoQuery = query.ProjectTo<AssetForViewDto>(query);
+            return assetDtoQuery.ToList();
+        }
+
         public void updateAssetStatusInStock(string assetID)
         {
             var assetEntity = assetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.AssetId.ToLower().Equals(assetID.ToLower()));

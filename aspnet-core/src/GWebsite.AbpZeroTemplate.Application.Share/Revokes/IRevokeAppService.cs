@@ -1,4 +1,5 @@
-﻿using Abp.Application.Services.Dto;
+﻿using System.Collections.Generic;
+using Abp.Application.Services.Dto;
 using GWebsite.AbpZeroTemplate.Application.Share.Revokes.Dto;
 
 namespace GWebsite.AbpZeroTemplate.Application.Share.Revokes
@@ -11,5 +12,6 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Revokes
         PagedResultDto<RevokeDto> GetRevokes(RevokeFilter input);
         RevokeForViewDto GetRevokeForView(int id);
         void ApproveRevoke(int id);
+        List<RevokeDto> GetListAssetNotApprove();
     }
 }

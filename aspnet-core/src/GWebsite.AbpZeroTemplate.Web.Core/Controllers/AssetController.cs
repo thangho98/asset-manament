@@ -77,6 +77,12 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         }
 
         [HttpGet]
+        public List<AssetForViewDto> GetListAssetsInUse()
+        {
+            return assetAppService.GetListAssetsInUse();
+        }
+
+        [HttpGet]
         public void updateAssetStatusInStock(string assetID)
         {
             assetAppService.updateAssetStatusInStock(assetID);

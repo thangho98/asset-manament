@@ -1,4 +1,5 @@
-﻿using Abp.Application.Services.Dto;
+﻿using System.Collections.Generic;
+using Abp.Application.Services.Dto;
 using GWebsite.AbpZeroTemplate.Application.Share.Revokes;
 using GWebsite.AbpZeroTemplate.Application.Share.Revokes.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -43,6 +44,12 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         public RevokeForViewDto GetRevokeForView(int id)
         {
             return revokeAppService.GetRevokeForView(id);
+        }
+
+        [HttpGet]
+        public List<RevokeDto> GetListAssetNotApprove()
+        {
+            return revokeAppService.GetListAssetNotApprove();
         }
 
         [HttpGet("{id}")]

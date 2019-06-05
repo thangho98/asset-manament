@@ -16,6 +16,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Assets
         int GetTotalAsset();
         AssetForViewDto GetAssetByAssetID(string assetId);
         List<AssetForViewDto> GetListAssetsInStock();
+        List<AssetForViewDto> GetListAssetsInUse();
         void updateAssetStatusInStock(string assetID);
         void updateAssetStatusUsing(string assetID);
         void updateAssetStatusReparing(string assetID);

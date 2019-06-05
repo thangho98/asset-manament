@@ -12,88 +12,82 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Ngày thu hồi</label>
-                    <p>{{revoke.revokeDate}}</p>
+                    <b>Ngày thu hồi: </b>
+                    <span>{{revoke.revokeDate}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Mã tài sản</label>
-                    <p>{{revoke.assetId}}</p>
+                    <b>Mã tài sản: </b>
+                    <span>{{revoke.assetId}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Tên tài sản</label>
-                    <p>{{}}</p>
+                    <b>Tên tài sản: </b>
+                    <span>{{asset.assetName}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Loại tài sản</label>
-                    <p>{{}}</p>
+                    <b>Loại tài sản: </b>
+                    <span *ngIf="asset.assetType == 0">Công cụ lao động</span>
+                    <span *ngIf="asset.assetType == 1">Tài sản cố định</span>
                 </div>
                 <div class="form-group">
-                    <label>Nhóm tài sản</label>
-                    <p>{{}}</p>
+                    <b>Nhóm tài sản: </b>
+                    <span>{{assetGroup.assetGroupName}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Thông tin mô tả</label>
-                    <p>{{}}</p>
+                    <b>Thông tin mô tả: </b>
+                    <span>{{asset.describe}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Tình trạng tài sản</label>
-                    <p>{{}}</p>
+                    <b>Tình trạng tài sản: </b>
+                    <span>{{asset.status}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Ngày bắt đầu khấu hao</label>
-                    <p>{{}}</p>
+                    <b>Ngày bắt đầu khấu hao: </b>
+                    <span>{{asset.dateAdded}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Ngày kết thúc khấu hao</label>
-                    <p>{{}}</p>
+                    <b>Ngày kết thúc khấu hao: </b>
+                    <span>{{dateEndDepreciation}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Số tháng khấu hao</label>
-                    <p>{{}}</p>
+                    <b>Số tháng khấu hao: </b>
+                    <span>{{asset.monthOfDepreciation}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Giá trị khấu hao</label>
-                    <p>{{}}</p>
+                    <b>Giá trị khấu hao: </b>
+                    <span>{{asset.depreciationValue}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Nguyên giá tài sản</label>
-                    <p>{{}}</p>
+                    <b>Nguyên giá tài sản: </b>
+                    <span>{{asset.originalPrice}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Giá trị khấu hao còn lại</label>
-                    <p>{{}}</p>
+                    <b>Giá trị khấu hao còn lại: </b>
+                    <span>{{remainingOfLiquidation}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Tình trạng khấu hao</label>
-                    <p>{{}}</p>
+                    <b>Đơn vị sửa dụng: </b>
+                    <span>{{"ákhkajdah"}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Đơn vị sửa dụng</label>
-                    <p>{{}}</p>
+                    <b>Người sử dụng: </b>
+                    <span>{{"ákhkajdah"}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Người sử dụng</label>
-                    <p>{{}}</p>
+                    <b>Lý do: </b>
+                    <span>{{revoke.reason}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Lý do</label>
-                    <p>{{revoke.reason}}</p>
+                    <b>Vị trí tài sản: </b>
+                    <span>{{revoke.currentLocationOfAssets}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Vị trí tài sản</label>
-                    <p>{{revoke.currentLocationOfAssets}}</p>
-                </div>
-                <div class="form-group">
-                    <label>Nội dung thu hồi</label>
-                    <p>{{revoke.revokeContent}}</p>
+                    <b>Nội dung thu hồi: </b>
+                    <span>{{revoke.revokeContent}}</span>
                 </div>
             </div>
             <div class="modal-footer">
                 <button [disabled]="saving" type="button" class="btn btn-default"
                     (click)="close()">{{l("Cancel")}}</button>
-                <button type="submit" class="btn btn-primary" [buttonBusy]="saving"
-                    [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i>
-                    <span>{{l("Save")}}</span></button>
             </div>
         </div>
     </div>

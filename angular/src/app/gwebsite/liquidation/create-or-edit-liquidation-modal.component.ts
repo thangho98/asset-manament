@@ -31,6 +31,7 @@ export class CreateOrEditLiquidationModalComponent extends AppComponentBase {
     assetType: string = "";
     assetGroup: AssetGroupForViewDto = new AssetGroupForViewDto();
     dateEndDepreciation: string = "";
+
     listLiquidation: LiquidationDto[];
     constructor(
         injector: Injector,
@@ -94,6 +95,7 @@ export class CreateOrEditLiquidationModalComponent extends AppComponentBase {
             else {
                 this.assetType = "Tài sản cố định";
             }
+            
             let date = new Date(this.assetSelect.dateAdded);
             date.setMonth(date.getMonth() + this.assetSelect.monthOfDepreciation);
             this.dateEndDepreciation = moment(date).format('YYYY-MM-DD');
@@ -118,7 +120,7 @@ export class CreateOrEditLiquidationModalComponent extends AppComponentBase {
             );
         });
 
-        if (this.listAssetInStock.length > 1) {
+        if (this.listAssetInStock.length > 0) {
             this.getAssetByID(this.listAssetInStock[0].assetId);
             this.liquidation.assetID = this.listAssetInStock[0].assetId;
         }

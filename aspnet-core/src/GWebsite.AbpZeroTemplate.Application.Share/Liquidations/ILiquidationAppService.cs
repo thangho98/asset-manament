@@ -12,7 +12,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Liquidations
         PagedResultDto<LiquidationDto> GetLiquidations(LiquidationFilter input);
         LiquidationForViewDto GetLiquidationForView(int id);
         LiquidationForViewDto GetLiquidationByAssetID(string assetId);
-        List<LiquidationDto> GetListLiquidation();
+        List<LiquidationDto> GetListLiquidationNoteApproved();
         void ApproveLiquidation(int id);
     }
 }

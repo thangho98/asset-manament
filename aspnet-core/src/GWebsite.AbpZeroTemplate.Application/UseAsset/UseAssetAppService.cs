@@ -2,11 +2,13 @@
 using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
+using AutoMapper.QueryableExtensions;
 using GWebsite.AbpZeroTemplate.Application;
 using GWebsite.AbpZeroTemplate.Application.Share.UseAssets;
 using GWebsite.AbpZeroTemplate.Application.Share.UseAssets.Dto;
 using GWebsite.AbpZeroTemplate.Core.Authorization;
 using GWebsite.AbpZeroTemplate.Core.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 
@@ -107,6 +109,13 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.UseAssets
             }
         }
 
+        public List<UseAssetDto> GetListUsseAssetNoteApproved()
+        {
+            IQueryable<UseAsset> query = useAssetRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.StatusApproved == false);
+            IQueryable<UseAssetDto> assetGroupDtoQuery = query.ProjectTo<UseAssetDto>(query);
+            return assetGroupDtoQuery.ToList();
+        }
+
         #endregion
 
         #region Private Method
@@ -114,6 +123,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.UseAssets
         [AbpAuthorize(GWebsitePermissions.Pages_Administration_UseAsset_Create)]
         private void Create(UseAssetInput useAssetInput)
         {
+            useAssetInput.StatusApproved = false;
             var useAssetEntity = ObjectMapper.Map<UseAsset>(useAssetInput);
             SetAuditInsert(useAssetEntity);
             useAssetRepository.Insert(useAssetEntity);

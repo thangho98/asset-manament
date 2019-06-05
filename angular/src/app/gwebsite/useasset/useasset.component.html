@@ -26,7 +26,7 @@
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <input [(ngModel)]="UseAssetName" name="UseAssetName" autoFocus class="form-control"
-                                        placeholder="Nhập tên khách hàng" type="text">
+                                        placeholder="Nhập mã tài sản" type="text">
                                     <span class="input-group-btn">
                                         <button (click)="applyFilters()" class="btn btn-primary" type="submit"><i
                                                 class="icon-refresh"></i>
@@ -71,7 +71,8 @@
                                 <tr>
                                     <td>
                                         <span class="ui-column-title">Ngày xuất</span>
-                                        <span title="{{record.dateExport}}">{{truncateString(record.dateExport)}}</span>
+                                        <span 
+                                            title="{{record.dateExport}}">{{truncateString(record.dateExport)}}</span>
                                     </td>
                                     <td>
                                         <span class="ui-column-title">Mã tài sản</span>
@@ -87,21 +88,28 @@
                                     </td>
                                     <td>
                                         <span class="ui-column-title">Trạng thái</span>
-                                        <span title="{{record.statusApproved}}">{{truncateString(record.statusApproved)}}</span>
+                                        <span *ngIf="!record.statusApproved">Chưa duyệt</span>
+                                        <span *ngIf="record.statusApproved">Đã duyệt</span>
                                     </td>
                                     <td>
-                                        <button
+                                         <button *ngIf="!record.statusApproved"
+                                            class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"
+                                            (click)="approvedUseAsset(record.id)" title="{{l('Approve')}}">
+                                            <i class="fa fa-thumbs-up" [attr.aria-label]="l('Approved')"></i>
+                                        </button>
+
+                                        <button *ngIf="!record.statusApproved"
                                             class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"
                                             (click)="createOrEditModal.show(record.id)" title="{{l('Edit')}}">
                                             <i class="fa fa-edit" [attr.aria-label]="l('Edit')"></i>
                                         </button>
-    
-                                        <button
+
+                                        <button *ngIf="!record.statusApproved"
                                             class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"
                                             (click)="deleteUseAsset(record.id)" title="{{l('Delete')}}">
                                             <i class="fa fa-times" [attr.aria-label]="l('Delete')"></i>
                                         </button>
-    
+
                                         <button
                                             class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"
                                             (click)="viewUseAssetModal.show(record.id)" title="{{l('View')}}">

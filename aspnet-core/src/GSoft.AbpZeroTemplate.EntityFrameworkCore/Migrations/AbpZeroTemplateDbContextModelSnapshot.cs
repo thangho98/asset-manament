@@ -1980,23 +1980,17 @@ namespace GSoft.AbpZeroTemplate.Migrations
 
                     b.Property<string>("DateExport");
 
-                    b.Property<float>("DepreciationValueForTheFirstMonth");
-
-                    b.Property<string>("EndDateOfDepreciation");
-
                     b.Property<bool>("IsDelete");
-
-                    b.Property<string>("StartDateOfDepreciation");
 
                     b.Property<bool>("StatusApproved");
 
-                    b.Property<string>("UnitsUsedId");
+                    b.Property<int>("UnitsUsedId");
 
                     b.Property<string>("UpdatedBy");
 
                     b.Property<DateTime?>("UpdatedDate");
 
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 

@@ -10,7 +10,7 @@ import { LiquidationComponent } from './liquidation/liquidation.component';
 // import { RepairComponent } from './repair/repair.component';
 // import { RevokeComponent } from './revoke/revoke.component';
 // import { TransferComponent } from './transfer/transfer.component';
-// import { UseAssetComponent } from './useasset/useasset.component';
+import { UseAssetComponent } from './useasset/useasset.component';
 
 
 @NgModule({
@@ -97,15 +97,15 @@ import { LiquidationComponent } from './liquidation/liquidation.component';
             //         },
             //     ]
             // },
-            // {
-            //     path: '',
-            //     children: [
-            //         {
-            //             path: 'useasset', component: UseAssetComponent,
-            //             data: { permission: 'Pages.Administration.UseAsset' }
-            //         },
-            //     ]
-            // },
+            {
+                path: '',
+                children: [
+                    {
+                        path: 'useasset', component: UseAssetComponent,
+                        data: { permission: 'Pages.Administration.UseAsset' }
+                    },
+                ]
+            },
         ])
     ],
     exports: [

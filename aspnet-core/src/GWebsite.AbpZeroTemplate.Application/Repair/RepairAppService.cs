@@ -123,6 +123,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Repairs
         [AbpAuthorize(GWebsitePermissions.Pages_Administration_Repair_Create)]
         private void Create(RepairInput repairInput)
         {
+            repairInput.StatusApproved = false;
             var repairEntity = ObjectMapper.Map<Repair>(repairInput);
             SetAuditInsert(repairEntity);
             repairRepository.Insert(repairEntity);

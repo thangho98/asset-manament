@@ -1,5 +1,5 @@
-<div bsModal #viewModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="viewModal"
-aria-hidden="true" [config]="{backdrop: 'static'}">
+<div bsModal #viewModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-bledby="viewModal"
+    aria-hidden="true" [config]="{backdrop: 'static'}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,82 +7,76 @@ aria-hidden="true" [config]="{backdrop: 'static'}">
                     <span *ngIf="useasset.id">{{l("EditUseAsset")}}: {{useasset.name}}</span>
                     <span *ngIf="!useasset.id">{{l("CreateNewUseAsset")}}</span>
                 </h4>
-                <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
+                <button type="button" class="close" (click)="close()" [attr.aria-b]="l('Close')">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Ngày xuất</label>
-                    <p>{{useasset.dateExport}}</p>
+                    <b>Ngày xuất: </b>
+                    <span>{{useasset.dateExport}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Mã tài sản</label>
-                    <p>{{useasset.assetId}}</p>
+                    <b>Mã tài sản</b>
+                    <span>{{useasset.assetId}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Loại tài sản</label>
-                    <p>{{}}</p>
+                    <b>Loại tài sản</b>
+                    <span *ngIf="asset.assetType == 0">Công cụ lao động</span>
+                    <span *ngIf="asset.assetType == 1">Tài sản cố định</span>
                 </div>
                 <div class="form-group">
-                    <label>Nhóm tài sản</label>
-                    <p>{{}}</p>
+                    <b>Nhóm tài sản: </b>
+                    <span>{{assetGroup.assetGroupName}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Tên tài sản</label>
-                    <p>{{}}</p>
+                    <b>Tên tài sản: </b>
+                    <span>{{asset.assetName}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Thông tin mô tả</label>
-                    <p>{{}}</p>
+                    <b>Thông tin mô tả: </b>
+                    <span>{{asset.describe}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Ngày bắt đầu khấu hao</label>
-                    <p>{{useasset.startDateOfDepreciation}}</p>
+                    <b>Ngày bắt đầu khấu hao: </b>
+                    <span>{{asset.dateAdded}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Ngày kết thúc khấu hao</label>
-                    <p>{{useasset.endDateOfDepreciation}}</p>
+                    <b>Số tháng khấu hao: </b>
+                    <span>{{asset.monthOfDepreciation}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Nguyên giá tài sản</label>
-                    <p>{{}}</p>
+                    <b>Ngày kết thúc khấu hao: </b>
+                    <span>{{dateEndDepreciation}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Giá trị khấu hao</label>
-                    <p>{{}}</p>
+                    <b>Nguyên giá tài sản: </b>
+                    <span>{{asset.originalPrice}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Đơn vị sử dụng</label>
-                    <p>{{useasset.unitsUsedId}}</p>
+                    <b>Giá trị khấu hao: </b>
+                    <span></span>
                 </div>
                 <div class="form-group">
-                    <label>Tên đơn vị</label>
-                    <p>{{}}</p>
+                    <b>Đơn vị sử dụng: </b>
+                    <span>{{useasset.unitsUsedId}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Người sử dụng</label>
-                    <p>{{useasset.userId}}</p>
+                    <b>Tên đơn vị: </b>
+                    <span>{{organizationUnit.displayName}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Tên người sử dụng</label>
-                    <p>{{}}</p>
+                    <b>Người sử dụng: </b>
+                    <span>{{useasset.userId}}</span>
                 </div>
                 <div class="form-group">
-                    <label>Đơn vị sử dụng</label>
-                    <p>{{useasset.unitsUsedId}}</p>
-                </div>
-                <div class="form-group">
-                    <label>Ghi chú</label>
-                    <p>{{}}</p>
+                    <b>Tên người sử dụng: </b>
+                    <span>{{userUseAsset.surname}} {{userUseAsset.name}}</span>
                 </div>
             </div>
             <div class="modal-footer">
                 <button [disabled]="saving" type="button" class="btn btn-default"
                     (click)="close()">{{l("Cancel")}}</button>
-                <button type="submit" class="btn btn-primary" [buttonBusy]="saving"
-                    [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i>
-                    <span>{{l("Save")}}</span></button>
             </div>
         </div>
     </div>

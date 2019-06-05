@@ -59,9 +59,9 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         }
 
         [HttpGet]
-        public List<LiquidationDto> GetListLiquidation()
+        public List<LiquidationDto> GetListLiquidationNoteApproved()
         {
-            return this.liquidationAppService.GetListLiquidation();
+            return this.liquidationAppService.GetListLiquidationNoteApproved();
         }
     }
 }

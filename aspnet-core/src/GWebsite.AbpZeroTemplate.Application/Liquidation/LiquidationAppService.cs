@@ -120,7 +120,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Liquidations
             }
         }
 
-        public List<LiquidationDto> GetListLiquidation()
+        public List<LiquidationDto> GetListLiquidationNoteApproved()
         {
             IQueryable<Liquidation> query = liquidationRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.StatusApproved == false);
             IQueryable<LiquidationDto> assetGroupDtoQuery = query.ProjectTo<LiquidationDto>(query);

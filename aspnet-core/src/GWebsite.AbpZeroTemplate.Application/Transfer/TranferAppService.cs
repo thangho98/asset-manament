@@ -114,6 +114,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Transfers
         [AbpAuthorize(GWebsitePermissions.Pages_Administration_Transfer_Create)]
         private void Create(TransferInput transferInput)
         {
+            transferInput.StatusApproved = false;
             var transferEntity = ObjectMapper.Map<Transfer>(transferInput);
             SetAuditInsert(transferEntity);
             transferRepository.Insert(transferEntity);

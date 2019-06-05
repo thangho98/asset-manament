@@ -81,7 +81,7 @@ export class CreateOrEditLiquidationModalComponent extends AppComponentBase {
     getListAssetsInStock(): void {
         this._assetService.getListAssetsInStock().subscribe(result => {
             this.listAssetInStock = result;
-            this.getListLiquidation();
+            this.getListLiquidationNoteApproved();
         });
     }
 
@@ -111,7 +111,7 @@ export class CreateOrEditLiquidationModalComponent extends AppComponentBase {
     filterListAssetInStock(): void {
         this.listLiquidation.forEach(liqui => {
             this.listAssetInStock = this.listAssetInStock.filter(item => {
-                if(item.assetId.toLowerCase() != liqui.assetID.toLowerCase()){
+                if (item.assetId.toLowerCase() != liqui.assetID.toLowerCase()) {
                     return item;
                 }
             }
@@ -124,8 +124,8 @@ export class CreateOrEditLiquidationModalComponent extends AppComponentBase {
         }
     }
 
-    getListLiquidation(): void {
-        this._liquidationService.getListLiquidation().subscribe(
+    getListLiquidationNoteApproved(): void {
+        this._liquidationService.getListLiquidationNoteApproved().subscribe(
             result => {
                 this.listLiquidation = result;
                 this.filterListAssetInStock();

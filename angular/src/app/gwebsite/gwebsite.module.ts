@@ -44,9 +44,9 @@ import { CreateOrEditLiquidationModalComponent } from './liquidation/create-or-e
 // import { ViewTransferModalComponent } from './transfer/view-transfer-modal.component';
 // import { CreateOrEditTransferModalComponent } from './transfer/create-or-edit-transfer-modal.component';
 
-// import { UseAssetComponent } from './useasset/useasset.component';
-// import { ViewUseAssetModalComponent } from './useasset/view-useasset-modal.component';
-// import { CreateOrEditUseAssetModalComponent } from './useasset/create-or-edit-useasset-modal.component';
+import { UseAssetComponent } from './useasset/useasset.component';
+import { ViewUseAssetModalComponent } from './useasset/view-useasset-modal.component';
+import { CreateOrEditUseAssetModalComponent } from './useasset/create-or-edit-useasset-modal.component';
 
 @NgModule({
     imports: [
@@ -78,7 +78,7 @@ import { CreateOrEditLiquidationModalComponent } from './liquidation/create-or-e
         // RepairComponent, CreateOrEditRepairModalComponent, ViewRepairModalComponent,
         // RevokeComponent, CreateOrEditRevokeModalComponent, ViewRevokeModalComponent,
         // TransferComponent, CreateOrEditTransferModalComponent, ViewTransferModalComponent,
-        // UseAssetComponent, CreateOrEditUseAssetModalComponent, ViewUseAssetModalComponent,
+        UseAssetComponent, CreateOrEditUseAssetModalComponent, ViewUseAssetModalComponent,
     ],
     providers: [
         DemoModelServiceProxy

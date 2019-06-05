@@ -2,6 +2,7 @@
 using GWebsite.AbpZeroTemplate.Application.Share.Liquidations;
 using GWebsite.AbpZeroTemplate.Application.Share.Liquidations.Dto;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace GWebsite.AbpZeroTemplate.Application.Controllers
 {
@@ -55,6 +56,12 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         public void ApproveLiquidation(int id)
         {
             liquidationAppService.ApproveLiquidation(id);
+        }
+
+        [HttpGet]
+        public List<LiquidationDto> GetListLiquidation()
+        {
+            return this.liquidationAppService.GetListLiquidation();
         }
     }
 }

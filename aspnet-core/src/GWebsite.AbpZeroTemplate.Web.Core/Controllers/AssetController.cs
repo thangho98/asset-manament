@@ -47,9 +47,9 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         }
 
         [HttpGet]
-        public string GetAssetNameByID(int id)
+        public string GetAssetNameByID(string assetId)
         {
-            return assetAppService.GetAssetNameByID(id);
+            return assetAppService.GetAssetNameByAssetID(assetId);
         }
 
         [HttpGet("{id}")]
@@ -59,15 +59,21 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         }
 
         [HttpGet]
+        public AssetForViewDto GetAssetByAssetID(string assetId)
+        {
+            return assetAppService.GetAssetByAssetID(assetId);
+        }
+
+        [HttpGet]
         public int GetTotalAsset()
         {
             return assetAppService.GetTotalAsset();
         }
 
         [HttpGet]
-        public List<AssetDto> getListAssetsInStock()
+        public List<AssetForViewDto> GetListAssetsInStock()
         {
-            return assetAppService.getListAssetsInStock();
+            return assetAppService.GetListAssetsInStock();
         }
 
         [HttpGet]

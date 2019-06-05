@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 import { Paginator } from 'primeng/components/paginator/paginator';
 import { Table } from 'primeng/components/table/table';
-import { LiquidationServiceProxy } from '@shared/service-proxies/service-proxies';
+import { LiquidationServiceProxy, AssetServiceProxy } from '@shared/service-proxies/service-proxies';
 import { CreateOrEditLiquidationModalComponent } from './create-or-edit-liquidation-modal.component';
 
 @Component({
@@ -28,10 +28,10 @@ export class LiquidationComponent extends AppComponentBase implements AfterViewI
     * tạo các biến dể filters
     */
     liquidationName: string;
-
     constructor(
         injector: Injector,
         private _liquidationService: LiquidationServiceProxy,
+        private _assetService: AssetServiceProxy,
         private _activatedRoute: ActivatedRoute,
     ) {
         super(injector);
@@ -122,5 +122,15 @@ export class LiquidationComponent extends AppComponentBase implements AfterViewI
     */
     truncateString(text): string {
         return abp.utils.truncateStringWithPostfix(text, 32, '...');
+    }
+
+    approvedLiquidation(id): void {
+        this._liquidationService.approveLiquidation(id).subscribe(() => {
+            this._liquidationService.getLiquidationForView(id).subscribe(result => {
+                this._assetService.updateAssetStatusLiquidated(result.assetID).subscribe(() => {
+                    this.reloadPage();
+                })
+            });
+        })
     }
 }

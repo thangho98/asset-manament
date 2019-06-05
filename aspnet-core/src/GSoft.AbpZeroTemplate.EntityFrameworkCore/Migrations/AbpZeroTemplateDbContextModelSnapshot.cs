@@ -1744,11 +1744,7 @@ namespace GSoft.AbpZeroTemplate.Migrations
 
                     b.Property<string>("Note");
 
-                    b.Property<float>("OriginalPrice");
-
-                    b.Property<string>("PurchaseUnit");
-
-                    b.Property<float>("ResidualValue");
+                    b.Property<int>("PurchaseUnit");
 
                     b.Property<bool>("StatusApproved");
 

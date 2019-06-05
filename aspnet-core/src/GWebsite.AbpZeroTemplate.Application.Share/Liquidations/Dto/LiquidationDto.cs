@@ -13,6 +13,6 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Liquidations.Dto
         //Mã tài sản
         public string AssetID { get; set; }
         //Trạng thái duyệt
-        public string StatusApproved { get; set; }
+        public bool StatusApproved { get; set; }
     }
 }

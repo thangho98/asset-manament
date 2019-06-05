@@ -97,9 +97,9 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
                 items.Select(item => ObjectMapper.Map<AssetDto>(item)).ToList());
         }
 
-        public string GetAssetNameByID(int id)
+        public string GetAssetNameByAssetID(string assetId)
         {
-            var assetEntity = assetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
+            var assetEntity = assetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.AssetId.ToLower().Equals(assetId.ToLower()));
             if (assetEntity == null)
             {
                 return null;
@@ -119,6 +119,16 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
             }
         }
 
+        public AssetForViewDto GetAssetByAssetID(string assetId)
+        {
+            var assetEntity = assetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.AssetId.ToLower().Equals(assetId.ToLower()));
+            if (assetEntity == null)
+            {
+                return null;
+            }
+            return ObjectMapper.Map<AssetForViewDto>(assetEntity);
+        }
+
         public int GetTotalAsset()
         {
             var query = assetRepository.GetAll();
@@ -129,10 +139,11 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
             return query.ToList().Count();
         }
 
-        public List<AssetDto> getListAssetsInStock()
+        public List<AssetForViewDto> GetListAssetsInStock()
         {
-            IQueryable<Asset> query = assetRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.Status == (int)Const.Const.AssetStatus.IN_STOCK);
-            IQueryable<AssetDto> assetDtoQuery = query.ProjectTo<AssetDto>(query);
+            IQueryable<Asset> query = assetRepository.GetAll().Where(x => !x.IsDelete)
+                .Where(x => x.Status == (int)Const.Const.AssetStatus.IN_STOCK).Where(x => x.StatusApproved == true);
+            IQueryable<AssetForViewDto> assetDtoQuery = query.ProjectTo<AssetForViewDto>(query);
             return assetDtoQuery.ToList();
         }
 

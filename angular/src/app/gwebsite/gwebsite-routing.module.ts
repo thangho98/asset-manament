@@ -6,7 +6,7 @@ import { CustomerComponent } from './customer/customer.component';
 //qlts
 import { AssetGroupComponent } from './assetgroup/assetgroup.component';
 import { AssetComponent } from './asset/asset.component';
-// import { LiquidationComponent } from './liquidation/liquidation.component';
+import { LiquidationComponent } from './liquidation/liquidation.component';
 // import { RepairComponent } from './repair/repair.component';
 // import { RevokeComponent } from './revoke/revoke.component';
 // import { TransferComponent } from './transfer/transfer.component';
@@ -61,15 +61,15 @@ import { AssetComponent } from './asset/asset.component';
                     },
                 ]
             },
-            // {
-            //     path: '',
-            //     children: [
-            //         {
-            //             path: 'liquidation', component: LiquidationComponent,
-            //             data: { permission: 'Pages.Administration.Liquidation' }
-            //         },
-            //     ]
-            // },
+            {
+                path: '',
+                children: [
+                    {
+                        path: 'liquidation', component: LiquidationComponent,
+                        data: { permission: 'Pages.Administration.Liquidation' }
+                    },
+                ]
+            },
             // {
             //     path: '',
             //     children: [

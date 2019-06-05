@@ -2,11 +2,13 @@
 using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
+using AutoMapper.QueryableExtensions;
 using GWebsite.AbpZeroTemplate.Application;
 using GWebsite.AbpZeroTemplate.Application.Share.Liquidations;
 using GWebsite.AbpZeroTemplate.Application.Share.Liquidations.Dto;
 using GWebsite.AbpZeroTemplate.Core.Authorization;
 using GWebsite.AbpZeroTemplate.Core.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 
@@ -97,7 +99,8 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Liquidations
 
         public LiquidationForViewDto GetLiquidationByAssetID(string assetId)
         {
-            var liquidationEntity = liquidationRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.AssetID == assetId);
+            var liquidationEntity = liquidationRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.StatusApproved == true)
+                .SingleOrDefault(x => x.AssetID.ToLower().Equals(assetId.ToLower()));
             if (liquidationEntity == null)
             {
                 return null;
@@ -117,6 +120,13 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Liquidations
             }
         }
 
+        public List<LiquidationDto> GetListLiquidation()
+        {
+            IQueryable<Liquidation> query = liquidationRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.StatusApproved == false);
+            IQueryable<LiquidationDto> assetGroupDtoQuery = query.ProjectTo<LiquidationDto>(query);
+            return assetGroupDtoQuery.ToList();
+        }
+
         #endregion
 
         #region Private Method
@@ -124,6 +134,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Liquidations
         [AbpAuthorize(GWebsitePermissions.Pages_Administration_Liquidation_Create)]
         private void Create(LiquidationInput liquidationInput)
         {
+            liquidationInput.StatusApproved = false;
             var liquidationEntity = ObjectMapper.Map<Liquidation>(liquidationInput);
             SetAuditInsert(liquidationEntity);
             liquidationRepository.Insert(liquidationEntity);

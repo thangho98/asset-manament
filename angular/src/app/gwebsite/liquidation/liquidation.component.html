@@ -16,7 +16,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="m-content">
         <div class="m-portlet m-portlet--mobile">
             <div class="m-portlet__body">
@@ -25,8 +25,8 @@
                         <div class="row align-items-center m--margin-bottom-10">
                             <div class="col-sm-12">
                                 <div class="input-group">
-                                    <input [(ngModel)]="LiquidationName" name="LiquidationName" autoFocus class="form-control"
-                                        placeholder="Nhập tên khách hàng" type="text">
+                                    <input [(ngModel)]="LiquidationName" name="LiquidationName" autoFocus
+                                        class="form-control" placeholder="Nhập mã tài sản" type="text">
                                     <span class="input-group-btn">
                                         <button (click)="applyFilters()" class="btn btn-primary" type="submit"><i
                                                 class="icon-refresh"></i>
@@ -51,6 +51,7 @@
                                     </th>
                                     <th pSortableColumn="assetID">
                                         Mã tài sản
+                                        <p-sortIcon field="assetID"></p-sortIcon>
                                     </th>
                                     <th pSortableColumn="statusApproved">
                                         Trạng thái duyệt
@@ -63,7 +64,8 @@
                                 <tr>
                                     <td>
                                         <span class="ui-column-title">Ngày thanh lý</span>
-                                        <span title="{{record.liquidationDate}}">{{truncateString(record.liquidationDate)}}</span>
+                                        <span
+                                            title="{{record.liquidationDate}}">{{truncateString(record.liquidationDate)}}</span>
                                     </td>
                                     <td>
                                         <span class="ui-column-title">Mã tài sản</span>
@@ -71,21 +73,28 @@
                                     </td>
                                     <td>
                                         <span class="ui-column-title">Trạng thái duyệt</span>
-                                        <span title="{{record.statusApproved}}">{{truncateString(record.statusApproved)}}</span>
+                                        <span *ngIf="!record.statusApproved">Chưa duyệt</span>
+                                        <span *ngIf="record.statusApproved">Đã duyệt</span>
                                     </td>
                                     <td>
-                                        <button
+                                        <button *ngIf="!record.statusApproved"
+                                            class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"
+                                            (click)="approvedLiquidation(record.id)" title="{{l('Approve')}}">
+                                            <i class="fa fa-thumbs-up" [attr.aria-label]="l('Approved')"></i>
+                                        </button>
+
+                                        <button *ngIf="!record.statusApproved"
                                             class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"
                                             (click)="createOrEditModal.show(record.id)" title="{{l('Edit')}}">
                                             <i class="fa fa-edit" [attr.aria-label]="l('Edit')"></i>
                                         </button>
-    
-                                        <button
+
+                                        <button *ngIf="!record.statusApproved"
                                             class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"
                                             (click)="deleteLiquidation(record.id)" title="{{l('Delete')}}">
                                             <i class="fa fa-times" [attr.aria-label]="l('Delete')"></i>
                                         </button>
-    
+
                                         <button
                                             class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"
                                             (click)="viewLiquidationModal.show(record.id)" title="{{l('View')}}">
@@ -116,4 +125,4 @@
     </div>
     <createOrEditLiquidationModal #createOrEditModal (modalSave)="reloadPage()"></createOrEditLiquidationModal>
     <viewLiquidationModal #viewLiquidationModal></viewLiquidationModal>
-    </div>
+</div>

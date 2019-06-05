@@ -43,7 +43,6 @@ export class CreateOrEditAssetModalComponent extends AppComponentBase {
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements OnInit' to the class.
         this.assetId = '';
-        console.log(this);
     }
 
     show(assetId?: number | null | undefined): void {
@@ -55,7 +54,9 @@ export class CreateOrEditAssetModalComponent extends AppComponentBase {
             this.modal.show();
             if (!this.asset.id) {
                 this.asset.dateAdded = moment().format('YYYY-MM-DD');
-                console.log(this.asset.dateAdded);
+            }
+            else {
+                this.getAssetGroupByID(this.asset.assetGrouptId);
             }
         });
     }
@@ -76,13 +77,10 @@ export class CreateOrEditAssetModalComponent extends AppComponentBase {
 
     getListAssetGroupsByAssetType(assetType: number): void {
         this._assetGroupService.getListAssetGroupsByAssetType(assetType).subscribe(result => {
-            console.log(this.assetGroup);
             this.assetGroups = result;
-            console.log(this.assetGroups);
             if (this.assetGroup.assetGrouptId != null) {
                 this.getAssetGroupByID(this.assetGroups[0].assetGrouptId);
             }
-            console.log(this.assetGroup);
         });
     }
 
@@ -98,10 +96,8 @@ export class CreateOrEditAssetModalComponent extends AppComponentBase {
     }
 
     getAssetGroupByID(assetGroupId: string): void {
-        console.log("Click");
         this._assetGroupService.getAssetGroupByAssetID(assetGroupId).subscribe(result => {
             this.assetGroup = result;
-            console.log(this.assetGroup);
 
             if (this.asset.assetType == 0) {
                 this.assetId = 'C' + this.assetGroup.assetGrouptId + this.formatAssetID(this.total);
@@ -110,6 +106,9 @@ export class CreateOrEditAssetModalComponent extends AppComponentBase {
                 this.assetId = 'T' + this.assetGroup.assetGrouptId + this.formatAssetID(this.total);
             }
             this.asset.assetId = this.assetId.toUpperCase();
+            if (!this.asset.id) {
+                this.asset.monthOfDepreciation = this.assetGroup.monthOfDepreciation;
+            }
         });
     }
 
@@ -123,7 +122,7 @@ export class CreateOrEditAssetModalComponent extends AppComponentBase {
     }
 
     onChange(event: any) {
-        console.log(this.asset.dateAdded);
-        console.log(event.target.value);
+        // console.log(this.asset.dateAdded);
+        // console.log(event.target.value);
     }
 }

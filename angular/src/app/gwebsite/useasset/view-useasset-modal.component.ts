@@ -20,6 +20,7 @@ export class ViewUseAssetModalComponent extends AppComponentBase {
 
     userUseAsset: UserEditDto = new UserEditDto();
     organizationUnit: OrganizationUnitDto = new OrganizationUnitDto();
+    barcode: string = '';
 
     constructor(
         injector: Injector,
@@ -41,6 +42,7 @@ export class ViewUseAssetModalComponent extends AppComponentBase {
             this.getUserUseAsset();
             this.getOrganizationUnit();
             this.getAssetByAssetID();
+            this.barcode = this.useasset.dateExport + "-" + this.useasset.assetId + "-" + this.useasset.unitsUsedId + "-" + this.useasset.userId;
         })
     }
 

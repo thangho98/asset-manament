@@ -73,6 +73,10 @@
                     <b>Tên người sử dụng: </b>
                     <span>{{userUseAsset.surname}} {{userUseAsset.name}}</span>
                 </div>
+                <div class="form-group">
+                    <b>Mã barcode: </b><br>
+                    <ngx-qrcode qrc-element-type="canvas" [qrc-value]="barcode"></ngx-qrcode>
+                </div>
             </div>
             <div class="modal-footer">
                 <button [disabled]="saving" type="button" class="btn btn-default"

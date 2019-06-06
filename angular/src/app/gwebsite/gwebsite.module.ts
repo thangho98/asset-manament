@@ -10,6 +10,7 @@ import { ModalModule, PopoverModule, TabsModule, TooltipModule } from 'ngx-boots
 import { AutoCompleteModule, EditorModule, FileUploadModule as PrimeNgFileUploadModule, InputMaskModule, PaginatorModule } from 'primeng/primeng';
 import { TableModule } from 'primeng/table';
 import { GWebsiteRoutingModule } from './gwebsite-routing.module';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 
 import { MenuClientComponent, CreateOrEditMenuClientModalComponent } from './index';
 import { DemoModelComponent } from './demo-model/demo-model.component';
@@ -65,7 +66,8 @@ import { CreateOrEditUseAssetModalComponent } from './useasset/create-or-edit-us
         PrimeNgFileUploadModule,
         AutoCompleteModule,
         EditorModule,
-        InputMaskModule
+        InputMaskModule,
+        NgxQRCodeModule
     ],
     declarations: [
         MenuClientComponent, CreateOrEditMenuClientModalComponent,

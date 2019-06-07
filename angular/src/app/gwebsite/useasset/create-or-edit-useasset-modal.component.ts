@@ -54,6 +54,9 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
         //Add 'implements OnInit' to the class.
         this.getListAssetsInStock();
         this.getOrganizationUnit();
+        if(this.listAssetInStock[0].assetId) this._assetService.getAssetByAssetID(this.listAssetInStock[0].assetId).subscribe(result => {
+            this.assetSelect = result;
+        });
     }
 
     show(useassetId?: number | null | undefined): void {
@@ -77,6 +80,7 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
         this.saving = true;
         this._useassetService.createOrEditUseAsset(input).subscribe(result => {
             this.notify.info(this.l('SavedSuccessfully'));
+            this._assetService.updateAssetStatusUsing(this.assetSelect.assetId);
             this.close();
         })
 

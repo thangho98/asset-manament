@@ -8,7 +8,7 @@ import { AssetGroupComponent } from './assetgroup/assetgroup.component';
 import { AssetComponent } from './asset/asset.component';
 import { LiquidationComponent } from './liquidation/liquidation.component';
 // import { RepairComponent } from './repair/repair.component';
-// import { RevokeComponent } from './revoke/revoke.component';
+import { RevokeComponent } from './revoke/revoke.component';
 // import { TransferComponent } from './transfer/transfer.component';
 import { UseAssetComponent } from './useasset/useasset.component';
 
@@ -79,15 +79,15 @@ import { UseAssetComponent } from './useasset/useasset.component';
             //         },
             //     ]
             // },
-            // {
-            //     path: '',
-            //     children: [
-            //         {
-            //             path: 'revoke', component: RevokeComponent,
-            //             data: { permission: 'Pages.Administration.Revoke' }
-            //         },
-            //     ]
-            // },
+            {
+                path: '',
+                children: [
+                    {
+                        path: 'revoke', component: RevokeComponent,
+                        data: { permission: 'Pages.Administration.Revoke' }
+                    },
+                ]
+            },
             // {
             //     path: '',
             //     children: [

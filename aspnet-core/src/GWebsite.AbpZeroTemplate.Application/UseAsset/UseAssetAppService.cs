@@ -97,6 +97,16 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.UseAssets
                 items.Select(item => ObjectMapper.Map<UseAssetDto>(item)).ToList());
         }
 
+        public UseAssetDto GetUseAssetByAssetID(string id)
+        {
+            var useAssetEntity = useAssetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.AssetId == id);
+            if (useAssetEntity == null)
+            {
+                return null;
+            }
+            return ObjectMapper.Map<UseAssetDto>(useAssetEntity);
+        }
+
         [AbpAuthorize(GWebsitePermissions.Pages_Administration_UseAsset_Approve)]
         public void ApproveUseAsset(int id)
         {

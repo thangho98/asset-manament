@@ -37,9 +37,9 @@ import { CreateOrEditLiquidationModalComponent } from './liquidation/create-or-e
 // import { ViewRepairModalComponent } from './repair/view-repair-modal.component';
 // import { CreateOrEditRepairModalComponent } from './repair/create-or-edit-repair-modal.component';
 
-// import { RevokeComponent } from './revoke/revoke.component';
-// import { ViewRevokeModalComponent } from './revoke/view-revoke-modal.component';
-// import { CreateOrEditRevokeModalComponent } from './revoke/create-or-edit-revoke-modal.component';
+import { RevokeComponent } from './revoke/revoke.component';
+import { ViewRevokeModalComponent } from './revoke/view-revoke-modal.component';
+import { CreateOrEditRevokeModalComponent } from './revoke/create-or-edit-revoke-modal.component';
 
 // import { TransferComponent } from './transfer/transfer.component';
 // import { ViewTransferModalComponent } from './transfer/view-transfer-modal.component';
@@ -78,7 +78,7 @@ import { CreateOrEditUseAssetModalComponent } from './useasset/create-or-edit-us
         AssetComponent, CreateOrEditAssetModalComponent, ViewAssetModalComponent,
         LiquidationComponent, CreateOrEditLiquidationModalComponent, ViewLiquidationModalComponent,
         // RepairComponent, CreateOrEditRepairModalComponent, ViewRepairModalComponent,
-        // RevokeComponent, CreateOrEditRevokeModalComponent, ViewRevokeModalComponent,
+        RevokeComponent, CreateOrEditRevokeModalComponent, ViewRevokeModalComponent,
         // TransferComponent, CreateOrEditTransferModalComponent, ViewTransferModalComponent,
         UseAssetComponent, CreateOrEditUseAssetModalComponent, ViewUseAssetModalComponent,
     ],

@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 import { Paginator } from 'primeng/components/paginator/paginator';
 import { Table } from 'primeng/components/table/table';
-import { RevokeServiceProxy } from '@shared/service-proxies/service-proxies';
+import { RevokeServiceProxy, AssetServiceProxy, AssetDto } from '@shared/service-proxies/service-proxies';
 import { CreateOrEditRevokeModalComponent } from './create-or-edit-revoke-modal.component';
 
 @Component({
@@ -32,6 +32,7 @@ export class RevokeComponent extends AppComponentBase implements AfterViewInit, 
     constructor(
         injector: Injector,
         private _revokeService: RevokeServiceProxy,
+        private _assetService: AssetServiceProxy,
         private _activatedRoute: ActivatedRoute,
     ) {
         super(injector);
@@ -122,5 +123,15 @@ export class RevokeComponent extends AppComponentBase implements AfterViewInit, 
      */
     truncateString(text): string {
         return abp.utils.truncateStringWithPostfix(text, 32, '...');
+    }
+
+    approvedRevoke(id): void {
+        this._revokeService.approveRevoke(id).subscribe(() => {
+            this._revokeService.getRevokeForView(id).subscribe(result => {
+                this._assetService.updateAssetStatusInStock(result.assetId).subscribe(() => {
+                    this.reloadPage();
+                })
+            });
+        })
     }
 }

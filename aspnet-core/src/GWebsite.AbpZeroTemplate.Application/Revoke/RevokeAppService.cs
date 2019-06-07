@@ -1,4 +1,5 @@
-﻿using Abp.Application.Services.Dto;
+﻿using System.Collections.Generic;
+using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
@@ -9,6 +10,7 @@ using GWebsite.AbpZeroTemplate.Core.Authorization;
 using GWebsite.AbpZeroTemplate.Core.Models;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using AutoMapper.QueryableExtensions;
 
 namespace GWebsite.AbpZeroTemplate.Web.Core.Revokes
 {
@@ -105,6 +107,13 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Revokes
                 revokeRepository.Update(revokeEntity);
                 CurrentUnitOfWork.SaveChanges();
             }
+        }
+
+        public List<RevokeDto> GetListRevokeNotApproved()
+        {
+            IQueryable<Revoke> query = revokeRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.StatusApproved == false);
+            IQueryable<RevokeDto> assetGroupDtoQuery = query.ProjectTo<RevokeDto>(query);
+            return assetGroupDtoQuery.ToList();
         }
 
         #endregion

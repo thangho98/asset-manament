@@ -5,7 +5,7 @@
             <form #editForm="ngForm" novalidate (ngSubmit)="save()">
                 <div class="modal-header">
                     <h4 class="modal-title">
-                        <span *ngIf="assetgroup.id">Cập nhật nhóm tài sản: {{assetgroup.name}}</span>
+                        <span *ngIf="assetgroup.id">Cập nhật nhóm tài sản: {{assetgroup.assetGroupName}}</span>
                         <span *ngIf="!assetgroup.id">Tạo mới nhóm tài sản</span>
                     </h4>
                     <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
@@ -57,10 +57,10 @@
                 </div>
                 <div class="modal-footer">
                     <button [disabled]="saving" type="button" class="btn btn-default"
-                        (click)="close()">{{l("Cancel")}}</button>
+                        (click)="close()">{{l("Huỷ bỏ")}}</button>
                     <button type="submit" class="btn btn-primary" [buttonBusy]="saving"
                         [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i>
-                        <span>{{l("Save")}}</span></button>
+                        <span>{{l("Lưu")}}</span></button>
                 </div>
             </form>
         </div>

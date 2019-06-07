@@ -118,7 +118,7 @@ export class CreateOrEditLiquidationModalComponent extends AppComponentBase {
             );
         });
 
-        if (this.listAssetInStock.length > 1) {
+        if (this.listAssetInStock.length > 0) {
             this.getAssetByID(this.listAssetInStock[0].assetId);
             this.liquidation.assetID = this.listAssetInStock[0].assetId;
         }

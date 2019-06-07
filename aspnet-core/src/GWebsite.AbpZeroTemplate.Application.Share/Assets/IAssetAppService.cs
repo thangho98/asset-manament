@@ -11,10 +11,11 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Assets
         void DeleteAsset(int id);
         PagedResultDto<AssetDto> GetAssets(AssetFilter input);
         AssetForViewDto GetAssetForView(int id);
-        string GetAssetNameByID(int id);
+        string GetAssetNameByAssetID(string assetId);
         void ApproveAsset(int id);
         int GetTotalAsset();
-        List<AssetDto> getListAssetsInStock();
+        AssetForViewDto GetAssetByAssetID(string assetId);
+        List<AssetForViewDto> GetListAssetsInStock();
         void updateAssetStatusInStock(string assetID);
         void updateAssetStatusUsing(string assetID);
         void updateAssetStatusReparing(string assetID);

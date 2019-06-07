@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 import { Paginator } from 'primeng/components/paginator/paginator';
 import { Table } from 'primeng/components/table/table';
-import { UseAssetServiceProxy } from '@shared/service-proxies/service-proxies';
+import { UseAssetServiceProxy, AssetServiceProxy } from '@shared/service-proxies/service-proxies';
 import { CreateOrEditUseAssetModalComponent } from './create-or-edit-useasset-modal.component';
 
 @Component({
@@ -32,6 +32,7 @@ export class UseAssetComponent extends AppComponentBase implements AfterViewInit
     constructor(
         injector: Injector,
         private _useassetService: UseAssetServiceProxy,
+        private _assetService: AssetServiceProxy,
         private _activatedRoute: ActivatedRoute,
     ) {
         super(injector);
@@ -122,5 +123,15 @@ export class UseAssetComponent extends AppComponentBase implements AfterViewInit
     */
     truncateString(text): string {
         return abp.utils.truncateStringWithPostfix(text, 32, '...');
+    }
+
+    approvedUseAsset(id): void {
+        this._useassetService.approveUseAsset(id).subscribe(() => {
+            this._useassetService.getUseAssetForView(id).subscribe(result => {
+                this._assetService.updateAssetStatusUsing(result.assetId).subscribe(() => {
+                    this.reloadPage();
+                })
+            });
+        })
     }
 }

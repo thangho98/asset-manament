@@ -1,11 +1,11 @@
 <div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
-aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form #editForm="ngForm" novalidate (ngSubmit)="save()">
                 <div class="modal-header">
                     <h4 class="modal-title">
-                        <span *ngIf="useasset.id">Cập nhật xuất sử dụng tài sản: {{useasset.name}}</span>
+                        <span *ngIf="useasset.id">Cập nhật xuất sử dụng tài sản: {{useasset.assetId}}</span>
                         <span *ngIf="!useasset.id">Tạo mới xuất sử dụng tài sản</span>
                     </h4>
                     <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
@@ -15,99 +15,78 @@ aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'sta
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Ngày xuất *</label>
-                        <input #nameInput="ngModel" class="form-control" type="text" name="DateExport"
-                            [(ngModel)]="useasset.dateExport" required maxlength="64">
-                        <validation-messages [formCtrl]="dateExportInput"></validation-messages>
+                        <input #nameInput="ngModel" readonly class="form-control" type="date" name="DateExport"
+                            [(ngModel)]="useasset.dateExport" required>
                     </div>
                     <div class="form-group">
-                        <label>Mã tài sản *</label>
-                        <input #nameInput="ngModel" class="form-control" type="text" name="AssetId"
-                            [(ngModel)]="useasset.assetId" required maxlength="64">
-                        <validation-messages [formCtrl]="assetIdInput"></validation-messages>
+                        <label>Tài sản *</label>
+                        <select *ngIf="!useasset.id" #nameInput="ngModel" required [(ngModel)]='useasset.assetID'
+                            class='form-control' name="AssetID" (change)="getAssetByID($event.target.value)">
+                            <option *ngFor="let item of listAssetInStock" [value]="item.assetId">
+                                {{item.assetId}} - {{item.assetName}}
+                            </option>
+                        </select>
+                        <input *ngIf="useasset.id" readonly name="AssetID" [value]="assetSelect.assetName"
+                            class="form-control" type="text">
                     </div>
                     <div class="form-group">
                         <label>Loại tài sản *</label>
-                        <input #nameInput="ngModel" class="form-control" type="text" name=""
-                            [(ngModel)]="" required maxlength="64">
-                        <validation-messages [formCtrl]="IdInput"></validation-messages>
-                    </div>                    
-                    <div class="form-group">
-                        <label>Nhóm tài sản *</label>
-                        <input #nameInput="ngModel" class="form-control" type="text" name=""
-                            [(ngModel)]="" required maxlength="64">
-                        <validation-messages [formCtrl]="IdInput"></validation-messages>
+                        <input readonly name="assetType" [value]="assetType" class="form-control" type="text">
                     </div>
                     <div class="form-group">
-                        <label>Tên tài sản *</label>
-                        <input #addressInput="ngModel" class="form-control" type="text" name=""
-                            [(ngModel)]="" required maxlength="64">
-                        <validation-messages [formCtrl]="Input"></validation-messages>
+                        <label>Nhóm tài sản *</label>
+                        <input readonly name="assetGroupName" [value]="assetGroup.assetGroupName" class="form-control"
+                            type="text">
                     </div>
                     <div class="form-group">
                         <label>Thông tin mô tả *</label>
-                        <input #addressInput="ngModel" class="form-control" type="text" name=""
-                            [(ngModel)]="" required maxlength="64">
-                        <validation-messages [formCtrl]="Input"></validation-messages>
+                        <input readonly name="describe" [value]="assetSelect.describe" class="form-control" type="text">
                     </div>
                     <div class="form-group">
                         <label>Ngày bắt đầu khấu hao *</label>
-                        <input #addressInput="ngModel" class="form-control" type="date" name="StartDateOfDepreciation"
-                            [(ngModel)]="useasset.startDateOfDepreciation" required maxlength="64">
-                        <validation-messages [formCtrl]="startDateOfDepreciationInput"></validation-messages>
+                        <input readonly name="DateAdded" [value]="assetSelect.dateAdded" class="form-control"
+                            type="text">
                     </div>
                     <div class="form-group">
                         <label>Số tháng khấu hao *</label>
-                        <input #addressInput="ngModel" class="form-control" type="text" name=""
-                            [(ngModel)]="" required maxlength="64">
-                        <validation-messages [formCtrl]="Input"></validation-messages>
+                        <input readonly name="monthOfDepreciation" [value]="assetSelect.monthOfDepreciation"
+                            class="form-control" type="text">
                     </div>
                     <div class="form-group">
                         <label>Ngày kết thúc khấu hao *</label>
-                        <input #addressInput="ngModel" class="form-control" type="date" name="EndDateOfDepreciation"
-                            [(ngModel)]="useasset.endDateOfDepreciation" required maxlength="64">
-                        <validation-messages [formCtrl]="endDateOfDepreciationInput"></validation-messages>
+                        <input readonly class="form-control" [value]="dateEndDepreciation" type="text">
                     </div>
                     <div class="form-group">
                         <label>Nguyên giá tài sản *</label>
-                        <input #addressInput="ngModel" class="form-control" type="text" name=""
-                            [(ngModel)]="" required maxlength="64">
-                        <validation-messages [formCtrl]="Input"></validation-messages>
+                        <input readonly name="originalPrice" [value]="assetSelect.originalPrice" class="form-control"
+                            type="text">
                     </div>
                     <div class="form-group">
                         <label>Giá trị khấu hao *</label>
-                        <input #addressInput="ngModel" class="form-control" type="text" name=""
-                            [(ngModel)]="" required maxlength="64">
-                        <validation-messages [formCtrl]="Input"></validation-messages>
+                        <input readonly name="depreciationValue" [value]="assetSelect.depreciationValue"
+                            class="form-control" type="text">
                     </div>
                     <div class="form-group">
                         <label>Đơn vị sử dụng *</label>
-                        <input #addressInput="ngModel" class="form-control" type="text" name="UnitsUsedId"
-                            [(ngModel)]="useasset.unitsUsedId" required maxlength="64">
-                        <validation-messages [formCtrl]="unitsUsedIdInput"></validation-messages>
-                    </div>
-                    <div class="form-group">
-                        <label>Tên đơn vị *</label>
-                        <input #addressInput="ngModel" class="form-control" type="text" name=""
-                            [(ngModel)]="" required maxlength="64">
-                        <validation-messages [formCtrl]="Input"></validation-messages>
+                        <select *ngIf="!useasset.id" #nameInput="ngModel" required [(ngModel)]='useasset.unitsUsedId'
+                            class='form-control' name="UnitID" (change)="getOrgannizationUnitUser($event.target.value)">
+                            <option *ngFor="let item of listOrganizationUnit" [value]="item.id">
+                                {{item.code}} - {{item.displayName}}
+                            </option>
+                        </select>
+                        <input *ngIf="useasset.id" readonly name="AssetID" [value]="useasset.assetID"
+                            class="form-control" type="text">
                     </div>
                     <div class="form-group">
                         <label>Người sử dụng *</label>
-                        <input #addressInput="ngModel" class="form-control" type="text" name="UserId"
-                            [(ngModel)]="useasset.userId" required maxlength="64">
-                        <validation-messages [formCtrl]="userIdInput"></validation-messages>
-                    </div>
-                    <div class="form-group">
-                        <label>Tên người dùng *</label>
-                        <input #addressInput="ngModel" class="form-control" type="text" name=""
-                            [(ngModel)]="" required maxlength="64">
-                        <validation-messages [formCtrl]="Input"></validation-messages>
-                    </div>
-                    <div class="form-group">
-                        <label>Ghi chú *</label>
-                        <input #addressInput="ngModel" class="form-control" type="text" name=""
-                            [(ngModel)]="" required maxlength="64">
-                        <validation-messages [formCtrl]="Input"></validation-messages>
+                        <select *ngIf="!useasset.id" #nameInput="ngModel" required [(ngModel)]='useasset.userId'
+                            class='form-control' name="AssetID">
+                            <option *ngFor="let item of listOrganizationUnitUser" [value]="item.id">
+                                {{item.surname}} {{item.name}}
+                            </option>
+                        </select>
+                        <input *ngIf="useasset.id" readonly name="userId" [value]="useasset.userId" class="form-control"
+                            type="text">
                     </div>
                 </div>
                 <div class="modal-footer">

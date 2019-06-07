@@ -10,6 +10,7 @@ import { ModalModule, PopoverModule, TabsModule, TooltipModule } from 'ngx-boots
 import { AutoCompleteModule, EditorModule, FileUploadModule as PrimeNgFileUploadModule, InputMaskModule, PaginatorModule } from 'primeng/primeng';
 import { TableModule } from 'primeng/table';
 import { GWebsiteRoutingModule } from './gwebsite-routing.module';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 
 import { MenuClientComponent, CreateOrEditMenuClientModalComponent } from './index';
 import { DemoModelComponent } from './demo-model/demo-model.component';
@@ -28,9 +29,9 @@ import { AssetComponent } from './asset/asset.component';
 import { ViewAssetModalComponent } from './asset/view-asset-modal.component';
 import { CreateOrEditAssetModalComponent } from './asset/create-or-edit-asset-modal.component';
 
-// import { LiquidationComponent } from './liquidation/liquidation.component';
-// import { ViewLiquidationModalComponent } from './liquidation/view-liquidation-modal.component';
-// import { CreateOrEditLiquidationModalComponent } from './liquidation/create-or-edit-liquidation-modal.component';
+import { LiquidationComponent } from './liquidation/liquidation.component';
+import { ViewLiquidationModalComponent } from './liquidation/view-liquidation-modal.component';
+import { CreateOrEditLiquidationModalComponent } from './liquidation/create-or-edit-liquidation-modal.component';
 
 // import { RepairComponent } from './repair/repair.component';
 // import { ViewRepairModalComponent } from './repair/view-repair-modal.component';
@@ -44,9 +45,9 @@ import { CreateOrEditAssetModalComponent } from './asset/create-or-edit-asset-mo
 // import { ViewTransferModalComponent } from './transfer/view-transfer-modal.component';
 // import { CreateOrEditTransferModalComponent } from './transfer/create-or-edit-transfer-modal.component';
 
-// import { UseAssetComponent } from './useasset/useasset.component';
-// import { ViewUseAssetModalComponent } from './useasset/view-useasset-modal.component';
-// import { CreateOrEditUseAssetModalComponent } from './useasset/create-or-edit-useasset-modal.component';
+import { UseAssetComponent } from './useasset/useasset.component';
+import { ViewUseAssetModalComponent } from './useasset/view-useasset-modal.component';
+import { CreateOrEditUseAssetModalComponent } from './useasset/create-or-edit-useasset-modal.component';
 
 @NgModule({
     imports: [
@@ -65,7 +66,8 @@ import { CreateOrEditAssetModalComponent } from './asset/create-or-edit-asset-mo
         PrimeNgFileUploadModule,
         AutoCompleteModule,
         EditorModule,
-        InputMaskModule
+        InputMaskModule,
+        NgxQRCodeModule
     ],
     declarations: [
         MenuClientComponent, CreateOrEditMenuClientModalComponent,
@@ -74,11 +76,11 @@ import { CreateOrEditAssetModalComponent } from './asset/create-or-edit-asset-mo
 
         AssetGroupComponent, CreateOrEditAssetGroupModalComponent, ViewAssetGroupModalComponent,
         AssetComponent, CreateOrEditAssetModalComponent, ViewAssetModalComponent,
-        // LiquidationComponent, CreateOrEditLiquidationModalComponent, ViewLiquidationModalComponent,
+        LiquidationComponent, CreateOrEditLiquidationModalComponent, ViewLiquidationModalComponent,
         // RepairComponent, CreateOrEditRepairModalComponent, ViewRepairModalComponent,
         // RevokeComponent, CreateOrEditRevokeModalComponent, ViewRevokeModalComponent,
         // TransferComponent, CreateOrEditTransferModalComponent, ViewTransferModalComponent,
-        // UseAssetComponent, CreateOrEditUseAssetModalComponent, ViewUseAssetModalComponent,
+        UseAssetComponent, CreateOrEditUseAssetModalComponent, ViewUseAssetModalComponent,
     ],
     providers: [
         DemoModelServiceProxy

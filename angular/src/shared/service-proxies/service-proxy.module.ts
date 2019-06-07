@@ -44,11 +44,11 @@ import { WebApiServiceProxy } from './webapi.service';
 
         ApiServiceProxies.AssetGroupServiceProxy,
         ApiServiceProxies.AssetServiceProxy,
-        // ApiServiceProxies.LiquidationServiceProxy,
+        ApiServiceProxies.LiquidationServiceProxy,
         // ApiServiceProxies.RepairServiceProxy,
         // ApiServiceProxies.RevokeServiceProxy,
         // ApiServiceProxies.TransferServiceProxy,
-        // ApiServiceProxies.UseAssetServiceProxy,
+        ApiServiceProxies.UseAssetServiceProxy,
         { provide: HTTP_INTERCEPTORS, useClass: AbpHttpInterceptor, multi: true }
     ]
 })

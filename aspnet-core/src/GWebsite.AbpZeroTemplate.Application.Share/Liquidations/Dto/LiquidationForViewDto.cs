@@ -12,11 +12,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Liquidations.Dto
         //Ngày thanh lý
         public string LiquidationDate { get; set; }
         //Đơn vị mua
-        public string PurchaseUnit { get; set; }
-        //Nguyên giá
-        public float OriginalPrice { get; set; }
-        //Giá trị còn lại
-        public float ResidualValue { get; set; }
+        public int PurchaseUnit { get; set; }
         //Tình trạng tài sản/ công cụ
         public string AssetStatus { get; set; }
         //Hình thức thanh lý

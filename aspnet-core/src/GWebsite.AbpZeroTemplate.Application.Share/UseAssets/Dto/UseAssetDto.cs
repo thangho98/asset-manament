@@ -17,6 +17,6 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.UseAssets.Dto
         //Ngày xuất
         public string DateExport { get; set; }
         //Trạng thái duyệt
-        public string StatusApproved { get; set; }
+        public bool StatusApproved { get; set; }
     }
 }

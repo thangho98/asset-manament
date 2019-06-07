@@ -57,5 +57,11 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         {
             useAssetAppService.ApproveUseAsset(id);
         }
+
+        [HttpGet]
+        public List<UseAssetDto> GetListUsseAssetNoteApproved()
+        {
+            return useAssetAppService.GetListUsseAssetNoteApproved();
+        }
     }
 }

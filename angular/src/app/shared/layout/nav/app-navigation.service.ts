@@ -24,11 +24,11 @@ export class AppNavigationService {
                 new AppMenuItem('Quản lý tài sản', '', 'flaticon-squares', '', [
                     new AppMenuItem('Nhóm tài sản', 'Pages.Administration.AssetGroup', 'flaticon-menu-1', '/app/gwebsite/assetgroup'),
                     new AppMenuItem('Tài sản', 'Pages.Administration.Asset', 'flaticon-menu-1', '/app/gwebsite/asset'),
-                    // new AppMenuItem('Sử dụng tài sản', 'Pages.Administration.UseAsset', 'flaticon-menu-1', '/app/gwebsite/useasset'),
+                    new AppMenuItem('Sử dụng tài sản', 'Pages.Administration.UseAsset', 'flaticon-menu-1', '/app/gwebsite/useasset'),
                     // new AppMenuItem('Điều chuyển tài sản', 'Pages.Administration.Transfer', 'flaticon-menu-1', '/app/gwebsite/transfer'),
                     // new AppMenuItem('Thu hồi tài sản', 'Pages.Administration.Revoke', 'flaticon-menu-1', '/app/gwebsite/revoke'),
                     // new AppMenuItem('Sửa chữa tài sản', 'Pages.Administration.Repair', 'flaticon-menu-1', '/app/gwebsite/repair'),
-                    // new AppMenuItem('Thanh lý tài sản', 'Pages.Administration.Liquidation', 'flaticon-menu-1', '/app/gwebsite/liquidation'),
+                    new AppMenuItem('Thanh lý tài sản', 'Pages.Administration.Liquidation', 'flaticon-menu-1', '/app/gwebsite/liquidation'),
 
                 ])
             ]),

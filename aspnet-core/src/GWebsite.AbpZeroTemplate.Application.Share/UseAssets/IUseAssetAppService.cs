@@ -12,6 +12,6 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.UseAssets
         PagedResultDto<UseAssetDto> GetUseAssets(UseAssetFilter input);
         UseAssetForViewDto GetUseAssetForView(int id);
         void ApproveUseAsset(int id);
-        List<UseAssetForViewDto> GetListUseAssetByAssetId(string assetId);
+        List<UseAssetDto> GetListUsseAssetNoteApproved();
     }
 }

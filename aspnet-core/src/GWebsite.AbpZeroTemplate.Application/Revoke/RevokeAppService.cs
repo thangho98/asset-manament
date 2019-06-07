@@ -114,6 +114,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Revokes
         [AbpAuthorize(GWebsitePermissions.Pages_Administration_Revoke_Create)]
         private void Create(RevokeInput revokeInput)
         {
+            revokeInput.StatusApproved = false;
             var revokeEntity = ObjectMapper.Map<Revoke>(revokeInput);
             SetAuditInsert(revokeEntity);
             revokeRepository.Insert(revokeEntity);

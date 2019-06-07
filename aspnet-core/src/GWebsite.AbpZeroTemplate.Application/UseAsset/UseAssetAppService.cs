@@ -97,13 +97,6 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.UseAssets
                 items.Select(item => ObjectMapper.Map<UseAssetDto>(item)).ToList());
         }
 
-        public List<UseAssetForViewDto> GetListUseAssetByAssetId(string assetId)
-        {
-            IQueryable<UseAsset> query = useAssetRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.AssetId == assetId);
-            IQueryable<UseAssetForViewDto> useAssetDtoQuery = query.ProjectTo<UseAssetForViewDto>(query);
-            return useAssetDtoQuery.ToList();
-        }
-
         [AbpAuthorize(GWebsitePermissions.Pages_Administration_UseAsset_Approve)]
         public void ApproveUseAsset(int id)
         {

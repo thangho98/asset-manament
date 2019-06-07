@@ -46,12 +46,6 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
             return useAssetAppService.GetUseAssetForView(id);
         }
 
-        [HttpGet]
-        public List<UseAssetForViewDto> GetListUseAssetByAssetId(string assetId)
-        {
-            return useAssetAppService.GetListUseAssetByAssetId(assetId);
-        }
-
         [HttpGet("{id}")]
         public void ApproveUseAsset(int id)
         {

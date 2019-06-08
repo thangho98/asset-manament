@@ -24158,8 +24158,8 @@ export interface IPagedResultDtoOfUseAssetDto {
 
 export class UseAssetDto implements IUseAssetDto {
     assetId!: string | undefined;
-    unitsUsedId!: string | undefined;
-    userId!: string | undefined;
+    unitsUsedId!: number | undefined;
+    userId!: number | undefined;
     dateExport!: string | undefined;
     statusApproved!: boolean | undefined;
     id!: number | undefined;
@@ -24205,8 +24205,8 @@ export class UseAssetDto implements IUseAssetDto {
 
 export interface IUseAssetDto {
     assetId: string | undefined;
-    unitsUsedId: string | undefined;
-    userId: string | undefined;
+    unitsUsedId: number | undefined;
+    userId: number | undefined;
     dateExport: string | undefined;
     statusApproved: boolean | undefined;
     id: number | undefined;

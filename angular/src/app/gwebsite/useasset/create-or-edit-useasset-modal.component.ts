@@ -34,6 +34,7 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
     listUseAsset: UseAssetDto[];
     listOrganizationUnit: OrganizationUnitDto[];
     listOrganizationUnitUser: OrganizationUnitUserListDto[];
+    endOfLiquidation: string;
 
     userName: string = "";
     unitName: string = "";
@@ -159,5 +160,10 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
                     this.listOrganizationUnitUser = result.items;
             }
         )
+    }
+
+    calculateEndOfLiqidation(): void {
+        let dateAdd = moment(this.assetSelect.dateAdded);
+        this.endOfLiquidation = dateAdd.add(this.assetSelect.monthOfDepreciation, "months").format('YYYY-MM-DD');
     }
 }

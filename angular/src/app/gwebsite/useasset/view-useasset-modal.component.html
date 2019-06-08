@@ -4,8 +4,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">
-                    <span *ngIf="useasset.id">{{l("EditUseAsset")}}: {{useasset.name}}</span>
-                    <span *ngIf="!useasset.id">{{l("CreateNewUseAsset")}}</span>
+                    <span *ngIf="useasset.id">{{l("Chỉnh sửa thông tin sử dụng")}}: {{asset.assetName}}</span>
+                    <span *ngIf="!useasset.id">{{l("Tạo mới xuất sử dụng")}}</span>
                 </h4>
                 <button type="button" class="close" (click)="close()" [attr.aria-b]="l('Close')">
                     <span aria-hidden="true">&times;</span>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="form-group">
                     <b>Giá trị khấu hao: </b>
-                    <span></span>
+                    <span>{{asset.depreciationValue}}</span>
                 </div>
                 <div class="form-group">
                     <b>Đơn vị sử dụng: </b>
@@ -74,7 +74,7 @@
                     <span>{{userUseAsset.surname}} {{userUseAsset.name}}</span>
                 </div>
                 <div class="form-group">
-                    <b>Mã barcode: </b><br>
+                    <b>Mã QR Code: </b><br>
                     <ngx-qrcode qrc-element-type="canvas" [qrc-value]="barcode"></ngx-qrcode>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { RevokeForViewDto, AssetServiceProxy, AssetForViewDto, AssetGroupForViewDto, AssetGroupServiceProxy, UseAssetServiceProxy, UseAssetDto, UserServiceProxy } from './../../../shared/service-proxies/service-proxies';
+import { RevokeForViewDto, AssetServiceProxy, AssetForViewDto, AssetGroupForViewDto, AssetGroupServiceProxy, UseAssetServiceProxy, UseAssetDto, UserServiceProxy, UserEditDto, OrganizationUnitDto, OrganizationUnitServiceProxy, UseAssetForViewDto } from './../../../shared/service-proxies/service-proxies';
 import { AppComponentBase } from "@shared/common/app-component-base";
 import { AfterViewInit, Injector, Component, ViewChild } from "@angular/core";
 import { RevokeServiceProxy } from "@shared/service-proxies/service-proxies";
@@ -17,18 +17,20 @@ export class ViewRevokeModalComponent extends AppComponentBase {
 
     asset: AssetForViewDto = new AssetForViewDto();
     assetGroup: AssetGroupForViewDto = new AssetGroupForViewDto();
-    assetUse: UseAssetDto = new UseAssetDto();
     dateEndDepreciation: string = "";
     remainingOfLiquidation: number;
-    useAsset: UseAssetDto = new UseAssetDto();
-
+    useAsset: UseAssetForViewDto = new UseAssetForViewDto();
+    userUseAsset: UserEditDto = new UserEditDto();
+    organizationUnit: OrganizationUnitDto = new OrganizationUnitDto();
+    
     constructor(
         injector: Injector,
         private _revokeService: RevokeServiceProxy,
         private _assetService: AssetServiceProxy,
         private _assetGroupService: AssetGroupServiceProxy,
         private _useAsset: UseAssetServiceProxy,
-        private _user: UserServiceProxy
+        private _userService: UserServiceProxy,
+        private _organizationUnitService: OrganizationUnitServiceProxy,
     ) {
         super(injector);
     }
@@ -60,7 +62,7 @@ export class ViewRevokeModalComponent extends AppComponentBase {
             this.calculateRemaining();
             this._useAsset.getUseAssetByAssetID(this.asset.assetId).subscribe(result => {
                 this.useAsset = result;
-                console.log(this.useAsset);
+                
             });
         });
 
@@ -83,6 +85,22 @@ export class ViewRevokeModalComponent extends AppComponentBase {
         console.log(diffDate);
         console.log(this.asset);
         return this.remainingOfLiquidation;
+    }
+
+    getUserUseAsset() {
+        this._userService.getUserForEdit(this.useAsset.userId).subscribe(
+            result => {
+                this.userUseAsset = result.user;
+            }
+        )
+    }
+
+    getOrganizationUnit() {
+        this._organizationUnitService.getOrganizationUnitByID(this.useAsset.unitsUsedId).subscribe(
+            result => {
+                this.organizationUnit = result;
+            }
+        )
     }
 
 }

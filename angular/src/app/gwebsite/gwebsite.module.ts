@@ -29,6 +29,8 @@ import { AssetComponent } from './asset/asset.component';
 import { ViewAssetModalComponent } from './asset/view-asset-modal.component';
 import { CreateOrEditAssetModalComponent } from './asset/create-or-edit-asset-modal.component';
 
+import { CreateAssetComponent } from './asset/create-asset.component';
+
 import { LiquidationComponent } from './liquidation/liquidation.component';
 import { ViewLiquidationModalComponent } from './liquidation/view-liquidation-modal.component';
 import { CreateOrEditLiquidationModalComponent } from './liquidation/create-or-edit-liquidation-modal.component';
@@ -76,6 +78,7 @@ import { CreateOrEditUseAssetModalComponent } from './useasset/create-or-edit-us
 
         AssetGroupComponent, CreateOrEditAssetGroupModalComponent, ViewAssetGroupModalComponent,
         AssetComponent, CreateOrEditAssetModalComponent, ViewAssetModalComponent,
+        CreateAssetComponent,
         LiquidationComponent, CreateOrEditLiquidationModalComponent, ViewLiquidationModalComponent,
         // RepairComponent, CreateOrEditRepairModalComponent, ViewRepairModalComponent,
         RevokeComponent, CreateOrEditRevokeModalComponent, ViewRevokeModalComponent,

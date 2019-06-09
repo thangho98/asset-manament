@@ -11,6 +11,7 @@ import { LiquidationComponent } from './liquidation/liquidation.component';
 import { RevokeComponent } from './revoke/revoke.component';
 // import { TransferComponent } from './transfer/transfer.component';
 import { UseAssetComponent } from './useasset/useasset.component';
+import { CreateAssetComponent } from './asset/create-asset.component';
 
 
 @NgModule({
@@ -59,6 +60,15 @@ import { UseAssetComponent } from './useasset/useasset.component';
                         path: 'asset', component: AssetComponent,
                         data: { permission: 'Pages.Administration.Asset' }
                     },
+                ]
+            },
+            {
+                path: '',
+                children: [
+                    {
+                        path: 'asset/create-asset', component: CreateAssetComponent,
+                        data: { permission: 'Pages.Administration.Asset' },
+                    }
                 ]
             },
             {

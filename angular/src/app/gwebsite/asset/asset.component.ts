@@ -33,6 +33,7 @@ export class AssetComponent extends AppComponentBase implements AfterViewInit, O
         injector: Injector,
         private _assetService: AssetServiceProxy,
         private _activatedRoute: ActivatedRoute,
+        private _router: Router,
     ) {
         super(injector);
     }
@@ -119,7 +120,8 @@ export class AssetComponent extends AppComponentBase implements AfterViewInit, O
 
     //hàm show view create MenuClient
     createAsset() {
-        this.createOrEditModal.show();
+        // this.createOrEditModal.show();
+        this._router.navigateByUrl('app/gwebsite/asset/create-asset');
     }
 
     /**

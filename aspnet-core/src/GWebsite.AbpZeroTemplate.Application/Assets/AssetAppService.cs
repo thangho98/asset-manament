@@ -77,7 +77,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
             // filter by value
             if (input.AssetName != null)
             {
-                query = query.Where(x => x.AssetName.ToLower().Equals(input.AssetName));
+                query = query.Where(x => x.AssetName.ToLower().Contains(input.AssetName.ToLower()));
             }
 
             var totalCount = query.Count();

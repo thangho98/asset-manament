@@ -1,8 +1,10 @@
 import { Component, ElementRef, EventEmitter, Injector, Output, ViewChild } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { ModalDirective } from 'ngx-bootstrap';
-import { UseAssetServiceProxy, UseAssetInput, AssetForViewDto, AssetGroupForViewDto, AssetServiceProxy, AssetGroupServiceProxy, OrganizationUnitDto, OrganizationUnitServiceProxy, OrganizationUnitUserListDto, UseAssetDto } from '@shared/service-proxies/service-proxies';
+import { UseAssetServiceProxy, UseAssetInput, AssetForViewDto, AssetGroupForViewDto, AssetServiceProxy, AssetGroupServiceProxy, OrganizationUnitDto, OrganizationUnitServiceProxy, OrganizationUnitUserListDto, UseAssetDto, AssetDto } from '@shared/service-proxies/service-proxies';
 import { moment } from 'ngx-bootstrap/chronos/test/chain';
+
+import { AssetLookupModalComponent } from '../../shared/common/lookup/asset-lookup-modal.component';
 
 
 @Component({
@@ -10,7 +12,7 @@ import { moment } from 'ngx-bootstrap/chronos/test/chain';
     templateUrl: './create-or-edit-useasset-modal.component.html'
 })
 export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
-
+    @ViewChild('assetLookup') assetLookupModal: AssetLookupModalComponent;
 
     @ViewChild('createOrEditModal') modal: ModalDirective;
     @ViewChild('useassetCombobox') useassetCombobox: ElementRef;
@@ -24,6 +26,8 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
     @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
 
     saving = false;
+
+    testName = '';
 
     useasset: UseAssetInput = new UseAssetInput();
 
@@ -165,5 +169,20 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
     calculateEndOfLiqidation(): void {
         let dateAdd = moment(this.assetSelect.dateAdded);
         this.endOfLiquidation = dateAdd.add(this.assetSelect.monthOfDepreciation, "months").format('YYYY-MM-DD');
+    }
+
+    openSelectAssetModal() {
+        this.assetLookupModal.show();
+    }
+
+    modalSaved(assetSaved: AssetDto) {
+        this.assetSelect.assetId = assetSaved.assetId;
+        this.assetSelect.assetName = assetSaved.assetName;
+        this.getAssetByID(this.assetSelect.assetId);
+    }
+
+    setAssetIdNull() {
+        this.assetSelect = new AssetForViewDto();
+        this.getAssetByID('');
     }
 }

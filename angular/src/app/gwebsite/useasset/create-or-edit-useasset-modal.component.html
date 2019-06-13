@@ -19,8 +19,8 @@
                             [(ngModel)]="useasset.dateExport" required>
                     </div>
                     <div class="form-group">
-                        <label>Tài sản *</label>
-                        <!-- <select *ngIf="!useasset.id" #nameInput="ngModel" required [(ngModel)]='assetSelect.assetId'
+                        <!-- <label>Tài sản *</label>
+                        <select *ngIf="!useasset.id" #nameInput="ngModel" required [(ngModel)]='assetSelect.assetId'
                             class='form-control' name="AssetID" (change)="getAssetByID($event.target.value)">
                             <option *ngFor="let item of listAssetInStock" [value]="item.assetId">
                                 {{item.assetId}} - {{item.assetName}}
@@ -33,10 +33,7 @@
                                 <div class="input-group-append">
                                     <button class="btn btn-info" (click)="openSelectAssetModal()" type="button"><i class="fa fa-search"></i> {{l("Pick")}}</button>
                                 </div>
-                                <!-- <div class="input-group-prepend">
-                                    <button class="btn btn-danger" type="button" (click)="setAssetIdNull()"><i class="fa fa-times"></i></button>
-                                </div> -->
-                                <input class="form-control" id="EmcampaignName" name="emCampaignName" [(ngModel)]="assetSelect.assetName" type="text" disabled required>
+                                <input class="form-control" id="EmcampaignName" name="emCampaignName" value="{{assetSelect.assetName}}" type="text" disabled required>
                             </div>
                         </div>
                         

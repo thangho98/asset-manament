@@ -179,6 +179,7 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
         this.assetSelect.assetId = assetSaved.assetId;
         this.assetSelect.assetName = assetSaved.assetName;
         this.getAssetByID(this.assetSelect.assetId);
+        this.useasset.assetId = assetSaved.assetId;
     }
 
     setAssetIdNull() {

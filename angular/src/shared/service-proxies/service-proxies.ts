@@ -15268,6 +15268,7 @@ export interface IPagedResultDtoOfCustomerDto {
 }
 
 export class CustomerDto implements ICustomerDto {
+    organizationId!: number | undefined;
     name!: string | undefined;
     address!: string | undefined;
     info!: string | undefined;
@@ -15284,6 +15285,7 @@ export class CustomerDto implements ICustomerDto {
 
     init(data?: any) {
         if (data) {
+            this.organizationId = data["organizationId"];
             this.name = data["name"];
             this.address = data["address"];
             this.info = data["info"];
@@ -15300,6 +15302,7 @@ export class CustomerDto implements ICustomerDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["organizationId"] = this.organizationId;
         data["name"] = this.name;
         data["address"] = this.address;
         data["info"] = this.info;
@@ -15309,6 +15312,7 @@ export class CustomerDto implements ICustomerDto {
 }
 
 export interface ICustomerDto {
+    organizationId: number | undefined;
     name: string | undefined;
     address: string | undefined;
     info: string | undefined;
@@ -15316,6 +15320,7 @@ export interface ICustomerDto {
 }
 
 export class CustomerInput implements ICustomerInput {
+    organizationId!: number | undefined;
     name!: string | undefined;
     address!: string | undefined;
     info!: string | undefined;
@@ -15332,6 +15337,7 @@ export class CustomerInput implements ICustomerInput {
 
     init(data?: any) {
         if (data) {
+            this.organizationId = data["organizationId"];
             this.name = data["name"];
             this.address = data["address"];
             this.info = data["info"];
@@ -15348,6 +15354,7 @@ export class CustomerInput implements ICustomerInput {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["organizationId"] = this.organizationId;
         data["name"] = this.name;
         data["address"] = this.address;
         data["info"] = this.info;
@@ -15357,6 +15364,7 @@ export class CustomerInput implements ICustomerInput {
 }
 
 export interface ICustomerInput {
+    organizationId: number | undefined;
     name: string | undefined;
     address: string | undefined;
     info: string | undefined;
@@ -15364,6 +15372,7 @@ export interface ICustomerInput {
 }
 
 export class CustomerForViewDto implements ICustomerForViewDto {
+    organizationId!: number | undefined;
     name!: string | undefined;
     address!: string | undefined;
     info!: string | undefined;
@@ -15379,6 +15388,7 @@ export class CustomerForViewDto implements ICustomerForViewDto {
 
     init(data?: any) {
         if (data) {
+            this.organizationId = data["organizationId"];
             this.name = data["name"];
             this.address = data["address"];
             this.info = data["info"];
@@ -15394,6 +15404,7 @@ export class CustomerForViewDto implements ICustomerForViewDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["organizationId"] = this.organizationId;
         data["name"] = this.name;
         data["address"] = this.address;
         data["info"] = this.info;
@@ -15402,6 +15413,7 @@ export class CustomerForViewDto implements ICustomerForViewDto {
 }
 
 export interface ICustomerForViewDto {
+    organizationId: number | undefined;
     name: string | undefined;
     address: string | undefined;
     info: string | undefined;

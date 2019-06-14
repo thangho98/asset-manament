@@ -1651,6 +1651,8 @@ namespace GSoft.AbpZeroTemplate.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<long>("OrganizationId");
+
                     b.Property<string>("UpdatedBy");
 
                     b.Property<DateTime?>("UpdatedDate");

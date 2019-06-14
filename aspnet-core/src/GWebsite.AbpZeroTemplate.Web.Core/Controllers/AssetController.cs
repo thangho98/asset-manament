@@ -99,5 +99,11 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         {
             assetAppService.updateAssetStatusLiquidated(assetID);
         }
+
+        [HttpGet]
+        public List<AssetForViewDto> GetListAssetsNotLiquidated()
+        {
+            return assetAppService.GetListAssetsNotLiquidated();
+        }
     }
 }

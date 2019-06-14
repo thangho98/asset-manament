@@ -1881,7 +1881,7 @@ namespace GSoft.AbpZeroTemplate.Migrations
 
                     b.Property<string>("Proposer");
 
-                    b.Property<int?>("RepairUnit");
+                    b.Property<string>("RepairUnit");
 
                     b.Property<string>("StaffInCharge");
 

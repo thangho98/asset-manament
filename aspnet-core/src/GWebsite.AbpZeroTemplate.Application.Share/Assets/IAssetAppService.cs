@@ -20,5 +20,6 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Assets
         void updateAssetStatusUsing(string assetID);
         void updateAssetStatusReparing(string assetID);
         void updateAssetStatusLiquidated(string assetID);
+        List<AssetForViewDto> GetListAssetsNotLiquidated();
     }
 }

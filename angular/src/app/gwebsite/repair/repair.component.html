@@ -26,7 +26,7 @@
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <input [(ngModel)]="repairName" name="repairName" autoFocus class="form-control"
-                                        placeholder="Nhập tên khách hàng" type="text">
+                                        placeholder="Nhập mã tài sản" type="text">
                                     <span class="input-group-btn">
                                         <button (click)="applyFilters()" class="btn btn-primary" type="submit"><i
                                                 class="icon-refresh"></i>
@@ -92,7 +92,7 @@
                                     </td>
                                     <td>
                                         <span class="ui-column-title">Tên tài sản</span>
-                                        <span title="{{record.info}}">{{}}</span>
+                                        <span title="{{record.info}}">{{truncateString(record.assetName)}}</span>
                                     </td>
                                     <td>
                                         <span class="ui-column-title">Người đề xuất</span>

@@ -25,8 +25,10 @@ namespace GSoft.AbpZeroTemplate.Organizations
 
         Task<PagedResultDto<NameValueDto>> FindUsers(FindOrganizationUnitUsersInput input);
 
-        Task<ListResultDto<OrganizationUnitUserListDto>> GetListUsersOrganizationUnit(int Id);
+        Task<ListResultDto<OrganizationUnitUserListDto>> GetListUsersOrganizationUnit(int id);
 
-        Task<OrganizationUnitDto> GetOrganizationUnitByID(int Id);
+        Task<OrganizationUnitDto> GetOrganizationUnitByID(int id);
+
+        Task<OrganizationUnitDto> GetOrganizationUnitByCode(string code);
     }
 }

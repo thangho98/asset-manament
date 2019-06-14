@@ -29,5 +29,7 @@ namespace GSoft.AbpZeroTemplate.Authorization.Users
         Task DeleteUser(EntityDto<long> input);
 
         Task UnlockUser(EntityDto<long> input);
+
+        Task<List<UserListDto>> GetListUsers();
     }
 }

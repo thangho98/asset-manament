@@ -116,6 +116,13 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Repairs
             }
         }
 
+        public List<RepairDto> GetListRepairNotApproved()
+        {
+            IQueryable<Repair> query = repairRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.StatusApproved == false);
+            IQueryable<RepairDto> assetGroupDtoQuery = query.ProjectTo<RepairDto>(query);
+            return assetGroupDtoQuery.ToList();
+        }
+
         #endregion
 
         #region Private Method

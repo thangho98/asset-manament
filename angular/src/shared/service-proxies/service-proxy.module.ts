@@ -45,7 +45,7 @@ import { WebApiServiceProxy } from './webapi.service';
         ApiServiceProxies.AssetGroupServiceProxy,
         ApiServiceProxies.AssetServiceProxy,
         ApiServiceProxies.LiquidationServiceProxy,
-        // ApiServiceProxies.RepairServiceProxy,
+        ApiServiceProxies.RepairServiceProxy,
         // ApiServiceProxies.RevokeServiceProxy,
         // ApiServiceProxies.TransferServiceProxy,
         ApiServiceProxies.UseAssetServiceProxy,

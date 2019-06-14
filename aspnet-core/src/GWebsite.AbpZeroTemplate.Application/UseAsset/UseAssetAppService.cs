@@ -116,6 +116,16 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.UseAssets
             return assetGroupDtoQuery.ToList();
         }
 
+        public UseAssetDto GetUseAssetByAssetID(string id)
+        {
+            var useAssetEntity = useAssetRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.AssetId.ToLower().Equals(id.ToLower()));
+            if (useAssetEntity == null)
+            {
+                return null;
+            }
+            return ObjectMapper.Map<UseAssetDto>(useAssetEntity);
+        }
+
         #endregion
 
         #region Private Method

@@ -191,6 +191,14 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
             }
         }
 
+        public List<AssetForViewDto> GetListAssetsNotLiquidated()
+        {
+            IQueryable<Asset> query = assetRepository.GetAll().Where(x => !x.IsDelete)
+                .Where(x => x.Status != (int)Const.Const.AssetStatus.LIQUIDATED).Where(x => x.StatusApproved == true);
+            IQueryable<AssetForViewDto> assetDtoQuery = query.ProjectTo<AssetForViewDto>(query);
+            return assetDtoQuery.ToList();
+        }
+
         #endregion
 
         #region Private Method

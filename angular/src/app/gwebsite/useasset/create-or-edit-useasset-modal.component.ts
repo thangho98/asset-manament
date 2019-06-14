@@ -34,6 +34,7 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
     listUseAsset: UseAssetDto[];
     listOrganizationUnit: OrganizationUnitDto[];
     listOrganizationUnitUser: OrganizationUnitUserListDto[];
+    dateEndDepreciation: string = "";
 
     userName: string = "";
     unitName: string = "";
@@ -103,6 +104,9 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
             else {
                 this.assetType = "Tài sản cố định";
             }
+            let date = new Date(this.assetSelect.dateAdded);
+            date.setMonth(date.getMonth() + this.assetSelect.monthOfDepreciation);
+            this.dateEndDepreciation = moment(date).format('YYYY-MM-DD');
             this.getAssetGroup();
         });
     }

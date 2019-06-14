@@ -20,5 +20,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Repairs.Dto
         public string DateRepaired { get; set; }
         //Trạng thái
         public bool Status { get; set; }
+        //Trạng thái duyệt
+        public bool StatusApproved { get; set; }
     }
 }

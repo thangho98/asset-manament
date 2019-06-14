@@ -57,5 +57,11 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         {
             repairAppService.ApproveRepair(id);
         }
+
+        [HttpGet]
+        public List<RepairDto> GetListRepairNotApproved()
+        {
+            return repairAppService.GetListRepairNotApproved();
+        }
     }
 }

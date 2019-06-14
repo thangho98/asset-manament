@@ -15,7 +15,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Repairs.Dto
         //Ngày dự kiến sửa xong
         public string ExpectedDateRepaired { get; set; }
         //Đơn vị dự kiến sửa chữa - select để chọn
-        public string ExpectedRepairUnit { get; set; }
+        public int ExpectedRepairUnit { get; set; }
         //Người đề xuất
         public string Proposer { get; set; }
         //NV phụ trách
@@ -29,7 +29,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Repairs.Dto
         //Ngày sửa xong
         public string DateRepaired { get; set; }
         //Đơn vị sửa chữa thực tế - select để chọn
-        public int? RepairUnit { get; set; }
+        public int RepairUnit { get; set; }
         //Chi phí thực tế
         public float? Cost { get; set; }
         //Thay đổi công năng - checked true false

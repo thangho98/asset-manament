@@ -7,7 +7,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { AssetGroupComponent } from './assetgroup/assetgroup.component';
 import { AssetComponent } from './asset/asset.component';
 import { LiquidationComponent } from './liquidation/liquidation.component';
-// import { RepairComponent } from './repair/repair.component';
+import { RepairComponent } from './repair/repair.component';
 // import { RevokeComponent } from './revoke/revoke.component';
 // import { TransferComponent } from './transfer/transfer.component';
 import { UseAssetComponent } from './useasset/useasset.component';
@@ -70,15 +70,15 @@ import { UseAssetComponent } from './useasset/useasset.component';
                     },
                 ]
             },
-            // {
-            //     path: '',
-            //     children: [
-            //         {
-            //             path: 'repair', component: RepairComponent,
-            //             data: { permission: 'Pages.Administration.Repair' }
-            //         },
-            //     ]
-            // },
+            {
+                path: '',
+                children: [
+                    {
+                        path: 'repair', component: RepairComponent,
+                        data: { permission: 'Pages.Administration.Repair' }
+                    },
+                ]
+            },
             // {
             //     path: '',
             //     children: [

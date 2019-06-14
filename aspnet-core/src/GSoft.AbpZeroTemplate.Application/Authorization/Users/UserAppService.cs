@@ -270,6 +270,14 @@ namespace GSoft.AbpZeroTemplate.Authorization.Users
             user.Unlock();
         }
 
+        public async Task<List<UserListDto>> GetListUsers()
+        {
+            var users = await UserManager.Users.ToListAsync();
+            var userListDtos = ObjectMapper.Map<List<UserListDto>>(users);
+
+            return userListDtos;
+        }
+
         [AbpAuthorize(AppPermissions.Pages_Administration_Users_Edit)]
         protected virtual async Task UpdateUserAsync(CreateOrUpdateUserInput input)
         {

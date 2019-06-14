@@ -92,8 +92,8 @@
                         <label>Người sử dụng *</label>
                         <select *ngIf="!useasset.id" #nameInput="ngModel" required [(ngModel)]='useasset.userId'
                             class='form-control' name="AssetID">
-                            <option *ngFor="let item of listOrganizationUnitUser" [value]="item.id">
-                                {{item.surname}} {{item.name}}
+                            <option *ngFor="let item of customersByOrganization" [value]="item.id">
+                                {{item.name}}
                             </option>
                         </select>
                         <input *ngIf="useasset.id" readonly name="userId" [value]="useasset.userId" class="form-control"

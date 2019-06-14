@@ -48,6 +48,10 @@
                                                 {{l('Name')}}
                                                 <p-sortIcon field="assetName"></p-sortIcon>
                                               </th>
+                                              <th style="width: 150px" pSortableColumn="assetType">
+                                                Loại tài sản
+                                                <p-sortIcon field="assetType"></p-sortIcon>
+                                              </th>
                                             </tr>
                                           </ng-template>
                                           <ng-template pTemplate="body" let-record="$implicit">
@@ -62,6 +66,11 @@
                                               <td style="width:150px">
                                                 <span class="ui-column-title"> {{l('Name')}}</span>
                                                 {{record.assetName}}
+                                              </td>
+                                              <td style="width:150px">
+                                                <span class="ui-column-title"> Loại tài sản</span>
+                                                <span *ngIf="record.assetType === 0">Công cụ lao động</span>
+                                                <span *ngIf="record.assetType === 1">Tài sản cố định</span>
                                               </td>
                                             </tr>
                                           </ng-template>

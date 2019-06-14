@@ -13755,6 +13755,7 @@ export class AssetDto implements IAssetDto {
     dateAdded!: string | undefined;
     providerId!: string | undefined;
     statusApproved!: boolean | undefined;
+    status!: number | undefined;
     id!: number | undefined;
 
     constructor(data?: IAssetDto) {
@@ -13775,6 +13776,7 @@ export class AssetDto implements IAssetDto {
             this.dateAdded = data["dateAdded"];
             this.providerId = data["providerId"];
             this.statusApproved = data["statusApproved"];
+            this.status = data["status"];
             this.id = data["id"];
         }
     }
@@ -13795,6 +13797,7 @@ export class AssetDto implements IAssetDto {
         data["dateAdded"] = this.dateAdded;
         data["providerId"] = this.providerId;
         data["statusApproved"] = this.statusApproved;
+        data["status"] = this.status;
         data["id"] = this.id;
         return data; 
     }
@@ -13808,6 +13811,7 @@ export interface IAssetDto {
     dateAdded: string | undefined;
     providerId: string | undefined;
     statusApproved: boolean | undefined;
+    status: number | undefined;
     id: number | undefined;
 }
 

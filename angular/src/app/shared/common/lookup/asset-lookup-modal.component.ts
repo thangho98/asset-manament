@@ -1,4 +1,4 @@
-import { Component, ViewChild, Injector, Output, EventEmitter, ViewEncapsulation} from '@angular/core';
+import { Component, ViewChild, Injector, Output, EventEmitter, ViewEncapsulation, Input } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { AssetServiceProxy, AssetDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/common/app-component-base';
@@ -22,6 +22,7 @@ export class AssetLookupModalComponent extends AppComponentBase {
     id = '';
     displayName: string;
 
+    @Input() assetStatusFilter: number;
     @Output() modalSave: EventEmitter<AssetDto> = new EventEmitter<AssetDto>();
     active = false;
     saving = false;
@@ -58,9 +59,13 @@ export class AssetLookupModalComponent extends AppComponentBase {
           this.primengTableHelper.getMaxResultCount(this.paginator, event),
           this.primengTableHelper.getSkipCount(this.paginator, event)
         ).subscribe(result => {
-          this.primengTableHelper.totalRecordsCount = result.totalCount;
-          this.primengTableHelper.records = result.items;
-          this.primengTableHelper.hideLoadingIndicator();
+            result.items = result.items.filter(asset => {
+                return (asset.statusApproved === true && asset.status === this.assetStatusFilter)
+            })
+
+            this.primengTableHelper.totalRecordsCount = result.totalCount;
+            this.primengTableHelper.records = result.items;
+            this.primengTableHelper.hideLoadingIndicator();
         });
 
         // this.assetService.getAssetsByFilter(

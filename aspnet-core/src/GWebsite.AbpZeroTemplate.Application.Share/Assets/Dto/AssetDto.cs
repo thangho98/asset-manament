@@ -22,5 +22,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Assets.Dto
         public string ProviderId { get; set; }
         //Trạng thái duyệt
         public bool StatusApproved { get; set; }
+		//Trạng thái tài sản
+		public int Status { get; set; }
     }
 }

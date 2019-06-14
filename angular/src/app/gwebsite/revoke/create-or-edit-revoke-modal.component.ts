@@ -1,8 +1,9 @@
 import { Component, ElementRef, EventEmitter, Injector, Output, ViewChild } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { ModalDirective } from 'ngx-bootstrap';
-import { RevokeServiceProxy, RevokeInput, AssetForViewDto, AssetGroupForViewDto, AssetServiceProxy, AssetGroupServiceProxy, RevokeDto } from '@shared/service-proxies/service-proxies';
+import { RevokeServiceProxy, RevokeInput, AssetForViewDto, AssetGroupForViewDto, AssetServiceProxy, AssetGroupServiceProxy, RevokeDto, AssetDto } from '@shared/service-proxies/service-proxies';
 import { moment } from 'ngx-bootstrap/chronos/test/chain';
+import { AssetLookupModalComponent } from '@app/shared/common/lookup/asset-lookup-modal.component';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { moment } from 'ngx-bootstrap/chronos/test/chain';
     templateUrl: './create-or-edit-revoke-modal.component.html'
 })
 export class CreateOrEditRevokeModalComponent extends AppComponentBase {
-
+    @ViewChild('assetLookup') assetLookupModal: AssetLookupModalComponent;
 
     @ViewChild('createOrEditModal') modal: ModalDirective;
     @ViewChild('revokeCombobox') revokeCombobox: ElementRef;
@@ -146,5 +147,16 @@ export class CreateOrEditRevokeModalComponent extends AppComponentBase {
         console.log(diffDate);
         console.log(this.assetSelect);
         return this.remainingOfLiquidation;
+    }
+
+    openSelectAssetModal() {
+        this.assetLookupModal.show();
+    }
+
+    modalSaved(assetSaved: AssetDto) {
+        this.assetSelect.assetId = assetSaved.assetId;
+        this.assetSelect.assetName = assetSaved.assetName;
+        this.getAssetByID(this.assetSelect.assetId);
+        this.revoke.assetId = assetSaved.assetId;
     }
 }

@@ -18,7 +18,8 @@
                         <input #nameInput="ngModel" readonly class="form-control" type="text" name="LiquidationDate"
                             [(ngModel)]="liquidation.liquidationDate" required maxlength="64">
                     </div>
-                    <div class="form-group">
+
+                    <!-- <div class="form-group">
                         <label>Tài sản *</label>
                         <select *ngIf="!liquidation.id" #nameInput="ngModel" required [(ngModel)]='liquidation.assetID'
                             class='form-control' name="AssetID" (change)="getAssetByID($event.target.value)">
@@ -28,7 +29,17 @@
                         </select>
                         <input *ngIf="liquidation.id" readonly name="AssetID" [value]="assetSelect.assetName"
                             class="form-control" type="text">
+                    </div> -->
+                    <!-- Open EmCampaign Lookup Modal -->
+                    <div class="form-group m-form__group">
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <button class="btn btn-info" (click)="openSelectAssetModal()" type="button"><i class="fa fa-search"></i> {{l("Pick")}}</button>
+                            </div>
+                            <input class="form-control" id="EmcampaignName" name="emCampaignName" value="{{assetSelect.assetName}}" type="text" disabled required>
+                        </div>
                     </div>
+
                     <div class="form-group">
                         <label>Loại tài sản *</label>
                         <input readonly name="assetType" [value]="assetType" class="form-control" type="text">
@@ -131,4 +142,6 @@
             </form>
         </div>
     </div>
+
+    <assetLookupModal #assetLookup [assetStatusFilter]="0" (modalSave)="modalSaved($event)"></assetLookupModal>
 </div>

@@ -17,9 +17,9 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Repairs.Dto
         //Đơn vị dự kiến sửa chữa - select để chọn
         public int ExpectedRepairUnit { get; set; }
         //Người đề xuất
-        public string Proposer { get; set; }
+        public int Proposer { get; set; }
         //NV phụ trách
-        public string StaffInCharge { get; set; }
+        public int StaffInCharge { get; set; }
         //Chi phí dự kiến
         public float ExpectedCost { get; set; }
         //Nội dung dự kiến

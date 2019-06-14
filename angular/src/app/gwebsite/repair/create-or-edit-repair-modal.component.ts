@@ -87,14 +87,6 @@ export class CreateOrEditRepairModalComponent extends AppComponentBase {
             this.repairInput = result;
             if (!this.repairInput.id) {
                 this.repairInput.exportDate = moment().format('YYYY-MM-DD');
-                this.repairInput.dateRepaired = "";
-                this.repairInput.repairUnit = "";
-                this.repairInput.cost = 0;
-                this.repairInput.isChangeFunction = false;
-                this.repairInput.content = "";
-                this.repairInput.note = "";
-                this.repairInput.status = false;
-                this.repairInput.statusApproved = false;
             }
             else {
                 this.getAssetByID(this.repairInput.assetId);
@@ -105,14 +97,30 @@ export class CreateOrEditRepairModalComponent extends AppComponentBase {
         
     }
 
-    save(): void {
+    save(): void {        
         let input = this.repairInput;
+        
+        if (!input.dateRepaired)
+            input.dateRepaired = "";
+
+        if (!input.repairUnit)
+            input.repairUnit = 0;
+
+        if (!input.cost)
+            input.cost = 0;
+
+        if (!input.content)
+            input.content = "";
+
+        if (!input.note)
+            input.note = "";
+
+        console.log(input);
         this.saving = true;
         this._repairService.createOrEditRepair(input).subscribe(result => {
             this.notify.info(this.l('SavedSuccessfully'));
             this.close();
         })
-
     }
 
     close(): void {

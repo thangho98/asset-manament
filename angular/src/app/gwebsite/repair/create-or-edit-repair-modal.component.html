@@ -114,7 +114,7 @@
                                     {{item.surname}} {{item.name}}
                                 </option>
                             </select>
-                            <input *ngIf="repairInput.id" readonly name="proposer" [value]="repairInput.proposer"
+                            <input *ngIf="repairInput.id" readonly name="Proposer" [value]="repairInput.proposer"
                                 class="form-control" type="text">
                         </div>
                         <div class="form-group">
@@ -148,68 +148,41 @@
                     </div>
                     <!-- End propose -->
                     <!-- Start reality -->
-                    <!-- <div *ngIf="repairInput.id && repairInput.statusapproved" style="border:1px solid blue;border-radius: 5px;padding:2px">
+                    <div *ngIf="repairInput.id && repairInput.statusapproved" style="border:1px solid blue;border-radius: 5px;padding:2px">
                         <label>Thông tin sửa chữa thực tế</label>
                         <div class="form-group">
-                            <label>Ngày xuất *</label>
-                            <input #nameInput="ngModel" readonly class="form-control" type="text" name="RepairDate"
-                            [(ngModel)]="repairInput.exportDate" required maxlength="64">                        
+                            <label>Ngày sửa xong *</label>
+                            <input #nameInput="ngModel" readonly class="form-control" type="text" name="DateRepaired"
+                            [(ngModel)]="repairInput.dateRepaired" required maxlength="64">                        
                         </div>
                         <div class="form-group">
-                            <label>Ngày dự kiến sửa xong *</label>
-                            <input #nameInput="ngModel" class="form-control" type="date" name="ExpectedDateRepaired"
-                            [(ngModel)]="repairInput.expectedDateRepaired" required maxlength="64">                       
-                        </div>
-                        <div class="form-group">
-                            <label>Đơn vị sửa chữa dự kiến *</label>
-                            <input #addressInput="ngModel" class="form-control" type="text" name="RepairUnit"
-                                [(ngModel)]="repairInput.repairUnit" required maxlength="64">
-                        </div>
-                        <div class="form-group">
-                            <label>Chi phí dự kiến *</label>
-                            <input #addressInput="ngModel" class="form-control" type="number" name="ExpectedCost"
-                                [(ngModel)]="repairInput.expectedCost" maxlength="64">
-                        </div>
-                        <div class="form-group">
-                            <label>Người đề xuất *</label>
-                            <select *ngIf="!repairInput.id" #nameInput="ngModel" required [(ngModel)]='repairInput.proposer'
-                                class='form-control' name="Proposer" (change)="getUsers($event.target.value)">
-                                <option *ngFor="let item of listUsers" [value]="item.id">
-                                    {{item.surname}} {{item.name}}
-                                </option>
+                            <label>Đơn vị sửa chữa thực tế *</label>
+                            <select #nameInput="ngModel" required [(ngModel)]="repairInput.repairUnit"
+                                class='form-control' name="RepairUnit">
+                                <option value='0'>Đơn vị sửa chữa 1</option>
+                                <option value='1'>Đơn vị sửa chữa 2</option>
+                                <option value='2'>Đơn vị sửa chữa 3</option>
+                                <option value='3'>Đơn vị sửa chữa 4</option>
                             </select>
-                            <input *ngIf="repairInput.id" readonly name="AssetID" [value]="asset.assetName"
-                                class="form-control" type="text">
                         </div>
                         <div class="form-group">
-                            <label>Đơn vị đề xuất *</label>
-                            <input #addressInput="ngModel" class="form-control" type="text" name="proposerUnit"
-                                [(ngModel)]="repairInput.expectedCost" required maxlength="64">
-                        </div>                
-                        <div class="form-group">
-                            <label>Nhân viên phụ trách *</label>
-                            <select *ngIf="!repairInput.id" #nameInput="ngModel" required [(ngModel)]='repairInput.proposer'
-                                class='form-control' name="Proposer" (change)="getUsers($event.target.value)">
-                                <option *ngFor="let item of listUsers" [value]="item.id">
-                                    {{item.surname}} {{item.name}}
-                                </option>
-                            </select>
-                            <input *ngIf="repairInput.id" readonly name="StaffInCharge" [value]="asset.StaffInCharge"
-                                class="form-control" type="text">
+                            <label>Chi phí thực tế *</label>
+                            <input #addressInput="ngModel" class="form-control" type="number" name="Cost"
+                                [(ngModel)]="repairInput.cost" maxlength="64">
                         </div>
                         <div class="form-group">
-                            <label>Nội dung sửa chữa *</label>
+                            <label>Nội dung sửa chữa thực tế *</label>
                             <textarea #addressInput="ngModel" class="form-control" name="Content"
                                 [(ngModel)]="repairInput.content" required>
                             </textarea>
                         </div>
                         <div class="form-group">
-                            <label>Ghi chú *</label>
+                            <label>Ghi chú thực tế*</label>
                             <textarea #addressInput="ngModel" class="form-control" name="Note"
                                 [(ngModel)]="repairInput.note">
                             </textarea>
                         </div>
-                    </div> -->
+                    </div>
                     <!-- End reality -->
                 </div>
                 <!-- End content -->

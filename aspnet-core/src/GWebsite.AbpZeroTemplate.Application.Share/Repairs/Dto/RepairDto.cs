@@ -13,9 +13,9 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Repairs.Dto
         //Ngày xuất
         public string ExportDate { get; set; }
         //Người đề xuất
-        public string Proposer { get; set; }
+        public int Proposer { get; set; }
         //NV phụ trách
-        public string StaffInCharge { get; set; }
+        public int StaffInCharge { get; set; }
         //Ngày sửa xong
         public string DateRepaired { get; set; }
         //Trạng thái

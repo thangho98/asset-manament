@@ -20876,7 +20876,7 @@ export class RepairDto implements IRepairDto {
     assetId!: string | undefined;
     exportDate!: string | undefined;
     proposer!: number | undefined;
-    staffInCharge!: string | undefined;
+    staffInCharge!: number | undefined;
     dateRepaired!: string | undefined;
     status!: boolean | undefined;
     statusApproved!: boolean | undefined;
@@ -20929,7 +20929,7 @@ export interface IRepairDto {
     assetId: string | undefined;
     exportDate: string | undefined;
     proposer: number | undefined;
-    staffInCharge: string | undefined;
+    staffInCharge: number | undefined;
     dateRepaired: string | undefined;
     status: boolean | undefined;
     statusApproved: boolean | undefined;
@@ -20942,7 +20942,7 @@ export class RepairInput implements IRepairInput {
     expectedDateRepaired!: string | undefined;
     expectedRepairUnit!: number | undefined;
     proposer!: number | undefined;
-    staffInCharge!: string | undefined;
+    staffInCharge!: number | undefined;
     expectedCost!: number | undefined;
     expectedContent!: string | undefined;
     expectedNote!: string | undefined;
@@ -21025,7 +21025,7 @@ export interface IRepairInput {
     expectedDateRepaired: string | undefined;
     expectedRepairUnit: number | undefined;
     proposer: number | undefined;
-    staffInCharge: string | undefined;
+    staffInCharge: number | undefined;
     expectedCost: number | undefined;
     expectedContent: string | undefined;
     expectedNote: string | undefined;
@@ -21046,7 +21046,7 @@ export class RepairForViewDto implements IRepairForViewDto {
     expectedDateRepaired!: string | undefined;
     expectedRepairUnit!: number | undefined;
     proposer!: number | undefined;
-    staffInCharge!: string | undefined;
+    staffInCharge!: number | undefined;
     expectedCost!: number | undefined;
     expectedContent!: string | undefined;
     expectedNote!: string | undefined;
@@ -21126,7 +21126,7 @@ export interface IRepairForViewDto {
     expectedDateRepaired: string | undefined;
     expectedRepairUnit: number | undefined;
     proposer: number | undefined;
-    staffInCharge: string | undefined;
+    staffInCharge: number | undefined;
     expectedCost: number | undefined;
     expectedContent: string | undefined;
     expectedNote: string | undefined;

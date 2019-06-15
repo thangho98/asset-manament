@@ -121,7 +121,7 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
             }
             let date = new Date(this.assetSelect.dateAdded);
             date.setMonth(date.getMonth() + this.assetSelect.monthOfDepreciation);
-            this.dateEndDepreciation = moment(date).format('YYYY-MM-DD');
+            //this.dateEndDepreciation = moment(date).format('YYYY-MM-DD');
             this.getAssetGroup();
         });
     }

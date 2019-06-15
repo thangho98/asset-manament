@@ -1,8 +1,10 @@
 import { Component, ElementRef, EventEmitter, Injector, Output, ViewChild } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { ModalDirective } from 'ngx-bootstrap';
-import { UseAssetServiceProxy, UseAssetInput, AssetForViewDto, AssetGroupForViewDto, AssetServiceProxy, AssetGroupServiceProxy, OrganizationUnitDto, OrganizationUnitServiceProxy, OrganizationUnitUserListDto, UseAssetDto } from '@shared/service-proxies/service-proxies';
+import { UseAssetServiceProxy, UseAssetInput, AssetForViewDto, AssetGroupForViewDto, AssetServiceProxy, AssetGroupServiceProxy, OrganizationUnitDto, OrganizationUnitServiceProxy, OrganizationUnitUserListDto, UseAssetDto, AssetDto, CustomerServiceProxy, CustomerDto } from '@shared/service-proxies/service-proxies';
 import { moment } from 'ngx-bootstrap/chronos/test/chain';
+
+import { AssetLookupModalComponent } from '../../shared/common/lookup/asset-lookup-modal.component';
 
 
 @Component({
@@ -10,7 +12,7 @@ import { moment } from 'ngx-bootstrap/chronos/test/chain';
     templateUrl: './create-or-edit-useasset-modal.component.html'
 })
 export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
-
+    @ViewChild('assetLookup') assetLookupModal: AssetLookupModalComponent;
 
     @ViewChild('createOrEditModal') modal: ModalDirective;
     @ViewChild('useassetCombobox') useassetCombobox: ElementRef;
@@ -25,6 +27,8 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
 
     saving = false;
 
+    testName = '';
+
     useasset: UseAssetInput = new UseAssetInput();
 
     listAssetInStock: AssetForViewDto[];
@@ -34,10 +38,13 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
     listUseAsset: UseAssetDto[];
     listOrganizationUnit: OrganizationUnitDto[];
     listOrganizationUnitUser: OrganizationUnitUserListDto[];
-    dateEndDepreciation: string = "";
+    endOfLiquidation: string;
 
     userName: string = "";
     unitName: string = "";
+
+    customers: CustomerDto[] = [];
+    customersByOrganization: CustomerDto[] = [];
 
     constructor(
         injector: Injector,
@@ -46,6 +53,7 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
         private _assetgroupService: AssetGroupServiceProxy,
         private _organizationunitService: OrganizationUnitServiceProxy,
         private _organizationunituserService: OrganizationUnitServiceProxy,
+        private _customerService: CustomerServiceProxy
     ) {
         super(injector);
     }
@@ -55,6 +63,9 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
         //Add 'implements OnInit' to the class.
         this.getListAssetsInStock();
         this.getOrganizationUnit();
+        if(this.listAssetInStock[0].assetId) this._assetService.getAssetByAssetID(this.listAssetInStock[0].assetId).subscribe(result => {
+            this.assetSelect = result;
+        });
     }
 
     show(useassetId?: number | null | undefined): void {
@@ -62,13 +73,16 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
         this.getListAssetsInStock();
         this._useassetService.getUseAssetForEdit(useassetId).subscribe(result => {
             this.useasset = result;
-            this.modal.show();
+            // this.modal.show();
             if (!this.useasset.id) {
                 this.useasset.dateExport = moment().format('YYYY-MM-DD');
             }
             else {
                 this.getAssetByID(this.useasset.assetId);
             }
+            this._customerService.getCustomersByFilter('', '', 1000, 0).subscribe(result => {
+                this.customers = result.items;
+            });
             this.modal.show();
         })
     }
@@ -78,6 +92,7 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
         this.saving = true;
         this._useassetService.createOrEditUseAsset(input).subscribe(result => {
             this.notify.info(this.l('SavedSuccessfully'));
+            this._assetService.updateAssetStatusUsing(this.assetSelect.assetId);
             this.close();
         })
 
@@ -153,11 +168,44 @@ export class CreateOrEditUseAssetModalComponent extends AppComponentBase {
     }
 
     getOrgannizationUnitUser(id: number): void {
-        this._organizationunituserService.getListUsersOrganizationUnit(id).subscribe(
-            result => {
-                if (result != null)
-                    this.listOrganizationUnitUser = result.items;
+        // this._organizationunituserService.getListUsersOrganizationUnit(id).subscribe(
+        //     result => {
+        //         if (result != null)
+        //             this.listOrganizationUnitUser = result.items;
+        //     }
+        // )
+        this.useasset.userId = undefined;
+        this.customersByOrganization = this.customers.filter(customer => {
+            console.log(`${customer.organizationId} == ${id}`);
+            if (customer.organizationId == id) {
+                return true;
             }
-        )
+
+            return false;
+        });
+        console.error(id);
+        console.log(this.customersByOrganization);
+        console.error(this.customers);
+    }
+
+    calculateEndOfLiqidation(): void {
+        let dateAdd = moment(this.assetSelect.dateAdded);
+        this.endOfLiquidation = dateAdd.add(this.assetSelect.monthOfDepreciation, "months").format('YYYY-MM-DD');
+    }
+
+    openSelectAssetModal() {
+        this.assetLookupModal.show();
+    }
+
+    modalSaved(assetSaved: AssetDto) {
+        this.assetSelect.assetId = assetSaved.assetId;
+        this.assetSelect.assetName = assetSaved.assetName;
+        this.getAssetByID(this.assetSelect.assetId);
+        this.useasset.assetId = assetSaved.assetId;
+    }
+
+    setAssetIdNull() {
+        this.assetSelect = new AssetForViewDto();
+        this.getAssetByID('');
     }
 }

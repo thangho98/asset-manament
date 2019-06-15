@@ -4,15 +4,15 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto col-xs-6">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    <span>{{l("Revoke")}}</span>
+                    <span>{{l("Thu hồi")}}</span>
                 </h3>
                 <span class="m-section__sub">
-                    {{l("RevokeInfo")}}
+                    {{l("Thông tin thu hồi")}}
                 </span>
             </div>
             <div class="col-xs-6 text-right">
                 <button (click)="createRevoke()" *ngIf="isGranted('Pages.Administration.Revoke.Create')"
-                    class="btn btn-primary"><i class="fa fa-plus"></i> {{l("CreateNewRevoke")}}</button>
+                    class="btn btn-primary"><i class="fa fa-plus"></i> {{l("Tạo thu hồi mới")}}</button>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <input [(ngModel)]="revokeName" name="revokeName" autoFocus class="form-control"
-                                        placeholder="Nhập tên khách hàng" type="text">
+                                        placeholder="Nhập mã tài sản" type="text">
                                     <span class="input-group-btn">
                                         <button (click)="applyFilters()" class="btn btn-primary" type="submit"><i
                                                 class="icon-refresh"></i>
@@ -53,10 +53,10 @@
                                         Mã tài sản
                                         <p-sortIcon field="assetId"></p-sortIcon>
                                     </th>
-                                    <th pSortableColumn="assetName">
+                                    <!-- <th pSortableColumn="assetName">
                                         Tên tài sản
                                         <p-sortIcon field="assetName"></p-sortIcon>
-                                    </th>
+                                    </th> -->
                                     <th pSortableColumn="reason">
                                         Lý do
                                         <p-sortIcon field="reason"></p-sortIcon>
@@ -78,26 +78,33 @@
                                         <span class="ui-column-title">Mã tài sản</span>
                                         <span title="{{record.assetId}}">{{truncateString(record.assetId)}}</span>
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                         <span class="ui-column-title">Tên tài sản</span>
-                                        <span title="{{}}">{{}}</span>
-                                    </td>
+                                        <span title="{{record.assetName}}">{{record.assetName}}</span>
+                                    </td> -->
                                     <td>
                                         <span class="ui-column-title">Lý do</span>
                                         <span title="{{record.reason}}">{{truncateString(record.reason)}}</span>
                                     </td>
                                     <td>
                                         <span class="ui-column-title">Trạng thái duyệt</span>
-                                        <span title="{{}}">{{}}</span>
+                                        <span *ngIf="!record.statusApproved">Chưa duyệt</span>
+                                        <span *ngIf="record.statusApproved">Đã duyệt</span>
                                     </td>
                                     <td>
-                                        <button
+                                        <button *ngIf="!record.statusApproved"
+                                            class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"
+                                            (click)="approvedRevoke(record.id)" title="{{l('Approve')}}">
+                                            <i class="fa fa-thumbs-up" [attr.aria-label]="l('Approved')"></i>
+                                        </button>
+
+                                        <button *ngIf="!record.statusApproved"
                                             class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"
                                             (click)="createOrEditModal.show(record.id)" title="{{l('Edit')}}">
                                             <i class="fa fa-edit" [attr.aria-label]="l('Edit')"></i>
                                         </button>
 
-                                        <button
+                                        <button *ngIf="!record.statusApproved"
                                             class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"
                                             (click)="deleteRevoke(record.id)" title="{{l('Delete')}}">
                                             <i class="fa fa-times" [attr.aria-label]="l('Delete')"></i>

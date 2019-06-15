@@ -1,8 +1,9 @@
 import { Component, ElementRef, EventEmitter, Injector, Output, ViewChild } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { ModalDirective } from 'ngx-bootstrap';
-import { LiquidationServiceProxy, LiquidationInput, AssetForViewDto, AssetServiceProxy, AssetGroupServiceProxy, AssetGroupForViewDto, LiquidationDto } from '@shared/service-proxies/service-proxies';
+import { LiquidationServiceProxy, LiquidationInput, AssetForViewDto, AssetServiceProxy, AssetGroupServiceProxy, AssetGroupForViewDto, LiquidationDto, AssetDto } from '@shared/service-proxies/service-proxies';
 import { moment } from 'ngx-bootstrap/chronos/test/chain';
+import { AssetLookupModalComponent } from '@app/shared/common/lookup/asset-lookup-modal.component';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { moment } from 'ngx-bootstrap/chronos/test/chain';
     templateUrl: './create-or-edit-liquidation-modal.component.html'
 })
 export class CreateOrEditLiquidationModalComponent extends AppComponentBase {
-
+    @ViewChild('assetLookup') assetLookupModal: AssetLookupModalComponent;
 
     @ViewChild('createOrEditModal') modal: ModalDirective;
     @ViewChild('liquidationCombobox') liquidationCombobox: ElementRef;
@@ -118,7 +119,7 @@ export class CreateOrEditLiquidationModalComponent extends AppComponentBase {
             );
         });
 
-        if (this.listAssetInStock.length > 1) {
+        if (this.listAssetInStock.length > 0) {
             this.getAssetByID(this.listAssetInStock[0].assetId);
             this.liquidation.assetID = this.listAssetInStock[0].assetId;
         }
@@ -131,5 +132,16 @@ export class CreateOrEditLiquidationModalComponent extends AppComponentBase {
                 this.filterListAssetInStock();
             }
         );
+    }
+
+    openSelectAssetModal() {
+        this.assetLookupModal.show();
+    }
+
+    modalSaved(assetSaved: AssetDto) {
+        this.assetSelect.assetId = assetSaved.assetId;
+        this.assetSelect.assetName = assetSaved.assetName;
+        this.getAssetByID(this.assetSelect.assetId);
+        this.liquidation.assetID = assetSaved.assetId;
     }
 }

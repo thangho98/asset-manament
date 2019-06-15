@@ -3,15 +3,15 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto col-xs-6">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    <span>{{l("AssetGroup")}}</span>
+                    <span>{{l("Nhóm tài sản")}}</span>
                 </h3>
                 <span class="m-section__sub">
-                    {{l("AssetGroupInfo")}}
+                    {{l("Thông tin nhóm tài sản")}}
                 </span>
             </div>
             <div class="col-xs-6 text-right">
                 <button (click)="createAssetGroup()" *ngIf="isGranted('Pages.Administration.AssetGroup.Create')"
-                    class="btn btn-primary"><i class="fa fa-plus"></i> {{l("CreateNewAssetGroup")}}</button>
+                    class="btn btn-primary"><i class="fa fa-plus"></i> {{l("Tạo nhóm tài sản mới")}}</button>
             </div>
         </div>
     </div>
@@ -107,7 +107,7 @@
                             </ng-template>
                         </p-table>
                         <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
-                            {{l('NoData')}}
+                            {{l('Không có dữ liệu')}}
                         </div>
                         <div class="primeng-paging-container">
                             <p-paginator rows="{{primengTableHelper.defaultRecordsCountPerPage}}" #paginator

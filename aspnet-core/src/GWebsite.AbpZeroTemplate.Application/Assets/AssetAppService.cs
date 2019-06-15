@@ -77,7 +77,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
             // filter by value
             if (input.AssetName != null)
             {
-                query = query.Where(x => x.AssetName.ToLower().Equals(input.AssetName));
+                query = query.Where(x => x.AssetName.ToLower().Contains(input.AssetName.ToLower()));
             }
 
             var totalCount = query.Count();
@@ -143,6 +143,14 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Assets
         {
             IQueryable<Asset> query = assetRepository.GetAll().Where(x => !x.IsDelete)
                 .Where(x => x.Status == (int)Const.Const.AssetStatus.IN_STOCK).Where(x => x.StatusApproved == true);
+            IQueryable<AssetForViewDto> assetDtoQuery = query.ProjectTo<AssetForViewDto>(query);
+            return assetDtoQuery.ToList();
+        }
+
+        public List<AssetForViewDto> GetListAssetsInUse()
+        {
+            IQueryable<Asset> query = assetRepository.GetAll().Where(x => !x.IsDelete)
+                .Where(x => x.Status == (int)Const.Const.AssetStatus.USING).Where(x => x.StatusApproved == true);
             IQueryable<AssetForViewDto> assetDtoQuery = query.ProjectTo<AssetForViewDto>(query);
             return assetDtoQuery.ToList();
         }

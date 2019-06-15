@@ -4,15 +4,15 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto col-xs-6">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    <span>{{l("Asset")}}</span>
+                    <span>{{l("Tài sản")}}</span>
                 </h3>
                 <span class="m-section__sub">
-                    {{l("AssetInfo")}}
+                    {{l("Thông tin tài sản")}}
                 </span>
             </div>
             <div class="col-xs-6 text-right">
                 <button (click)="createAsset()" *ngIf="isGranted('Pages.Administration.Asset.Create')"
-                    class="btn btn-primary"><i class="fa fa-plus"></i> {{l("CreateNewAsset")}}</button>
+                    class="btn btn-primary"><i class="fa fa-plus"></i> {{l("Tạo tài sản mới")}}</button>
             </div>
         </div>
     </div>

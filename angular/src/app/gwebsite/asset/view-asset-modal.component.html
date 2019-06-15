@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-group">
                     <b>Nhóm tài sản: </b>
-                    <span>{{assetGroupName}}</span>
+                    <span>{{assetGroup.assetGroupName}}</span>
                 </div>
                 <div class="form-group">
                     <b>Ngày nhập: </b>
@@ -55,16 +55,13 @@
                     <span>{{asset.monthOfDepreciation}}</span>
                 </div>
                 <div class="form-group">
-                    <b>Tỉ lệ khấu hao: </b>
-                    <span></span>
-                </div>
-                <div class="form-group">
                     <b>Số tháng khấu hao còn lại: </b>
-                    <span></span>
+                    <span>{{remainingOfMonth}}</span>
                 </div>
                 <div class="form-group">
                     <b>Tình trạng khấu hao: </b>
-                    <span></span>
+                    <span *ngIf="remainingOfMonth <= 0">{{"Hết hạn khấu hao"}}</span>
+                    <span *ngIf="remainingOfMonth > 0">{{"Đang khấu hao"}}</span>
                 </div>
                 <div class="form-group">
                     <b>Giá trị khấu hao: </b>
@@ -72,14 +69,14 @@
                 </div>
                 <div class="form-group">
                     <b>Giá trị khấu hao còn lại: </b>
-                    <span></span>
+                    <span>{{remainingOfLiquidation}}</span>
                 </div>
                 <div class="form-group">
-                    <b>Ghi chú</b>
+                    <b>Ghi chú: </b>
                     <span>{{asset.note}}</span>
                 </div>
                 <div class="form-group">
-                    <b>Ngày hết hạn bảo hành</b>
+                    <b>Ngày hết hạn bảo hành: </b>
                     <span>{{asset.warrantyExpiryDate}}</span>
                 </div>
                 <div *ngIf="liquidation != null" style="border: 1px solid red; border-radius: 3px; padding: 4px;">
@@ -110,7 +107,7 @@
             </div>
             <div class="modal-footer">
                 <button [disabled]="saving" type="button" class="btn btn-default"
-                    (click)="close()">{{l("Cancel")}}</button>
+                    (click)="close()">{{l("Đóng")}}</button>
             </div>
         </div>
     </div>

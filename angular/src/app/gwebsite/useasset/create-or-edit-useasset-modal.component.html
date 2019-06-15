@@ -19,15 +19,26 @@
                             [(ngModel)]="useasset.dateExport" required>
                     </div>
                     <div class="form-group">
-                        <label>Tài sản *</label>
-                        <select *ngIf="!useasset.id" #nameInput="ngModel" required [(ngModel)]='useasset.assetID'
+                        <!-- <label>Tài sản *</label>
+                        <select *ngIf="!useasset.id" #nameInput="ngModel" required [(ngModel)]='assetSelect.assetId'
                             class='form-control' name="AssetID" (change)="getAssetByID($event.target.value)">
                             <option *ngFor="let item of listAssetInStock" [value]="item.assetId">
                                 {{item.assetId}} - {{item.assetName}}
                             </option>
-                        </select>
-                        <input *ngIf="useasset.id" readonly name="AssetID" [value]="assetSelect.assetName"
-                            class="form-control" type="text">
+                        </select> -->
+
+                        <!-- Open EmCampaign Lookup Modal -->
+                        <div class="form-group m-form__group">
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <button class="btn btn-info" (click)="openSelectAssetModal()" type="button"><i class="fa fa-search"></i> {{l("Pick")}}</button>
+                                </div>
+                                <input class="form-control" id="EmcampaignName" name="emCampaignName" value="{{assetSelect.assetName}}" type="text" disabled required>
+                            </div>
+                        </div>
+                        
+                        <!-- <input *ngIf="useasset.id" readonly name="AssetID" [value]="assetSelect.assetName"
+                            class="form-control" type="text"> -->
                     </div>
                     <div class="form-group">
                         <label>Loại tài sản *</label>
@@ -54,7 +65,7 @@
                     </div>
                     <div class="form-group">
                         <label>Ngày kết thúc khấu hao *</label>
-                        <input readonly class="form-control" [value]="dateEndDepreciation" type="text">
+                        <input readonly class="form-control" [value]="endOfLiquidation" type="text">
                     </div>
                     <div class="form-group">
                         <label>Nguyên giá tài sản *</label>
@@ -74,15 +85,15 @@
                                 {{item.code}} - {{item.displayName}}
                             </option>
                         </select>
-                        <input *ngIf="useasset.id" readonly name="AssetID" [value]="useasset.assetID"
+                        <input *ngIf="useasset.id" readonly name="AssetID" [value]="useasset.assetId"
                             class="form-control" type="text">
                     </div>
                     <div class="form-group">
                         <label>Người sử dụng *</label>
                         <select *ngIf="!useasset.id" #nameInput="ngModel" required [(ngModel)]='useasset.userId'
                             class='form-control' name="AssetID">
-                            <option *ngFor="let item of listOrganizationUnitUser" [value]="item.id">
-                                {{item.surname}} {{item.name}}
+                            <option *ngFor="let item of customersByOrganization" [value]="item.id">
+                                {{item.name}}
                             </option>
                         </select>
                         <input *ngIf="useasset.id" readonly name="userId" [value]="useasset.userId" class="form-control"
@@ -99,4 +110,6 @@
             </form>
         </div>
     </div>
+
+    <assetLookupModal #assetLookup [assetStatusFilter]="0" (modalSave)="modalSaved($event)"></assetLookupModal>
 </div>

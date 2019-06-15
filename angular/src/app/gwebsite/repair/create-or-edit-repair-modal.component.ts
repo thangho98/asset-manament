@@ -131,7 +131,7 @@ export class CreateOrEditRepairModalComponent extends AppComponentBase {
     getListAssetsNotLiquidated(): void {
         this._assetService.getListAssetsNotLiquidated().subscribe(result => {
             this.listAssetsNotLiquidated = result;
-            this.getListRepairNotApproved();
+            //this.getListRepairNotApproved();
         });
     }
 

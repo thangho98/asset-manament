@@ -52,7 +52,15 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Repairs
 
         public List<RepairForViewDto> GetListRepairByAssetId(string assetId)
         {
-            IQueryable<Repair> query = repairRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.AssetId == assetId);
+            //var repairEntity = repairRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.StatusApproved == true)
+            //    .SingleOrDefault(x => x.AssetId.ToLower().Equals(assetId.ToLower()));
+            //if (repairEntity == null)
+            //{
+            //    return null;
+            //}
+            //return ObjectMapper.Map<RepairForViewDto>(repairEntity);
+
+            IQueryable<Repair> query = repairRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.AssetId.ToLower().Equals(assetId.ToLower()));
             IQueryable<RepairForViewDto> repairDtoQuery = query.ProjectTo<RepairForViewDto>(query);
             return repairDtoQuery.ToList();
         }
@@ -82,18 +90,18 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Repairs
             var query = repairRepository.GetAll().Where(x => !x.IsDelete);
 
             // filter by value
-            if (input.AssetId != null)
-            {
-                query = query.Where(x => x.AssetId.ToLower().Equals(input.AssetId));
-            }
+            //if (input.AssetId != null)
+            //{
+            //    query = query.Where(x => x.AssetId.ToLower().Equals(input.AssetId.ToLower()));
+            //}
 
             var totalCount = query.Count();
-
+            
             // sorting
-            if (!string.IsNullOrWhiteSpace(input.Sorting))
-            {
-                query = query.OrderBy(input.Sorting);
-            }
+            //if (!string.IsNullOrWhiteSpace(input.Sorting))
+            //{
+            //    query = query.OrderBy(input.Sorting);
+            //}
 
             // paging
             var items = query.PageBy(input).ToList();
@@ -107,13 +115,18 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Repairs
         [AbpAuthorize(GWebsitePermissions.Pages_Administration_Repair_Approve)]
         public void ApproveRepair(int id)
         {
-            var repairEntity = repairRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
-            if (repairEntity != null)
+            var y = repairRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.Id == id);
+            if (y.Count() == 1)
             {
-                repairEntity.StatusApproved = true;
-                repairRepository.Update(repairEntity);
-                CurrentUnitOfWork.SaveChanges();
+                y.First();          
             }
+            //var repairEntity = repairRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
+            //if (repairEntity != null)
+            //{
+            //    repairEntity.StatusApproved = true;
+            //    repairRepository.Update(repairEntity);
+            //    CurrentUnitOfWork.SaveChanges();
+            //}
         }
 
         public List<RepairDto> GetListRepairNotApproved()

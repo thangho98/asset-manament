@@ -10,6 +10,6 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Repairs.Dto
     public class RepairFilter : PagedAndSortedInputDto
     {
         //Mã tài sản
-        public string AssetId { get; set; }
+        public string AssetId { get; set; }        
     }
 }

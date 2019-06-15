@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Injector, Output, ViewChild } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { ModalDirective } from 'ngx-bootstrap';
-import { RepairServiceProxy, RepairInput, AssetForViewDto, AssetServiceProxy, AssetGroupServiceProxy, AssetGroupForViewDto, RepairDto, UserListDto, UserServiceProxy, UseAssetForViewDto, OrganizationUnitDto, OrganizationUnitServiceProxy } from '@shared/service-proxies/service-proxies';
+import { RepairServiceProxy, RepairInput, AssetForViewDto, AssetServiceProxy, AssetGroupServiceProxy, AssetGroupForViewDto, RepairDto, UserListDto, UserServiceProxy, UseAssetForViewDto, OrganizationUnitDto, OrganizationUnitServiceProxy, OrganizationUnitUserListDto, UseAssetDto, AssetDto, CustomerServiceProxy, CustomerDto } from '@shared/service-proxies/service-proxies';
 import { moment } from 'ngx-bootstrap/chronos/test/chain';
 import { debug } from 'util';
 import { AssetLookupModalComponent } from '@app/shared/common/lookup/asset-lookup-modal.component';
@@ -43,14 +43,17 @@ export class CreateOrEditRepairModalComponent extends AppComponentBase {
     proposerUnit: string = "";
 
     //useasset: UseAssetForViewDto = new UseAssetForViewDto();
-
+    
+    customers: CustomerDto[] = [];
+    
     constructor(
         injector: Injector,
         private _repairService: RepairServiceProxy,
         private _assetService: AssetServiceProxy,
         private _assetGroupService: AssetGroupServiceProxy,
         private _userService: UserServiceProxy,
-        private _organizationUnitService: OrganizationUnitServiceProxy
+        //private _organizationUnitService: OrganizationUnitServiceProxy,
+        private _customerService: CustomerServiceProxy
     ) {
         super(injector);
     }
@@ -60,6 +63,7 @@ export class CreateOrEditRepairModalComponent extends AppComponentBase {
         //Add 'implements OnInit' to the class.
         this.getListAssetsNotLiquidated();
         this.getListUsers();
+        //this.getListCustomers();
 
         //this.repairInput.assetId = '';
         //this.repairInput.exportDate = '';
@@ -151,6 +155,15 @@ export class CreateOrEditRepairModalComponent extends AppComponentBase {
         });
     }
 
+    // getListCustomers(): void
+    // {
+    //     this._customerService.getCustomersByFilter();
+    //     getAssetGroupByAssetID(this.asset.assetGrouptId).subscribe(result => {
+    //         if (result != null)
+    //             this.assetGroup = result;
+    //     });
+    // }
+
     getAssetGroup(): void {
         this._assetGroupService.getAssetGroupByAssetID(this.asset.assetGrouptId).subscribe(result => {
             if (result != null)
@@ -201,12 +214,12 @@ export class CreateOrEditRepairModalComponent extends AppComponentBase {
                 result => {
                 result.memberedOrganizationUnits.forEach( code =>{
                     this.proposerUnit += code.toString();
-                    this._organizationUnitService.getOrganizationUnitByCode(code).subscribe(result1 => {
-                        if (this.proposerUnit.length > 0)
-                            this.proposerUnit += ' ' + result1.displayName;
-                        else
-                            this.proposerUnit = result1.displayName;
-                    });
+                    // this._organizationUnitService.getOrganizationUnitByCode(code).subscribe(result1 => {
+                    //     if (this.proposerUnit.length > 0)
+                    //         this.proposerUnit += ' ' + result1.displayName;
+                    //     else
+                    //         this.proposerUnit = result1.displayName;
+                    // });
                 });
             }
         )

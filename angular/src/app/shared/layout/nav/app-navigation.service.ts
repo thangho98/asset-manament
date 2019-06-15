@@ -19,7 +19,7 @@ export class AppNavigationService {
             new AppMenuItem('Administration', '', 'flaticon-interface-8', '', [
                 new AppMenuItem('MenuClient', 'Pages.Administration.MenuClient', 'flaticon-menu-1', '/app/gwebsite/menu-client'),
                 new AppMenuItem('DemoModel', 'Pages.Administration.DemoModel', 'flaticon-menu-1', '/app/gwebsite/demo-model'),
-                new AppMenuItem('Người sử dụng', 'Pages.Administration.Customer', 'flaticon-menu-1', '/app/gwebsite/customer'),
+                new AppMenuItem('Nhân viên', 'Pages.Administration.Customer', 'flaticon-menu-1', '/app/gwebsite/customer'),
 
                 new AppMenuItem('Quản lý tài sản', '', 'flaticon-squares', '', [
                     new AppMenuItem('Nhóm tài sản', 'Pages.Administration.AssetGroup', 'flaticon-menu-1', '/app/gwebsite/assetgroup'),

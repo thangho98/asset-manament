@@ -4,14 +4,14 @@ import { ModalDirective } from 'ngx-bootstrap';
 import { RepairServiceProxy, RepairInput, AssetForViewDto, AssetServiceProxy, AssetGroupServiceProxy, AssetGroupForViewDto, RepairDto, UserListDto, UserServiceProxy, UseAssetForViewDto, OrganizationUnitDto, OrganizationUnitServiceProxy } from '@shared/service-proxies/service-proxies';
 import { moment } from 'ngx-bootstrap/chronos/test/chain';
 import { debug } from 'util';
-
+import { AssetLookupModalComponent } from '@app/shared/common/lookup/asset-lookup-modal.component';
 
 @Component({
     selector: 'createOrEditRepairModal',
     templateUrl: './create-or-edit-repair-modal.component.html'
 })
 export class CreateOrEditRepairModalComponent extends AppComponentBase {
-
+    @ViewChild('assetLookup') assetLookupModal: AssetLookupModalComponent;
 
     @ViewChild('createOrEditModal') modal: ModalDirective;
     @ViewChild('repairCombobox') repairCombobox: ElementRef;
@@ -99,7 +99,7 @@ export class CreateOrEditRepairModalComponent extends AppComponentBase {
 
     save(): void {        
         let input = this.repairInput;
-        
+
         if (!input.dateRepaired)
             input.dateRepaired = "";
 
@@ -131,7 +131,7 @@ export class CreateOrEditRepairModalComponent extends AppComponentBase {
     getListAssetsNotLiquidated(): void {
         this._assetService.getListAssetsNotLiquidated().subscribe(result => {
             this.listAssetsNotLiquidated = result;
-            //this.getListRepairNotApproved();
+            this.getListRepairNotApproved();
         });
     }
 
@@ -210,5 +210,9 @@ export class CreateOrEditRepairModalComponent extends AppComponentBase {
                 });
             }
         )
+    }
+
+    openSelectAssetModal() {
+        this.assetLookupModal.show();
     }
 }

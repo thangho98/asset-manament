@@ -89,7 +89,7 @@
                             class="form-control" type="text">
                     </div>
                     <div class="form-group">
-                        <label>Người sử dụng *</label>
+                        <label>Nhân viên *</label>
                         <select *ngIf="!useasset.id" #nameInput="ngModel" required [(ngModel)]='useasset.userId'
                             class='form-control' name="AssetID">
                             <option *ngFor="let item of customersByOrganization" [value]="item.id">

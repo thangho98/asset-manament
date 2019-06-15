@@ -12,7 +12,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.Repairs
         PagedResultDto<RepairDto> GetRepairs(RepairFilter input);
         RepairForViewDto GetRepairForView(int id);
         List<RepairForViewDto> GetListRepairByAssetId(string assetId);
-        void ApproveRepair(int id);
+        int ApproveRepair(int id);
         List<RepairDto> GetListRepairNotApproved();
     }
 }

@@ -75,7 +75,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Transfers
             // filter by value
             if (input.AssetId != null)
             {
-                query = query.Where(x => x.AssetId.ToLower().Equals(input.AssetId));
+                query = query.Where(x => x.AssetId.ToLower().Contains(input.AssetId.ToLower()));
             }
 
             var totalCount = query.Count();

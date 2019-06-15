@@ -24,9 +24,17 @@
                                     {{item.assetId}} - {{item.assetName}}
                                 </option>
                             </select>
-                            <input *ngIf="repairInput.id" readonly name="AssetID" [value]="asset.assetName"
+                            <input *ngIf="repairInput.id" readonly name="AssetID" [value]="asset.assetId"
                                 class="form-control" type="text">
                         </div>
+                        <!-- <div class="form-group m-form__group">
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <button class="btn btn-info" (click)="openSelectAssetModal()" type="button"><i class="fa fa-search"></i> {{l("Pick")}}</button>
+                                </div>
+                                <input class="form-control" id="EmcampaignName" name="emCampaignName" value="{{asset.assetName}}" type="text" disabled required>
+                            </div>
+                        </div> -->
                         <div class="form-group">
                             <label>Loại tài sản *</label>
                             <input readonly name="assetType" [value]="assetType" class="form-control" type="text">
@@ -73,7 +81,7 @@
                             <input readonly class="form-control" [value]="" type="text">
                         </div>
                         <div class="form-group">
-                            <label>Người sử dụng *</label>
+                            <label>Nhân viên *</label>
                             <input readonly class="form-control" type="text">
                         </div>
                     </div>

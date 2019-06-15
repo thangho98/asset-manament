@@ -53,9 +53,9 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         }
 
         [HttpGet("{id}")]
-        public void ApproveRepair(int id)
+        public int ApproveRepair(int id)
         {
-            repairAppService.ApproveRepair(id);
+            return repairAppService.ApproveRepair(id);
         }
 
         [HttpGet]

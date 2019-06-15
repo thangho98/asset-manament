@@ -90,18 +90,18 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Repairs
             var query = repairRepository.GetAll().Where(x => !x.IsDelete);
 
             // filter by value
-            //if (input.AssetId != null)
-            //{
-            //    query = query.Where(x => x.AssetId.ToLower().Equals(input.AssetId.ToLower()));
-            //}
+            if (input.AssetId != null)
+            {
+                query = query.Where(x => x.AssetId.ToLower().Contains(input.AssetId.ToLower()));
+            }
 
             var totalCount = query.Count();
-            
+
             // sorting
-            //if (!string.IsNullOrWhiteSpace(input.Sorting))
-            //{
-            //    query = query.OrderBy(input.Sorting);
-            //}
+            if (!string.IsNullOrWhiteSpace(input.Sorting))
+            {
+                query = query.OrderBy(input.Sorting);
+            }
 
             // paging
             var items = query.PageBy(input).ToList();
@@ -113,20 +113,16 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Repairs
         }
 
         [AbpAuthorize(GWebsitePermissions.Pages_Administration_Repair_Approve)]
-        public void ApproveRepair(int id)
-        {
-            var y = repairRepository.GetAll().Where(x => !x.IsDelete).Where(x => x.Id == id);
-            if (y.Count() == 1)
+        public int ApproveRepair(int id)
+        {            
+            var repairEntity = repairRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
+            if (repairEntity != null)
             {
-                y.First();          
+                repairEntity.StatusApproved = true;
+                repairRepository.Update(repairEntity);
+                CurrentUnitOfWork.SaveChanges();
             }
-            //var repairEntity = repairRepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == id);
-            //if (repairEntity != null)
-            //{
-            //    repairEntity.StatusApproved = true;
-            //    repairRepository.Update(repairEntity);
-            //    CurrentUnitOfWork.SaveChanges();
-            //}
+            return id;
         }
 
         public List<RepairDto> GetListRepairNotApproved()

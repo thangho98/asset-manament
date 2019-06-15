@@ -77,7 +77,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Liquidations
             // filter by value
             if (input.AssetID != null)
             {
-                query = query.Where(x => x.AssetID.ToLower().Equals(input.AssetID));
+                query = query.Where(x => x.AssetID.ToLower().Contains(input.AssetID.ToLower()));
             }
 
             var totalCount = query.Count();

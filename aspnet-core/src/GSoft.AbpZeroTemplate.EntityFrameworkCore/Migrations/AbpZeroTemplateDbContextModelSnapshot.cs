@@ -1871,7 +1871,7 @@ namespace GSoft.AbpZeroTemplate.Migrations
 
                     b.Property<string>("ExpectedNote");
 
-                    b.Property<string>("ExpectedRepairUnit");
+                    b.Property<int>("ExpectedRepairUnit");
 
                     b.Property<string>("ExportDate");
 
@@ -1881,11 +1881,11 @@ namespace GSoft.AbpZeroTemplate.Migrations
 
                     b.Property<string>("Note");
 
-                    b.Property<string>("Proposer");
+                    b.Property<int>("Proposer");
 
-                    b.Property<string>("RepairUnit");
+                    b.Property<int>("RepairUnit");
 
-                    b.Property<string>("StaffInCharge");
+                    b.Property<int>("StaffInCharge");
 
                     b.Property<bool>("Status");
 

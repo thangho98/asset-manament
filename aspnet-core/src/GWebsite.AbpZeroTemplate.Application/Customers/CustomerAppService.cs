@@ -75,7 +75,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.Customers
             // filter by value
             if (input.Name != null)
             {
-                query = query.Where(x => x.Name.ToLower().Equals(input.Name));
+                query = query.Where(x => x.Name.ToLower().Contains(input.Name.ToLower()));
             }
 
             var totalCount = query.Count();

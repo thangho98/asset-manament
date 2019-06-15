@@ -4,10 +4,10 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto col-xs-6">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    <span>{{l("Người sử dụng")}}</span>
+                    <span>{{l("Nhân viên")}}</span>
                 </h3>
                 <span class="m-section__sub">
-                    {{l("Thông tin người sử dụng")}}
+                    {{l("Thông tin Nhân viên")}}
                 </span>
             </div>
             <div class="col-xs-6 text-right">
@@ -26,7 +26,7 @@
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <input [(ngModel)]="customerName" name="customerName" autoFocus class="form-control"
-                                        placeholder="Nhập tên khách hàng" type="text">
+                                        placeholder="Nhập tên Nhân viên" type="text">
                                     <span class="input-group-btn">
                                         <button (click)="applyFilters()" class="btn btn-primary" type="submit"><i
                                                 class="icon-refresh"></i>
@@ -46,7 +46,7 @@
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th pSortableColumn="name">
-                                        Tên người sử dụng
+                                        Tên Nhân viên
                                         <p-sortIcon field="name"></p-sortIcon>
                                     </th>
                                     <th pSortableColumn="address">
@@ -57,7 +57,7 @@
                                         <p-sortIcon field="info"></p-sortIcon>
                                     </th>
                                     <th pSortableColumn="organizationId">
-                                        Đơn vị sử dụng
+                                        Đơn vị tổ chức
                                         <p-sortIcon field="organizationId"></p-sortIcon>
                                     </th>
                                     <th>{{l('Edit')}}</th>
@@ -66,7 +66,7 @@
                             <ng-template pTemplate="body" let-record="$implicit">
                                 <tr>
                                     <td>
-                                        <span class="ui-column-title">Tên người sử dụng</span>
+                                        <span class="ui-column-title">Tên Nhân viên</span>
                                         <span title="{{record.name}}">{{truncateString(record.name)}}</span>
                                     </td>
                                     <td>
